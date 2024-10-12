@@ -16,6 +16,8 @@ coverage = "^7.2.2"
 django = "^5.1.2"
 uuid = "^1.30"
 psycopg2-binary = "^2.9.7"
+pillow = "^10.4.0"
+pdfplumber = "^0.11.4"
 
 [build-system]
 requires = ["poetry-core"]
