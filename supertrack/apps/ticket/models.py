@@ -18,5 +18,6 @@ class TicketProductModel(BaseModel):
         on_delete=models.PROTECT,
     )
     name = models.CharField(_("Name"), max_length=200)
+    quantity = models.IntegerField(_("Quantity"), default=0)
     unit_price = models.FloatField(_("Price"), default=0.0)
     total_price = models.FloatField(_("Price"), default=0.0)

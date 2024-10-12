@@ -33,6 +33,7 @@ class TicketModelAdmin(BaseModelAdmin):
     list_display = (
         "public_id",
         "paid_at",
+        "total",
     )
     search_fields = ("paid_at",)
     # list_filter = ()
