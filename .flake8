@@ -9,3 +9,6 @@ exclude =
     .env,
     */migrations/*.py
     local_settings.py
+
+per-file-ignores =
+    supertrack/settings.py:E501,F403,F401

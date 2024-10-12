@@ -12,6 +12,7 @@ class TicketModel(BaseModel):
     total = models.FloatField(_("Total"), default=0.0)
     paid_at = models.DateTimeField(blank=True, null=True)
 
+
 class TicketProductModel(BaseModel):
     ticket = models.ForeignKey(
         TicketModel,
