@@ -6,7 +6,7 @@ from supertrack.helpers.filer import ticket_image_upload_path
 
 
 class TicketModel(BaseModel):
-    image = models.ImageField(
+    image = models.FileField(
         upload_to=ticket_image_upload_path,
     )
     total = models.FloatField(_("Total"), default=0.0)
