@@ -7,11 +7,12 @@ from supertrack.helpers.admin import BaseModelAdmin
 class TicketProductModelInline(admin.TabularInline):
     model = TicketProductModel
     extra = 1
-    
+
+
 class TicketProductModelAdmin(BaseModelAdmin):
     model = TicketProductModel
     empty_value_display = "-empty-"
-    
+
     list_display = (
         "public_id",
         "name",
@@ -23,6 +24,7 @@ class TicketProductModelAdmin(BaseModelAdmin):
 
 
 admin.site.register(TicketProductModel, TicketProductModelAdmin)
+
 
 class TicketModelAdmin(BaseModelAdmin):
     model = TicketModel
