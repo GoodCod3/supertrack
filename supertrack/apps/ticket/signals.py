@@ -1,5 +1,3 @@
-from django.conf import settings
-
 from supertrack.apps.ticket.models import TicketProductModel
 from supertrack.apps.ticket.utils.mercadona_ticket_reader import (
     get_mercadona_ticket_info,
