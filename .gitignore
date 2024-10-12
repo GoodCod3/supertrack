@@ -109,3 +109,6 @@ logs/
 
 # Uploaded files
 media/
+
+# Local DB
+db.sqlite3

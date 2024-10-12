@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM python:3.12.7-alpine
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -23,8 +23,8 @@ RUN pip install -r requirements.txt
 
 RUN apk del .tmp-build-deps
 
-RUN adduser -D budapp
+RUN adduser -D supertrack
 
-USER budapp
+USER supertrack
 
 EXPOSE 8080
