@@ -12,4 +12,4 @@ class SuperTrackHealth(View):
         """
         Return a ok if the application is running
         """
-        return JsonResponse(_CURRENT_VERSION)
+        return JsonResponse({"versuib": _CURRENT_VERSION})
