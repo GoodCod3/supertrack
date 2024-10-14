@@ -2,7 +2,6 @@ import requests
 import time
 from django.views import View
 from django.http import JsonResponse
-from django.db import transaction
 
 from supertrack.apps.scrappy.models import (
     MercadonaParentCategoryModel,

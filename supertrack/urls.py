@@ -16,8 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
+
+from supertrack.apps.HealthView import SuperTrackHealth
+
+API_VERSION = "api/v1"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("scrappy/", include("supertrack.apps.scrappy.urls")),
 ]
+
+urlpatterns += [
+    path("uatu/", admin.site.urls),
+    path(
+        f"{API_VERSION}/health/",
+        SuperTrackHealth.as_view(),
+        name="supertrack_health",
+    ),
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
