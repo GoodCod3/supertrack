@@ -29,7 +29,6 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path("uatu/", admin.site.urls),
     path(
         f"{API_VERSION}/health/",
         SuperTrackHealth.as_view(),
