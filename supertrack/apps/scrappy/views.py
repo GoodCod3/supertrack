@@ -88,9 +88,8 @@ class StoreMercadonaProductsView(View):
 
     def get(self, request, *args, **kwargs):
         success = True
-        self.sync_categories_and_products()
         try:
-            pass
+            self.sync_categories_and_products()
         except Exception as e:
             print(f"Error getting data from Mercadona: {e}")
             success = False
