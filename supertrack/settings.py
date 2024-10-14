@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "supertrack.apps",
     "supertrack.apps.ticket",
+    "supertrack.apps.scrappy",
 ]
 
 MIDDLEWARE = [
