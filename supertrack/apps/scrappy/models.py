@@ -48,5 +48,5 @@ class MercadonaProductModel(BaseModel):
         _("Image"),
         upload_to=mercadona_product_image_upload_path,
     )
-    slug = models.SlugField(_("Slug"))
+    slug = models.SlugField(_("Slug"), max_length=400)
     is_new = models.BooleanField(_("Is new"), default=False)
