@@ -1,0 +1,25 @@
+services:
+- type: web
+  name: supertrack-api
+  runtime: python
+  repo: https://github.com/GoodCod3/supertrack
+  plan: free
+  envVars:
+  - key: SECRET_KEY
+    sync: false
+  - key: POSTGRES_USER
+    sync: false
+  - key: POSTGRES_PORT
+    sync: false
+  - key: POSTGRES_PASSWORD
+    sync: false
+  - key: POSTGRES_NAME
+    sync: false
+  - key: POSTGRES_HOST
+    sync: false
+  - key: ALLOWED_HOSTS
+    sync: false
+  region: frankfurt
+  buildCommand: "./build.sh"
+  startCommand: gunicorn supertrack.wsgi:application
+version: "1"
