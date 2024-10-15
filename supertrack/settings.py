@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "supertrack.apps",
     "supertrack.apps.ticket",
     "supertrack.apps.scrappy",
+    "supertrack.apps.dashboards",
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,9 @@ ROOT_URLCONF = "supertrack.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            BASE_DIR / "supertrack/apps/dashboards/templates/",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
