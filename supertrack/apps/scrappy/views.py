@@ -79,7 +79,6 @@ class StoreMercadonaProductsView(View):
         if parent_categories_data and 'results' in parent_categories_data:
             for category_parent_data in parent_categories_data['results']:
                 print(category_parent_data['name'])
-                print("=" * 90)
                 parent_category = self.create_or_update_parent_category(category_parent_data)
                 for category_data in category_parent_data['categories']:
                     # with transaction.atomic():

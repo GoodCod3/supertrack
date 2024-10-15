@@ -1,11 +1,15 @@
 from django.contrib import admin
 
-from supertrack.apps.ticket.models import TicketModel, TicketProductModel
+from supertrack.apps.ticket.models import (
+    TicketModel,
+    TicketProductModel,
+    TicketProductRelationshipModel,
+)
 from supertrack.helpers.admin import BaseModelAdmin
 
 
-class TicketProductModelInline(admin.TabularInline):
-    model = TicketProductModel
+class TicketProductRelationshipModelInline(admin.TabularInline):
+    model = TicketProductRelationshipModel
     extra = 1
 
 
@@ -16,6 +20,19 @@ class TicketProductModelAdmin(BaseModelAdmin):
     list_display = (
         "public_id",
         "name",
+    )
+    search_fields = ("name",)
+
+admin.site.register(TicketProductModel, TicketProductModelAdmin)
+
+class TicketProductRelationshipModelAdmin(BaseModelAdmin):
+    model = TicketProductRelationshipModel
+    empty_value_display = "-empty-"
+
+    list_display = (
+        "public_id",
+        "ticket",
+        "product__name",
         "unit_price",
         "total_price",
     )
@@ -23,13 +40,13 @@ class TicketProductModelAdmin(BaseModelAdmin):
     # list_filter = ()
 
 
-admin.site.register(TicketProductModel, TicketProductModelAdmin)
+admin.site.register(TicketProductRelationshipModel, TicketProductRelationshipModelAdmin)
 
 
 class TicketModelAdmin(BaseModelAdmin):
     model = TicketModel
     inlines = [
-        TicketProductModelInline,
+        TicketProductRelationshipModelInline,
     ]
     empty_value_display = "-empty-"
     list_display = (

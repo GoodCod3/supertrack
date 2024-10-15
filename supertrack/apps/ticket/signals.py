@@ -1,4 +1,7 @@
-from supertrack.apps.ticket.models import TicketProductModel
+from supertrack.apps.ticket.models import (
+    TicketProductModel,
+    TicketProductRelationshipModel,
+)
 from supertrack.apps.ticket.utils.mercadona_ticket_reader import (
     get_mercadona_ticket_info,
 )
@@ -12,13 +15,17 @@ def register_new_ticket(sender, instance, created, **kwargs):
             instance.total = ticket_info["total"]
             instance.save()
 
-        for product in ticket_info["products"]:
-            TicketProductModel.objects.create(
+        for product_data in ticket_info["products"]:
+            product, created = TicketProductModel.objects.get_or_create(
+                name=product_data["name"],
+            )
+            
+            TicketProductRelationshipModel.objects.create(
                 **{
                     "ticket": instance,
-                    "name": product["name"],
-                    "quantity": product["quantity"],
-                    "unit_price": product["unit_price"],
-                    "total_price": product["total_price"],
+                    "product": product,
+                    "quantity": product_data["quantity"],
+                    "unit_price": product_data["unit_price"],
+                    "total_price": product_data["total_price"],
                 }
             )
