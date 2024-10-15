@@ -77,13 +77,14 @@ class StoreMercadonaProductsView(View):
     def sync_categories_and_products(self):
         parent_categories_data = self.get_parent_categories_from_api()
         if parent_categories_data and 'results' in parent_categories_data:
-                for category_parent_data in parent_categories_data['results']:
-                    parent_category = self.create_or_update_parent_category(category_parent_data)
-                    for category_data in category_parent_data['categories']:
-                        # with transaction.atomic():
-                        category = self.create_or_update_category(category_data, parent_category)
-                        self.fetch_and_store_products(category)
-                        time.sleep(0.5)
+            for category_parent_data in parent_categories_data['results']:
+                print(category_parent_data['name'])
+                parent_category = self.create_or_update_parent_category(category_parent_data)
+                for category_data in category_parent_data['categories']:
+                    # with transaction.atomic():
+                    category = self.create_or_update_category(category_data, parent_category)
+                    self.fetch_and_store_products(category)
+                    time.sleep(0.5)
 
     def get(self, request, *args, **kwargs):
         success = True
