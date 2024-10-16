@@ -23,7 +23,7 @@
 </div>
 
 <div class="row">
-  <div class="col">
+  <div class="col-sm-6">
     <h4>Current week</h4>
     <canvas
       class="my-4 w-100"
@@ -36,7 +36,7 @@
       "
     ></canvas>
   </div>
-  <div class="col">
+  <div class="col-sm-6">
     <h4>Current month</h4>
     <canvas
       class="my-4 w-100"
@@ -54,3 +54,37 @@
 <h2>Tickets</h2>
 <div class="table-responsive small"></div>
 {% endblock body %}
+
+{% block extrajs %}
+<script id="products-week-data" type="application/json">
+    {{ products_week|json_script:"products_week_data" }}
+</script>
+<script type="text/javascript">
+    const ctx = document.getElementById('myChart')
+    // eslint-disable-next-line no-unused-vars
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: {{products_week.weekdays|safe}},
+        datasets: [{
+          data: {{products_week.products}},
+          lineTension: 0,
+          backgroundColor: 'transparent',
+          borderColor: '#007bff',
+          borderWidth: 4,
+          pointBackgroundColor: '#007bff'
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            boxPadding: 3
+          }
+        }
+      }
+    })
+</script>
+{% endblock extrajs %}
