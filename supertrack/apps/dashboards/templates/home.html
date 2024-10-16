@@ -52,13 +52,45 @@
 </div>
 
 <h2>Tickets</h2>
-<div class="table-responsive small"></div>
+{% for ticket in tickets_month%}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ticket.total}} €</h5>
+      <p class="card-text">{{ticket.paid_at}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for product in ticket.products %}
+            <li class="list-group-item">
+                {{product.quantity}} {{product.name}} - {{product.total_price}}
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="card-body">
+      <a href="#" data-bs-toggle="modal" data-bs-target="#ticket-{{ticket.id}}" class="card-link">See ticket</a>
+    </div>
+  </div>
+
+  <div class="modal fade" id="ticket-{{ticket.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <embed src="{{ticket.pdf}}" width="800px" height="2100px" type="application/pdf"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
 {% endblock body %}
 
 {% block extrajs %}
-<script id="products-week-data" type="application/json">
-    {{ products_week|json_script:"products_week_data" }}
-</script>
 <script type="text/javascript">
     const ctx = document.getElementById('myChart')
     // eslint-disable-next-line no-unused-vars
@@ -68,6 +100,34 @@
         labels: {{products_week.weekdays|safe}},
         datasets: [{
           data: {{products_week.products}},
+          lineTension: 0,
+          backgroundColor: 'transparent',
+          borderColor: '#007bff',
+          borderWidth: 4,
+          pointBackgroundColor: '#007bff'
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            boxPadding: 3
+          }
+        }
+      }
+    })
+</script>
+
+<script type="text/javascript">
+    const ctx2 = document.getElementById('myChart2');
+    new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: {{products_month.days|safe}},
+        datasets: [{
+          data: {{products_month.products}},
           lineTension: 0,
           backgroundColor: 'transparent',
           borderColor: '#007bff',
