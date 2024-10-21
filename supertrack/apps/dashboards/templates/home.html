@@ -198,8 +198,8 @@
 
 <script type="text/javascript">
   $(function () {
-    var start = moment().subtract(29, "days");
-    var end = moment();
+    var start = moment("{{start_of_month}}");
+    var end = moment("{{end_of_month}}");
 
     function cb(start, end) {
       $("#reportrange span").html(

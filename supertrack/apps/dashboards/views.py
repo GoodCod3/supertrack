@@ -44,11 +44,7 @@ class HomeView(TemplateView):
             TicketProductRelationshipModel.objects.filter(
                 ticket__paid_at__date__range=[start_of_week, end_of_week]
             )
-            .annotate(
-                weekday=ExtractWeekDay(
-                    "ticket__paid_at"
-                )
-            )
+            .annotate(weekday=ExtractWeekDay("ticket__paid_at"))
             .values("weekday")
             .annotate(total_products=Sum("total_price"))
             .order_by("weekday")
@@ -64,52 +60,46 @@ class HomeView(TemplateView):
             "current_week_start": start_of_week,
             "current_week_end": end_of_week,
         }
-    
+
     def _get_date_range(self):
         today = timezone.now()
-        
-        start_date = self.request.GET.get('start_date')
-        end_date = self.request.GET.get('end_date')
 
-        # Si no hay parámetros en la URL, usar el mes actual
+        start_date = self.request.GET.get("start_date")
+        end_date = self.request.GET.get("end_date")
+
         if start_date and end_date:
             try:
-                # Parsear las fechas de los parámetros GET
-                start_of_range = datetime.strptime(start_date, '%Y-%m-%d').date()
-                end_of_range = datetime.strptime(end_date, '%Y-%m-%d').date()
+                start_of_range = datetime.strptime(
+                    start_date, "%Y-%m-%d"
+                ).date()
+                end_of_range = datetime.strptime(end_date, "%Y-%m-%d").date()
             except ValueError:
-                # Si las fechas no son válidas, usar las fechas por defecto (mes actual)
-                start_of_range = today.replace(day=1)
-                end_of_range = (today.replace(month=today.month + 1, day=1) - timedelta(days=1))
+                start_of_range = today.replace(day=1).date()
+                end_of_range = (today.replace(
+                    month=today.month + 1, day=1
+                ) - timedelta(days=1)).date()
         else:
-            # Fechas predeterminadas (mes actual)
-            start_of_range = today.replace(day=1)
-            end_of_range = (today.replace(month=today.month + 1, day=1) - timedelta(days=1))
-        
+            start_of_range = today.replace(day=1).date()
+            end_of_range = (today.replace(
+                month=today.month + 1, day=1
+            ) - timedelta(days=1)).date()
+
         return start_of_range, end_of_range
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Fechas actuales
-        now = timezone.now()
-
-        # Mes actual
-        # start_of_month = now.replace(day=1)
-        # end_of_month = now.replace(month=now.month + 1, day=1) - timedelta(
-        #     days=1
-        # )
         start_of_month, end_of_month = self._get_date_range()
 
         context["products_week"] = self._get_current_week_data()
 
         products_month = (
-            TicketProductRelationshipModel.objects.filter(
-                ticket__paid_at__date__range=[start_of_month, end_of_month]
+            TicketModel.objects.filter(
+                paid_at__date__range=[start_of_month, end_of_month]
             )
-            .annotate(day=TruncDay("ticket__paid_at"))
+            .annotate(day=TruncDay("paid_at"))
             .values("day")
-            .annotate(total_products=Sum("total_price"))
+            .annotate(total_amount=Sum("total"))
             .order_by("day")
         )
 
@@ -123,15 +113,11 @@ class HomeView(TemplateView):
 
         # Fill in the list with the quantity of products purchased on each day of the month
         for item in products_month:
-            day_index = (
-                item["day"].date() - start_of_month
-            ).days 
-            month_products[day_index] = item["total_products"]
+            day_index = (item["day"].date() - start_of_month).days
+            month_products[day_index] = item["total_amount"]
 
         context["products_month"] = {
-            "days": [
-                day.strftime("%d") for day in month_days
-            ],
+            "days": [day.strftime("%d") for day in month_days],
             "products": month_products,
         }
 
@@ -173,5 +159,7 @@ class HomeView(TemplateView):
 
         context["tickets_month"] = tickets_data
         context["total_tickets_month"] = "%.2f" % total_tickets_month
+        context["start_of_month"] = start_of_month
+        context["end_of_month"] = end_of_month
 
         return context
