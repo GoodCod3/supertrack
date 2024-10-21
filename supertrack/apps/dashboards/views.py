@@ -1,3 +1,4 @@
+import base64
 from django.views.generic import TemplateView
 from django.utils import timezone
 from datetime import timedelta
@@ -61,7 +62,7 @@ class HomeView(TemplateView):
                 )  # Extraemos el día de la semana
             )
             .values("weekday")
-            .annotate(total_products=Sum("quantity"))
+            .annotate(total_products=Sum("total_price"))
             .order_by("weekday")
         )
 
@@ -86,7 +87,7 @@ class HomeView(TemplateView):
             )
             .annotate(day=TruncDay("ticket__paid_at"))
             .values("day")
-            .annotate(total_products=Sum("quantity"))
+            .annotate(total_products=Sum("total_price"))
             .order_by("day")
         )
 
@@ -121,10 +122,16 @@ class HomeView(TemplateView):
 
         tickets_data = []
         for ticket in tickets_month:
+            ticket_pdf = ticket.image.path if ticket.image else None
+            if ticket_pdf:
+                pdf_content = None
+                with open(ticket_pdf, 'rb') as pdf_file:
+                    # Convert pdf to a string
+                    pdf_content = base64.b64encode(pdf_file.read()).decode()
             ticket_info = {
                 'total': ticket.total,
                 'paid_at': ticket.paid_at.strftime('%Y-%m-%d'),
-                'pdf': f"{ticket.image.url}" if ticket.image else "",
+                'pdf': pdf_content,
                 'products': []
             }
             for product_rel in ticket.ticketproductrelationshipmodel_set.all():

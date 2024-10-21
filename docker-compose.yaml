@@ -26,3 +26,10 @@ services:
       - .env
     depends_on:
       - db
+
+networks:
+  mynet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 173.20.0.0/16
