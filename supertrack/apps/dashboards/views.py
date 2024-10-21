@@ -121,7 +121,9 @@ class HomeView(TemplateView):
         )
 
         tickets_data = []
+        total_tickets_month = 0
         for ticket in tickets_month:
+            total_tickets_month += ticket.total
             ticket_pdf = ticket.image.path if ticket.image else None
             if ticket_pdf:
                 pdf_content = None
@@ -130,6 +132,7 @@ class HomeView(TemplateView):
                     pdf_content = base64.b64encode(pdf_file.read()).decode()
             ticket_info = {
                 'total': ticket.total,
+                'id': ticket.pk,
                 'paid_at': ticket.paid_at.strftime('%Y-%m-%d'),
                 'pdf': pdf_content,
                 'products': []
@@ -146,5 +149,6 @@ class HomeView(TemplateView):
             tickets_data.append(ticket_info)
 
         context["tickets_month"] = tickets_data
+        context["total_tickets_month"] = "%.2f" % total_tickets_month
 
         return context
