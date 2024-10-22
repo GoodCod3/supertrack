@@ -27,6 +27,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("scrappy/", include("supertrack.apps.scrappy.urls")),
     path("dashboard/", include("supertrack.apps.dashboards.urls")),
+    path('accounts/', include('allauth.urls')),
 ]
 
 urlpatterns += [

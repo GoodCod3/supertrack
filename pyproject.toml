@@ -21,6 +21,8 @@ pdfplumber = "^0.11.4"
 requests = "^2.32.3"
 gunicorn = "^23.0.0"
 whitenoise = {extras = ["brotli"], version = "^6.7.0"}
+django-allauth = "^65.0.2"
+pyjwt = "^2.9.0"
 
 [build-system]
 requires = ["poetry-core"]

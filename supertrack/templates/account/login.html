@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% load socialaccount %}
+
+{% block body %}
+  <h2>Iniciar Sesión</h2>
+  <a href="{% provider_login_url 'google' %}">Sign up with Google</a>
+{% endblock %}
