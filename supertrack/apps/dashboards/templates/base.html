@@ -219,9 +219,11 @@
       data-bs-theme="dark"
     >
       <a
-        class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
+        class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white text-center"
         href="{% url 'dashboards__home' %}"
-        >SuperTrack App</a
+        >
+        <img src="{% static 'images/supertrack_logo_transparent.png' %}" width="120px"/>
+        </a
       >
 
       {% include "extras/mobile-menu-icons.html" %}
