@@ -39,10 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "widget_tweaks",
+    
     "supertrack.apps",
     "supertrack.apps.ticket",
     "supertrack.apps.scrappy",
@@ -168,13 +171,17 @@ SOCIALACCOUNT_PROVIDERS = {
 SOCIALACCOUNT_PROVIDERS = {"google": {"FETCH_USERINFO": True}}
 
 SITE_ID = 1
-LOGIN_URL = "/accounts/login/"
+LOGIN_URL = "/accounts/google/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 SOCIALACCOUNT_QUERY_EMAIL = True
+
+ACCOUNT_FORMS = {
+  'signup': 'supertrack.forms.CustomSignUpForm.CustomSignUpForm'
+}
 
 try:
     from .local_settings import *

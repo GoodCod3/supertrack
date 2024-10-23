@@ -1,6 +1,6 @@
 from django.urls import path
 
-from supertrack.apps.dashboards.views import HomeView
+from supertrack.apps.dashboards.views.dashboard_monthly import HomeView
 
 urlpatterns = [
     path(
@@ -8,4 +8,5 @@ urlpatterns = [
         HomeView.as_view(),
         name="dashboards__home",
     ),
+
 ]
