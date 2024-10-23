@@ -1,3 +1,5 @@
+{% load allauth i18n %}
+
 <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
   <ul class="nav flex-column">
     <li class="nav-item">
@@ -26,10 +28,20 @@
       </a>
     </li> {% endcomment %}
     <li class="nav-item">
-      <a class="nav-link d-flex align-items-center gap-2" href="{% url 'account_logout' %}">
-        <svg class="bi"><use xlink:href="#door-closed"></use></svg>
-        Sign out
-      </a>
+      {% url 'account_logout' as action_url %}
+      {% element form method="post" action=action_url no_visible_fields=True %}
+          {% slot body %}
+              {% csrf_token %}
+              {{ redirect_field }}
+          {% endslot %}
+          {% slot actions %}
+            <button type="submit" class="nav-link d-flex align-items-center gap-2">
+                <svg class="bi"><use xlink:href="#door-closed"></use></svg>
+                Sign out
+            </button>
+          {% endslot %}
+      {% endelement %}
+      
     </li>
   </ul>
 </div>
