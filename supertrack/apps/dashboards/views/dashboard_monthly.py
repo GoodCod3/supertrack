@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from django.utils import timezone
 from django.db.models import Sum
 from django.db.models.functions import TruncDay, ExtractWeekDay
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from supertrack.apps.ticket.models import (
     TicketProductRelationshipModel,
@@ -21,7 +22,7 @@ WEEKDAY_NAMES = {
 }
 
 
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "home.html"
 
     def _get_current_week_data(self):

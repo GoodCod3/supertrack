@@ -14,19 +14,30 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
 from supertrack.apps.HealthView import SuperTrackHealth
+from supertrack.generic_views.custom_login import custom_google_login
 
 API_VERSION = "api/v1"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("scrappy/", include("supertrack.apps.scrappy.urls")),
-    path("dashboard/", include("supertrack.apps.dashboards.urls")),
+    path("", include("supertrack.apps.dashboards.urls")),
+    path("accounts/", include("allauth.urls")),
+]
+
+urlpatterns += [
+    path(
+        "accounts/google/login/",
+        custom_google_login,
+        name="google_login_direct",
+    ),
 ]
 
 urlpatterns += [

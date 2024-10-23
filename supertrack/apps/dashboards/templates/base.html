@@ -6,10 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
-    <meta
-      name="author"
-      content="Jonathan Rodriguez Alejos (jojo5716)"
-    />
+    <meta name="author" content="Jonathan Rodriguez Alejos (jojo5716)" />
     <title>Dashboard SuperTrack</title>
 
     <link
@@ -18,7 +15,7 @@
     />
 
     <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json" />
-    
+
     <meta name="theme-color" content="#712cf9" />
 
     <!-- Custom styles for this template -->
@@ -234,6 +231,7 @@
 
     <div class="container-fluid">
       <div class="row">
+        {% if user.is_authenticated %} 
         <div
           class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary"
         >
@@ -255,13 +253,14 @@
                 aria-label="Close"
               ></button>
             </div>
-
-            {% include "extras/menu.html" %}
+            
+                {% include "extras/menu.html" %} 
           </div>
         </div>
+        {% endif %}
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-         {% block body %} {% endblock body %}
+          {% block body %} {% endblock body %}
         </main>
       </div>
     </div>
