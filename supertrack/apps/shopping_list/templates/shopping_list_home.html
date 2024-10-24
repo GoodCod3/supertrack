@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block body %}
+<input type="text" id="searchInput" placeholder="Buscar productos..." class="form-control mb-3">
+
+<div class="accordion" id="accordionShoppingList">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="shoppingListTitle">
+          Shopping list (<span id="total-price">0.00</span> €)
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionShoppingList">
+        <div class="accordion-body">
+            <div id="product-info" class="mt-4 row"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<div class="accordion" id="accordionExample">
+    {% for category_name, products in products.items %}
+    <div class="accordion-item accordion-item-products">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ category_name|slugify }}" aria-expanded="true" aria-controls="collapseOne">
+          {{ category_name }}
+        </button>
+      </h2>
+      <div id="{{ category_name|slugify }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <div class="row">
+            {% for product in products %}
+              <div class="col-sm-4 col-xs-12 col-md-4 card" style="width: 18rem;">
+                <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.name }} ({{ product.price }} €)</h5>
+                  <a href="#" class="btn btn-primary add-to-cart" data-name="{{ product.name }}" data-price="{{ product.price }}" data-image="{{ product.image }}">Add</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock body %}
+
+{% block extrajs %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const searchInput = document.getElementById('searchInput');
+      
+      searchInput.addEventListener('keyup', function() {
+        const filter = searchInput.value.toLowerCase();
+        const accordionItems = document.querySelectorAll('.accordion-item-products');
+  
+        accordionItems.forEach(function(item) {
+          const categoryName = item.querySelector('.accordion-button').textContent.toLowerCase();
+          const products = item.querySelectorAll('.card');
+  
+          let categoryMatches = categoryName.includes(filter);
+          let productMatches = false;
+  
+          products.forEach(function(product) {
+            const productName = product.querySelector('.card-title').textContent.toLowerCase();
+            if (productName.includes(filter)) {
+              product.style.display = 'block';
+              productMatches = true;
+            } else {
+              product.style.display = 'none';
+            }
+          });
+  
+          if (categoryMatches || productMatches) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const addToCartButtons = document.querySelectorAll('.add-to-cart');
+      const productInfoDiv = document.getElementById('product-info');
+      const shoppingListTitle = document.getElementById('shoppingListTitle');
+  
+      let cart = {};
+      let totalPrice = 0;
+  
+      addToCartButtons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+          event.preventDefault();
+  
+          const productName = button.getAttribute('data-name');
+          const productPrice = parseFloat(button.getAttribute('data-price'));
+          const productImage = button.getAttribute('data-image');
+  
+          if (cart[productName]) {
+            cart[productName].quantity += 1;
+          } else {
+            cart[productName] = {
+              price: productPrice,
+              image: productImage,
+              quantity: 1
+            };
+          }
+  
+          totalPrice += productPrice;
+  
+          updateAccordionTitle();
+  
+          updateCartDisplay();
+        });
+      });
+  
+      function updateAccordionTitle() {
+        shoppingListTitle.textContent = `Shopping list - Total: ${totalPrice.toFixed(2)} €`;
+      }
+  
+      function updateCartDisplay() {
+        productInfoDiv.innerHTML = '';
+  
+        for (let productName in cart) {
+          const product = cart[productName];
+          productInfoDiv.innerHTML += `
+            <div class="card mb-2 col-md-4" style="width: 10rem;">
+              <img src="${product.image}" class="card-img-top" alt="${productName}">
+              <div class="card-body">
+                <h5 class="card-title">${productName}</h5>
+                <p class="card-text">Precio: ${product.price} €</p>
+                <p class="card-text">Cantidad: ${product.quantity}</p>
+                <p class="card-text">Subtotal: ${(product.price * product.quantity).toFixed(2)} €</p>
+              </div>
+            </div>
+          `;
+        }
+      }
+    });
+  </script>
+  
+  
+  
+{% endblock extrajs %}
