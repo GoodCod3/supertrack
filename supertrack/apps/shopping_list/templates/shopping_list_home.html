@@ -12,13 +12,14 @@
       </h2>
       <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionShoppingList">
         <div class="accordion-body">
-            <div id="product-info" class="mt-4 row"></div>
+
+            <ol id="product-info" class="list-group list-group-numbered"></ol>
         </div>
       </div>
     </div>
   </div>
 
-  
+<h2>Mercadona products</h2>
 <div class="accordion" id="accordionExample">
     {% for category_name, products in products.items %}
     <div class="accordion-item accordion-item-products">
@@ -29,17 +30,20 @@
       </h2>
       <div id="{{ category_name|slugify }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
         <div class="accordion-body">
-          <div class="row">
+          <ol class="list-group list-group-numbered">
             {% for product in products %}
-              <div class="col-sm-4 col-xs-12 col-md-4 card" style="width: 18rem;">
-                <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
-                <div class="card-body">
-                  <h5 class="card-title">{{ product.name }} ({{ product.price }} €)</h5>
-                  <a href="#" class="btn btn-primary add-to-cart" data-name="{{ product.name }}" data-price="{{ product.price }}" data-image="{{ product.image }}">Add</a>
-                </div>
-              </div>
+                <a href="#" class="add-to-cart" data-name="{{ product.name }}" data-price="{{ product.price }}" data-image="{{ product.image }}">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}" style="width:8rem">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">{{product.name}}</div>
+                        </div>
+                        <span class="badge text-bg-primary rounded-pill">{{product.price}} €</span>
+                    </li>
+                </a>
+
             {% endfor %}
-          </div>
+            </ol>
         </div>
       </div>
     </div>
@@ -129,15 +133,13 @@
         for (let productName in cart) {
           const product = cart[productName];
           productInfoDiv.innerHTML += `
-            <div class="card mb-2 col-md-4" style="width: 10rem;">
-              <img src="${product.image}" class="card-img-top" alt="${productName}">
-              <div class="card-body">
-                <h5 class="card-title">${productName}</h5>
-                <p class="card-text">Precio: ${product.price} €</p>
-                <p class="card-text">Cantidad: ${product.quantity}</p>
-                <p class="card-text">Subtotal: ${(product.price * product.quantity).toFixed(2)} €</p>
-              </div>
-            </div>
+           <li class="list-group-item d-flex justify-content-between align-items-start">
+                <img src="${product.image}" class="card-img-top" style="width:4rem;"/>
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">${productName} (${product.price} €)</div>
+                </div>
+                <span class="badge text-bg-primary rounded-pill">${product.quantity}</span>
+            </li>
           `;
         }
       }
