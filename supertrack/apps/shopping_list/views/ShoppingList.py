@@ -18,6 +18,7 @@ class ShoppingListView(LoginRequiredMixin, TemplateView):
                 products[product_category] = []
             
             products[product_category].append({
+                "id": mercadona_product.pk,
                 "name": mercadona_product.name,
                 "image": mercadona_product.image,
                 "price": mercadona_product.unit_price,

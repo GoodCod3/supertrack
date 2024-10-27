@@ -32,9 +32,9 @@
         <div class="accordion-body">
           <ol class="list-group list-group-numbered">
             {% for product in products %}
-                <a href="#" class="add-to-cart" data-name="{{ product.name }}" data-price="{{ product.price }}" data-image="{{ product.image }}">
+                <a href="#" class="add-to-cart" data-id="{{product.id}}" data-name="{{ product.name }}" data-price="{{ product.price }}" data-image="{{ product.image }}">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}" style="width:8rem">
+                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}" style="width:8rem" loading="lazy">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">{{product.name}}</div>
                         </div>
@@ -104,6 +104,9 @@
           const productName = button.getAttribute('data-name');
           const productPrice = parseFloat(button.getAttribute('data-price'));
           const productImage = button.getAttribute('data-image');
+          const productId = button.getAttribute('data-id');
+          
+          addProductToCartAjax(productId);
   
           if (cart[productName]) {
             cart[productName].quantity += 1;
@@ -123,6 +126,28 @@
         });
       });
   
+      function addProductToCartAjax(productId) {
+        fetch('{%url "shopping_list__add_cart" %}', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          body: new URLSearchParams({
+            'product_id': productId
+          })
+        })
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data) {
+          console.log("Producto añadido:", data);
+        })
+        .catch(function(error) {
+          console.error("Error al añadir el producto:", error);
+        });
+      }
+
       function updateAccordionTitle() {
         shoppingListTitle.textContent = `Shopping list - Total: ${totalPrice.toFixed(2)} €`;
       }
@@ -134,7 +159,7 @@
           const product = cart[productName];
           productInfoDiv.innerHTML += `
            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <img src="${product.image}" class="card-img-top" style="width:4rem;"/>
+                <img src="${product.image}" class="card-img-top" style="width:4rem;" loading="lazy"/>
                 <div class="ms-2 me-auto">
                     <div class="fw-bold">${productName} (${product.price} €)</div>
                 </div>
