@@ -7,13 +7,24 @@
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="shoppingListTitle">
-          Shopping list (<span id="total-price">0.00</span> €)
+          Shopping list (<span id="total-price">{% if shopping_list.total %}{{shopping_list.total}}{%else%}0.00{%endif%}</span> €)
         </button>
       </h2>
       <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionShoppingList">
         <div class="accordion-body">
 
-            <ol id="product-info" class="list-group list-group-numbered"></ol>
+            <ol id="product-info" class="list-group list-group-numbered">
+              {% for product in shopping_list.products %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <img src="{{product.image}}" class="card-img-top" style="width:4rem;" loading="lazy"/>
+                  <div class="ms-2 me-auto">
+                      <div class="fw-bold">{{product.name}} ({{product.total_price}} €)</div>
+                  </div>
+                  <span class="badge text-bg-primary rounded-pill">{{product.quantity}}</span>
+                  <button class="btn btn-danger btn-sm ms-2 remove-product" data-id="{{product.id}}">Eliminar</button>
+              </li>
+              {% endfor %}
+            </ol>
         </div>
       </div>
     </div>
@@ -93,41 +104,65 @@
       const addToCartButtons = document.querySelectorAll('.add-to-cart');
       const productInfoDiv = document.getElementById('product-info');
       const shoppingListTitle = document.getElementById('shoppingListTitle');
-  
+    
       let cart = {};
       let totalPrice = 0;
-  
+    
+      document.querySelectorAll('#product-info .list-group-item').forEach(item => {
+        const productName = item.querySelector('.fw-bold').textContent.split(" (")[0];
+        const productPrice = parseFloat(item.querySelector('.fw-bold').textContent.match(/\(([^)]+)\)/)[1]);
+        const productQuantity = parseInt(item.querySelector('.badge').textContent);
+        const productImage = item.querySelector('img').getAttribute('src');
+        const productId = item.querySelector('.remove-product').getAttribute('data-id'); 
+    
+        cart[productName] = {
+          id: productId,
+          price: productPrice,
+          image: productImage,
+          quantity: productQuantity
+        };
+    
+        totalPrice += productPrice * productQuantity;
+    
+        item.querySelector('.remove-product').addEventListener('click', function() {
+          removeProductFromCart(productName);
+        });
+      });
+    
+      updateAccordionTitle();
+    
       addToCartButtons.forEach(function(button) {
         button.addEventListener('click', function(event) {
           event.preventDefault();
-  
+    
           const productName = button.getAttribute('data-name');
           const productPrice = parseFloat(button.getAttribute('data-price'));
           const productImage = button.getAttribute('data-image');
           const productId = button.getAttribute('data-id');
-          
+    
           addProductToCartAjax(productId);
-  
+    
           if (cart[productName]) {
             cart[productName].quantity += 1;
           } else {
             cart[productName] = {
+              id: productId,
               price: productPrice,
               image: productImage,
               quantity: 1
             };
           }
-  
+    
           totalPrice += productPrice;
-  
+    
           updateAccordionTitle();
-  
-          updateCartDisplay();
+    
+          addProductToDisplay(productName);
         });
       });
-  
+    
       function addProductToCartAjax(productId) {
-        fetch('{%url "shopping_list__add_cart" %}', {
+        fetch('{% url "shopping_list__add_cart" %}', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -137,8 +172,8 @@
             'product_id': productId
           })
         })
-        .then(function(response){
-            return response.json();
+        .then(function(response) {
+          return response.json();
         })
         .then(function(data) {
           console.log("Producto añadido:", data);
@@ -147,26 +182,78 @@
           console.error("Error al añadir el producto:", error);
         });
       }
-
+    
       function updateAccordionTitle() {
         shoppingListTitle.textContent = `Shopping list - Total: ${totalPrice.toFixed(2)} €`;
       }
-  
-      function updateCartDisplay() {
-        productInfoDiv.innerHTML = '';
-  
-        for (let productName in cart) {
-          const product = cart[productName];
-          productInfoDiv.innerHTML += `
-           <li class="list-group-item d-flex justify-content-between align-items-start">
-                <img src="${product.image}" class="card-img-top" style="width:4rem;" loading="lazy"/>
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">${productName} (${product.price} €)</div>
-                </div>
-                <span class="badge text-bg-primary rounded-pill">${product.quantity}</span>
-            </li>
+    
+      function addProductToDisplay(productName) {
+        const product = cart[productName];
+    
+        let existingProduct = Array.from(productInfoDiv.children).find(item => {
+          return item.querySelector('.fw-bold').textContent.startsWith(productName);
+        });
+    
+        if (existingProduct) {
+          existingProduct.querySelector('.badge').textContent = product.quantity;
+        } else {
+          const productItem = document.createElement('li');
+          productItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start');
+          productItem.innerHTML = `
+            <img src="${product.image}" class="card-img-top" style="width:4rem;" loading="lazy"/>
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">${productName} (${product.price} €)</div>
+            </div>
+            <span class="badge text-bg-primary rounded-pill">${product.quantity}</span>
+            <button class="btn btn-danger btn-sm ms-2 remove-product" data-id="${product.id}">Eliminar</button>
           `;
+          productInfoDiv.appendChild(productItem);
+    
+          productItem.querySelector('.remove-product').addEventListener('click', function() {
+            removeProductFromCart(productName);
+          });
         }
+      }
+    
+      function removeProductFromCart(productName) {
+        const product = cart[productName];
+        if (!product) return;
+    
+        const productElement = Array.from(productInfoDiv.children).find(item => {
+          return item.querySelector('.fw-bold').textContent.startsWith(productName);
+        });
+        if (productElement) {
+          productInfoDiv.removeChild(productElement);
+        }
+    
+        totalPrice -= product.price * product.quantity;
+        delete cart[productName];
+    
+        updateAccordionTitle();
+    
+        removeProductFromCartAjax(product.id);
+      }
+    
+      function removeProductFromCartAjax(productId) {
+        fetch('{% url "shopping_list__delete_cart" %}', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          body: new URLSearchParams({
+            'product_id': productId
+          })
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          console.log("Producto eliminado:", data);
+        })
+        .catch(function(error) {
+          console.error("Error al eliminar el producto:", error);
+        });
       }
     });
   </script>

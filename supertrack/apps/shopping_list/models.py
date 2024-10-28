@@ -17,6 +17,7 @@ class MercadonaShoppingListProduct(BaseModel):
     shopping_list = models.ForeignKey(
         MercadonaShoppingList,
         on_delete=models.PROTECT,
+        related_name="products",
     )
     product = models.ForeignKey(
         "scrappy.MercadonaProductModel",
