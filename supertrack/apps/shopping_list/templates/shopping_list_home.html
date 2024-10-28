@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block body %}
+<input type="text" id="searchInput" placeholder="Buscar productos..." class="form-control mb-3">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+        Lista de Mercadona
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+        Lista de Consum
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+      <div class="accordion" id="accordionShoppingList">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="shoppingListTitle">
+              Lista de la compra (<span id="total-price">{% if shopping_list.total %}{{shopping_list.total}}{%else%}0.00{%endif%}</span> €)
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionShoppingList">
+            <div class="accordion-body">
+    
+                <ol id="product-info" class="list-group list-group-numbered">
+                  {% for product in shopping_list.products %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                      <img src="{{product.image}}" class="card-img-top" style="width:4rem;" loading="lazy"/>
+                      <div class="ms-2 me-auto">
+                          <div class="fw-bold">{{product.name}} ({{product.total_price}} €)</div>
+                      </div>
+                      <span class="badge text-bg-primary rounded-pill">{{product.quantity}}</span>
+                      <button class="btn btn-danger btn-sm ms-2 remove-product" data-id="{{product.id}}">Eliminar</button>
+                  </li>
+                  {% endfor %}
+                </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion" id="accordionExample">
+        {% for category_name, products in products.items %}
+        <div class="accordion-item accordion-item-products">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ category_name|slugify }}" aria-expanded="true" aria-controls="collapseOne">
+              {{ category_name }}
+            </button>
+          </h2>
+          <div id="{{ category_name|slugify }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <ol class="list-group list-group-numbered">
+                {% for product in products %}
+                    <a href="#" class="add-to-cart" data-id="{{product.id}}" data-name="{{ product.name }}" data-price="{{ product.price }}" data-image="{{ product.image }}">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}" style="width:8rem" loading="lazy">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">{{product.name}}</div>
+                            </div>
+                            <span class="badge text-bg-primary rounded-pill">{{product.price}} €</span>
+                        </li>
+                    </a>
+    
+                {% endfor %}
+                </ol>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+
+  </div>
+  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
+
+
+
+{% endblock body %}
+
+{% block extrajs %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const searchInput = document.getElementById('searchInput');
+      
+      searchInput.addEventListener('keyup', function() {
+        const filter = searchInput.value.toLowerCase();
+        const accordionItems = document.querySelectorAll('.accordion-item-products');
+  
+        accordionItems.forEach(function(item) {
+          const categoryName = item.querySelector('.accordion-button').textContent.toLowerCase();
+          const products = item.querySelectorAll('.card');
+  
+          let categoryMatches = categoryName.includes(filter);
+          let productMatches = false;
+  
+          products.forEach(function(product) {
+            const productName = product.querySelector('.card-title').textContent.toLowerCase();
+            if (productName.includes(filter)) {
+              product.style.display = 'block';
+              productMatches = true;
+            } else {
+              product.style.display = 'none';
+            }
+          });
+  
+          if (categoryMatches || productMatches) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const addToCartButtons = document.querySelectorAll('.add-to-cart');
+      const productInfoDiv = document.getElementById('product-info');
+      const shoppingListTitle = document.getElementById('shoppingListTitle');
+    
+      let cart = {};
+      let totalPrice = 0;
+    
+      document.querySelectorAll('#product-info .list-group-item').forEach(item => {
+        const productName = item.querySelector('.fw-bold').textContent.split(" (")[0];
+        const productPrice = parseFloat(item.querySelector('.fw-bold').textContent.match(/\(([^)]+)\)/)[1]);
+        const productQuantity = parseInt(item.querySelector('.badge').textContent);
+        const productImage = item.querySelector('img').getAttribute('src');
+        const productId = item.querySelector('.remove-product').getAttribute('data-id'); 
+    
+        cart[productName] = {
+          id: productId,
+          price: productPrice,
+          image: productImage,
+          quantity: productQuantity
+        };
+    
+        totalPrice += productPrice * productQuantity;
+    
+        item.querySelector('.remove-product').addEventListener('click', function() {
+          removeProductFromCart(productName);
+        });
+      });
+    
+      updateAccordionTitle();
+    
+      addToCartButtons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+          event.preventDefault();
+    
+          const productName = button.getAttribute('data-name');
+          const productPrice = parseFloat(button.getAttribute('data-price'));
+          const productImage = button.getAttribute('data-image');
+          const productId = button.getAttribute('data-id');
+    
+          addProductToCartAjax(productId);
+    
+          if (cart[productName]) {
+            cart[productName].quantity += 1;
+          } else {
+            cart[productName] = {
+              id: productId,
+              price: productPrice,
+              image: productImage,
+              quantity: 1
+            };
+          }
+    
+          totalPrice += productPrice;
+    
+          updateAccordionTitle();
+    
+          addProductToDisplay(productName);
+        });
+      });
+    
+      function addProductToCartAjax(productId) {
+        fetch('{% url "shopping_list__add_cart" %}', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          body: new URLSearchParams({
+            'product_id': productId
+          })
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          console.log("Producto añadido:", data);
+        })
+        .catch(function(error) {
+          console.error("Error al añadir el producto:", error);
+        });
+      }
+    
+      function updateAccordionTitle() {
+        shoppingListTitle.textContent = `Lista de la compra - Total: ${totalPrice.toFixed(2)} €`;
+      }
+    
+      function addProductToDisplay(productName) {
+        const product = cart[productName];
+    
+        let existingProduct = Array.from(productInfoDiv.children).find(item => {
+          return item.querySelector('.fw-bold').textContent.startsWith(productName);
+        });
+    
+        if (existingProduct) {
+          existingProduct.querySelector('.badge').textContent = product.quantity;
+        } else {
+          const productItem = document.createElement('li');
+          productItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start');
+          productItem.innerHTML = `
+            <img src="${product.image}" class="card-img-top" style="width:4rem;" loading="lazy"/>
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">${productName} (${product.price} €)</div>
+            </div>
+            <span class="badge text-bg-primary rounded-pill">${product.quantity}</span>
+            <button class="btn btn-danger btn-sm ms-2 remove-product" data-id="${product.id}">Eliminar</button>
+          `;
+          productInfoDiv.appendChild(productItem);
+    
+          productItem.querySelector('.remove-product').addEventListener('click', function() {
+            removeProductFromCart(productName);
+          });
+        }
+      }
+    
+      function removeProductFromCart(productName) {
+        const product = cart[productName];
+        if (!product) return;
+    
+        const productElement = Array.from(productInfoDiv.children).find(item => {
+          return item.querySelector('.fw-bold').textContent.startsWith(productName);
+        });
+        if (productElement) {
+          productInfoDiv.removeChild(productElement);
+        }
+    
+        totalPrice -= product.price * product.quantity;
+        delete cart[productName];
+    
+        updateAccordionTitle();
+    
+        removeProductFromCartAjax(product.id);
+      }
+    
+      function removeProductFromCartAjax(productId) {
+        fetch('{% url "shopping_list__delete_cart" %}', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          body: new URLSearchParams({
+            'product_id': productId
+          })
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          console.log("Producto eliminado:", data);
+        })
+        .catch(function(error) {
+          console.error("Error al eliminar el producto:", error);
+        });
+      }
+    });
+  </script>
+  
+  
+  
+{% endblock extrajs %}

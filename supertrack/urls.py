@@ -28,6 +28,7 @@ API_VERSION = "api/v1"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("scrappy/", include("supertrack.apps.scrappy.urls")),
+    path("shopping-list", include("supertrack.apps.shopping_list.urls")),
     path("", include("supertrack.apps.dashboards.urls")),
     path("accounts/", include("allauth.urls")),
 ]

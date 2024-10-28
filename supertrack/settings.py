@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "supertrack.apps.ticket",
     "supertrack.apps.scrappy",
     "supertrack.apps.dashboards",
+    "supertrack.apps.shopping_list",
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             BASE_DIR / "supertrack/apps/dashboards/templates/",
+            BASE_DIR / "supertrack/apps/shopping_list/templates/",
             BASE_DIR / "supertrack/templates/",
         ],
         "APP_DIRS": True,
