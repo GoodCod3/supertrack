@@ -7,7 +7,7 @@
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="shoppingListTitle">
-          Shopping list (<span id="total-price">{% if shopping_list.total %}{{shopping_list.total}}{%else%}0.00{%endif%}</span> €)
+          Lista de la compra (<span id="total-price">{% if shopping_list.total %}{{shopping_list.total}}{%else%}0.00{%endif%}</span> €)
         </button>
       </h2>
       <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionShoppingList">
@@ -30,36 +30,55 @@
     </div>
   </div>
 
-<h2>Mercadona products</h2>
-<div class="accordion" id="accordionExample">
-    {% for category_name, products in products.items %}
-    <div class="accordion-item accordion-item-products">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ category_name|slugify }}" aria-expanded="true" aria-controls="collapseOne">
-          {{ category_name }}
-        </button>
-      </h2>
-      <div id="{{ category_name|slugify }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <ol class="list-group list-group-numbered">
-            {% for product in products %}
-                <a href="#" class="add-to-cart" data-id="{{product.id}}" data-name="{{ product.name }}" data-price="{{ product.price }}" data-image="{{ product.image }}">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}" style="width:8rem" loading="lazy">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold">{{product.name}}</div>
-                        </div>
-                        <span class="badge text-bg-primary rounded-pill">{{product.price}} €</span>
-                    </li>
-                </a>
-
-            {% endfor %}
-            </ol>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+        Lista de Mercadona
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+        Lista de Consum
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+      <div class="accordion" id="accordionExample">
+        {% for category_name, products in products.items %}
+        <div class="accordion-item accordion-item-products">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ category_name|slugify }}" aria-expanded="true" aria-controls="collapseOne">
+              {{ category_name }}
+            </button>
+          </h2>
+          <div id="{{ category_name|slugify }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <ol class="list-group list-group-numbered">
+                {% for product in products %}
+                    <a href="#" class="add-to-cart" data-id="{{product.id}}" data-name="{{ product.name }}" data-price="{{ product.price }}" data-image="{{ product.image }}">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}" style="width:8rem" loading="lazy">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">{{product.name}}</div>
+                            </div>
+                            <span class="badge text-bg-primary rounded-pill">{{product.price}} €</span>
+                        </li>
+                    </a>
+    
+                {% endfor %}
+                </ol>
+            </div>
+          </div>
         </div>
-      </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+    </div>
+
+  </div>
+  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
+
+
 
 {% endblock body %}
 
