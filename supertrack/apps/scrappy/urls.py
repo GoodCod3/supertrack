@@ -1,6 +1,6 @@
 from django.urls import path
 
-from supertrack.apps.scrappy.views import StoreMercadonaProductsView
+from supertrack.apps.scrappy.views.mercadona import StoreMercadonaProductsView
 
 urlpatterns = [
     path(
