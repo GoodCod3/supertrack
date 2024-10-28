@@ -41,7 +41,7 @@ class ShoppingListView(LoginRequiredMixin, TemplateView):
 
         products = {}
         for mercadona_product in mercadona_products:
-            product_category = mercadona_product.category.parent_category.name
+            product_category = mercadona_product.category.parent_category.parent_category.name
             if product_category not in products:
                 products[product_category] = []
 
