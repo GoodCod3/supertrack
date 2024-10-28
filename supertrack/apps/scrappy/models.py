@@ -12,7 +12,9 @@ class MercadonaParentCategoryModel(BaseModel):
     name = models.CharField(_("Name"), max_length=200)
     internal_id = models.CharField(_("Internal ID"), max_length=100)
 
-
+    def __str__(self):
+        return self.name
+    
 class MercadonaCategoryModel(BaseModel):
     parent_category = models.ForeignKey(
         MercadonaParentCategoryModel,
@@ -21,6 +23,8 @@ class MercadonaCategoryModel(BaseModel):
     name = models.CharField(_("Name"), max_length=200)
     internal_id = models.CharField(_("Internal ID"), max_length=100)
 
+    def __str__(self):
+        return self.name
 
 class MercadonaProductCategoryModel(BaseModel):
     parent_category = models.ForeignKey(
@@ -34,6 +38,8 @@ class MercadonaProductCategoryModel(BaseModel):
         upload_to=mercadona_category_product_image_upload_path,
     )
 
+    def __str__(self):
+        return f"{self.parent_category} - {self.name}"
 
 class MercadonaProductModel(BaseModel):
     category = models.ForeignKey(
@@ -50,3 +56,6 @@ class MercadonaProductModel(BaseModel):
     )
     slug = models.SlugField(_("Slug"), max_length=400)
     is_new = models.BooleanField(_("Is new"), default=False)
+
+    def __str__(self):
+        return f"{self.category} - {self.name}"

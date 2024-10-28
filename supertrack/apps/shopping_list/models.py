@@ -1,3 +1,28 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+from supertrack.apps.base_models import BaseModel
+
+
+class MercadonaShoppingList(BaseModel):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.PROTECT,
+    )
+
+    def __str__(self):
+        return self.user.email
+
+class MercadonaShoppingListProduct(BaseModel):
+    shopping_list = models.ForeignKey(
+        MercadonaShoppingList,
+        on_delete=models.PROTECT,
+    )
+    product = models.ForeignKey(
+        "scrappy.MercadonaProductModel",
+        on_delete=models.PROTECT,
+    )
+    quantity = models.IntegerField("Quantity", default=1)
+
+    def __str__(self):
+        return f"{self.shopping_list} - {self.product}"
