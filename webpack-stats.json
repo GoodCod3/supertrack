@@ -3,7 +3,11 @@
   "assets": {
     "bundle.js": {
       "name": "bundle.js",
-      "path": "/home/jojo/projects/supertrack/builds/bundle.js"
+      "path": "/home/jojo/projects/supertrack/statics/dashboard/builds/bundle.js"
+    },
+    "bundle.js.map": {
+      "name": "bundle.js.map",
+      "path": "/home/jojo/projects/supertrack/statics/dashboard/builds/bundle.js.map"
     }
   },
   "chunks": {

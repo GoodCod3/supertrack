@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import ShoppingListPage from './components/ShoppingListPage.tsx';
+import Provider from './Provider';
 
-const rootElement = document.getElementById('root') ;
-if(rootElement) {
+const rootElement = document.getElementById('root');
+if (rootElement) {
     const root = ReactDOM.createRoot(
-        rootElement 
+        rootElement
     );
 
     root.render(
-        <React.StrictMode>
-            <ShoppingListPage />
-        </React.StrictMode>
+        <Provider />
     );
 }
