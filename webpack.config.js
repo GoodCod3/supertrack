@@ -54,6 +54,7 @@ module.exports = {
     alias: {
         "@src": path.resolve(__dirname, "statics/dashboard/js/"),
         "@components": path.resolve(__dirname, "statics/dashboard/js/components"),
+        "@api": path.resolve(__dirname, "statics/dashboard/js/api"),
       },
   },
 };

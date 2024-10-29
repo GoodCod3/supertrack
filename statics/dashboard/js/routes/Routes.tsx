@@ -3,7 +3,7 @@ import { Router, Switch, Route } from 'react-router-dom';
 import { History } from 'history';
 
 import FullLoader from '@components/FullLoader';
-import ShoppingListPage from '@components/ShoppingListPage';
+import ShoppingListPage from '@src/modules/shopping_list/ui/shopping_list';
 
 import {
     URL_SHOPPING_LIST_PAGE

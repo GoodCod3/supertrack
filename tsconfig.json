@@ -26,6 +26,7 @@
     "paths": {
       "@src/*": ["statics/dashboard/js/*"],
       "@components/*": ["statics/dashboard/js/components/*"],
+      "@api/*": ["statics/dashboard/js/api/*"],
     },
   },
   "include": [

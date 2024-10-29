@@ -6,3 +6,8 @@ export type IApiError = {
     message?: string,
     error?: IAnyRecord
 };
+
+export type ISagaParam<T> = {
+    payload: T,
+    type: string,
+};
