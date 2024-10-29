@@ -1,5 +1,6 @@
 import { put, StrictEffect, takeLatest, select, call } from 'redux-saga/effects';
-import { UnknownAction } from '@reduxjs/toolkit';
+
+import shoppingListAPI from '@api/shoppingList';
 
 import {
     GET_MERCADONA_PRODUCTS,
@@ -7,9 +8,12 @@ import {
 
 
 export function* getMercadonaProducts(): Generator<StrictEffect, void, never> {
-    console.log('si');
+    const partnersResponse: any = yield call(shoppingListAPI.getMercadonaProducts);
+
+    console.log(partnersResponse);
 }
 
 export default function* (): Generator {
     yield takeLatest(GET_MERCADONA_PRODUCTS, getMercadonaProducts);
 }
+

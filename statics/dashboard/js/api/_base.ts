@@ -43,7 +43,7 @@ const buildErrorResponse = (errorResponse?: IAxiosError): IApiError => {
 
 const get = async (url: string): Promise<any> => {
     try {
-        const response = await axios.get(`${ENDPOINT_BASE_URL}/${API_VERSION}/${url}`, buildHeaders());
+        const response = await axios.get(`${ENDPOINT_BASE_URL}/${url}`, buildHeaders());
 
         return response.data;
     } catch (error) {
