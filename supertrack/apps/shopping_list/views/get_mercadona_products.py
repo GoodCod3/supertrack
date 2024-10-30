@@ -16,7 +16,7 @@ from supertrack.apps.scrappy.models import MercadonaProductModel
 def get_mercadona_products(request):
     if request.user.is_authenticated:
         products = {}
-        mercadona_products = MercadonaProductModel.objects.all()[:56]
+        mercadona_products = MercadonaProductModel.objects.all()[:100]
 
         for mercadona_product in mercadona_products:
             parent_category = mercadona_product.category.parent_category.parent_category.name
@@ -32,7 +32,7 @@ def get_mercadona_products(request):
                 {
                     "id": mercadona_product.public_id,
                     "name": mercadona_product.name,
-                    "image": mercadona_product.image.url if mercadona_product.image else None,
+                    "image": mercadona_product.image,
                     "price": mercadona_product.unit_price,
                 }
             )

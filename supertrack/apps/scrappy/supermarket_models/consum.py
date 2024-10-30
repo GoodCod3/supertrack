@@ -2,10 +2,6 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 from supertrack.apps.base_models import BaseModel
-from supertrack.helpers.filer import (
-    consum_product_image_upload_path,
-    consum_category_product_image_upload_path,
-)
 
 
 class ConsumParentCategoryModel(BaseModel):

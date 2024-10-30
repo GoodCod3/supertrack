@@ -3,11 +3,15 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Col from 'react-bootstrap/Col';
+import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
-import type { MercadonaCategoryProducts } from '@src/modules/shopping_list/interfaces';
+import type {
+    MercadonaCategoryProducts,
+    Product,
+} from '@src/modules/shopping_list/interfaces';
 
 
 type IShoppingListCategories = {
@@ -24,7 +28,33 @@ type IShoppingListCategories = {
     ) => void,
 };
 
+type FilteredProductsResult = {
+    subcategoryName: string;
+    products: Product[];
+}[];
+
 const SUPERMARKET_NAME = 'mercadona';
+const getProductsBySelection = (
+    products: MercadonaCategoryProducts,
+    categoryName: string,
+    subcategoryName?: string | null
+): FilteredProductsResult => {
+    // Si se selecciona una subcategoría específica
+    if (subcategoryName) {
+        return [
+            {
+                subcategoryName,
+                products: products[categoryName][subcategoryName],
+            },
+        ];
+    }
+
+    // Si se selecciona la categoría padre, combinamos todas las subcategorías
+    return Object.entries(products[categoryName]).map(([subcatName, subcatProducts]) => ({
+        subcategoryName: subcatName,
+        products: subcatProducts,
+    }));
+};
 
 const ShoppingListCategories = ({
     closeSupermarketProducts,
@@ -35,8 +65,11 @@ const ShoppingListCategories = ({
     productCategorySelected,
     supermarketProductsSelected,
 }: IShoppingListCategories) => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    let filteredProducts: FilteredProductsResult = [];
+    if (isProductsDisplayed && parentCategorySelected) {
+        filteredProducts = getProductsBySelection(mercadonaProducts, parentCategorySelected, productCategorySelected);
+        console.log(filteredProducts);
+    }
 
     const entries = Object.entries(mercadonaProducts);
     const rows = [];
@@ -52,10 +85,10 @@ const ShoppingListCategories = ({
                         const subCategories = Object.keys(value);
                         return (
                             <Col xs={6} key={colIndex} className='equal-height-card'>
-                                <Card style={{ width: '8rem' }}>
+                                <Card >
                                     <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
                                     <Card.Body>
-                                        <Card.Title className='category-title'>
+                                        <Card.Title className='category-title category-name'>
                                             <Card.Link
                                                 onClick={() => displaySupermarketProducts(SUPERMARKET_NAME, key)}>
                                                 {key}
@@ -83,13 +116,37 @@ const ShoppingListCategories = ({
                     <Offcanvas.Title>{parentCategorySelected}</Offcanvas.Title>
                 </Offcanvas.Header>
                 {productCategorySelected && (
-                <Offcanvas.Header >
-                    <Offcanvas.Title>{productCategorySelected}</Offcanvas.Title>
-                </Offcanvas.Header>
+                    <Offcanvas.Header >
+                        <Offcanvas.Title>{productCategorySelected}</Offcanvas.Title>
+                    </Offcanvas.Header>
 
                 )}
                 <Offcanvas.Body>
-                    I will not close if you click outside of me.
+                    Haz click en un producto para añadirlo a la lista
+                    <Accordion defaultActiveKey="0">
+                        {filteredProducts.length > 0 && (
+                            filteredProducts.map((subCategory, index) => (
+                                <Accordion.Item eventKey={`${index}`}>
+                                    <Accordion.Header>{subCategory.subcategoryName}</Accordion.Header>
+                                    <Accordion.Body>
+                                        <ol id="product-info" className="list-group list-group-numbered">
+                                            {subCategory.products.map((product, productIndex) => (
+                                                <li 
+                                                    className='list-group-item d-flex justify-content-between align-items-start'
+                                                    key={`product-${productIndex}`}
+                                                >
+                                                    <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
+                                                    <div className="ms-2 me-auto">
+                                                        <div className="fw-bold">{product.name} ({product.price} €)</div>
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ol>
+                                    </Accordion.Body>
+                                </Accordion.Item>
+                            ))
+                        )}
+                    </Accordion>
                 </Offcanvas.Body>
             </Offcanvas>
         </Container>
