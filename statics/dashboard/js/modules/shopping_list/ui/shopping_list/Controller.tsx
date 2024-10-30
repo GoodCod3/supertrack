@@ -8,12 +8,20 @@ type IShoppingListPageProps = {
     getMercadonaProducts: () => void,
     displaySupermarketProducts: (supermarketSelected: string) => void,
     mercadonaProducts: MercadonaCategoryProducts,
+    isProductsDisplayed: boolean,
+    supermarketProductsSelected: string,
+    parentCategorySelected: string,
+    productCategorySelected?: string | null,
 };
 
 const ShoppingListPage = ({
     getMercadonaProducts,
     mercadonaProducts,
     displaySupermarketProducts,
+    isProductsDisplayed,
+    supermarketProductsSelected,
+    parentCategorySelected,
+    productCategorySelected,
 }: IShoppingListPageProps) => {
     useEffect(() => {
         getMercadonaProducts();
@@ -25,6 +33,10 @@ const ShoppingListPage = ({
             <ShoppingListMercadona
                 mercadonaProducts={mercadonaProducts}
                 displaySupermarketProducts={displaySupermarketProducts}
+                isProductsDisplayed={isProductsDisplayed}
+                supermarketProductsSelected={supermarketProductsSelected}
+                parentCategorySelected={parentCategorySelected}
+                productCategorySelected={productCategorySelected}
             />
         </React.Fragment>
     );

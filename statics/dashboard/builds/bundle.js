@@ -5365,7 +5365,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    mercadonaProducts: state.shoppingListReducer.mercadonaProducts
+    mercadonaProducts: state.shoppingListReducer.mercadonaProducts,
+    isProductsDisplayed: state.shoppingListReducer.isProductsDisplayed,
+    supermarketProductsSelected: state.shoppingListReducer.supermarketProductsSelected,
+    parentCategorySelected: state.shoppingListReducer.parentCategorySelected,
+    productCategorySelected: state.shoppingListReducer.productCategorySelected
   };
 };
 var mapActionsToProps = {
@@ -5395,7 +5399,11 @@ __webpack_require__.r(__webpack_exports__);
 var ShoppingListPage = function ShoppingListPage(_ref) {
   var getMercadonaProducts = _ref.getMercadonaProducts,
     mercadonaProducts = _ref.mercadonaProducts,
-    displaySupermarketProducts = _ref.displaySupermarketProducts;
+    displaySupermarketProducts = _ref.displaySupermarketProducts,
+    isProductsDisplayed = _ref.isProductsDisplayed,
+    supermarketProductsSelected = _ref.supermarketProductsSelected,
+    parentCategorySelected = _ref.parentCategorySelected,
+    productCategorySelected = _ref.productCategorySelected;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getMercadonaProducts();
   }, []);
@@ -5406,7 +5414,11 @@ var ShoppingListPage = function ShoppingListPage(_ref) {
     className: "form-control mb-3"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__["default"], {
     mercadonaProducts: mercadonaProducts,
-    displaySupermarketProducts: displaySupermarketProducts
+    displaySupermarketProducts: displaySupermarketProducts,
+    isProductsDisplayed: isProductsDisplayed,
+    supermarketProductsSelected: supermarketProductsSelected,
+    parentCategorySelected: parentCategorySelected,
+    productCategorySelected: productCategorySelected
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShoppingListPage);
@@ -5448,7 +5460,11 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var SUPERMARKET_NAME = 'mercadona';
 var ShoppingListCategories = function ShoppingListCategories(_ref) {
   var mercadonaProducts = _ref.mercadonaProducts,
-    displaySupermarketProducts = _ref.displaySupermarketProducts;
+    displaySupermarketProducts = _ref.displaySupermarketProducts,
+    isProductsDisplayed = _ref.isProductsDisplayed,
+    supermarketProductsSelected = _ref.supermarketProductsSelected,
+    parentCategorySelected = _ref.parentCategorySelected,
+    productCategorySelected = _ref.productCategorySelected;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     show = _useState2[0],
@@ -5501,7 +5517,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref) {
       }))));
     }));
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    show: show,
+    show: isProductsDisplayed,
     onHide: handleClose,
     backdrop: "static",
     responsive: "lg"

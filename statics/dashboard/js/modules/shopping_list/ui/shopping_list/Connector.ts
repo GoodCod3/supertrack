@@ -7,11 +7,15 @@ import {
 import type ICommonRecord from '@src/interfaces/commonRecord';
 import type IState from '@src/interfaces/state';
 
-import HomeController from './Controller';
+import Controller from './Controller';
 
 
 export const mapStateToProps = (state: IState): ICommonRecord => ({
     mercadonaProducts: state.shoppingListReducer.mercadonaProducts,
+    isProductsDisplayed: state.shoppingListReducer.isProductsDisplayed,
+    supermarketProductsSelected: state.shoppingListReducer.supermarketProductsSelected,
+    parentCategorySelected: state.shoppingListReducer.parentCategorySelected,
+    productCategorySelected: state.shoppingListReducer.productCategorySelected,
 });
 
 export const mapActionsToProps = {
@@ -22,4 +26,4 @@ export const mapActionsToProps = {
 export default connect(
     mapStateToProps,
     mapActionsToProps,
-)(HomeController);
+)(Controller);

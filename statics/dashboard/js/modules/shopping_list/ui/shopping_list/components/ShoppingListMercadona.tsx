@@ -12,6 +12,10 @@ import type { MercadonaCategoryProducts } from '@src/modules/shopping_list/inter
 
 type IShoppingListCategories = {
     mercadonaProducts: MercadonaCategoryProducts,
+    isProductsDisplayed: boolean,
+    supermarketProductsSelected: string,
+    parentCategorySelected: string,
+    productCategorySelected?: string | null,
     displaySupermarketProducts: (
         supermarketSelected: string,
         parentCategorySelected: string,
@@ -24,6 +28,10 @@ const SUPERMARKET_NAME = 'mercadona';
 const ShoppingListCategories = ({
     mercadonaProducts,
     displaySupermarketProducts,
+    isProductsDisplayed,
+    supermarketProductsSelected,
+    parentCategorySelected,
+    productCategorySelected,
 }: IShoppingListCategories) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -68,7 +76,7 @@ const ShoppingListCategories = ({
                     })}
                 </Row>
             ))}
-            <Offcanvas show={show} onHide={handleClose} backdrop="static" responsive="lg">
+            <Offcanvas show={isProductsDisplayed} onHide={handleClose} backdrop="static" responsive="lg">
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Offcanvas</Offcanvas.Title>
                 </Offcanvas.Header>
