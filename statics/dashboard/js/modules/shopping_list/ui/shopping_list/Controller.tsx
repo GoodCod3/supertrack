@@ -7,7 +7,11 @@ import ShoppingListMercadona from './components/ShoppingListMercadona';
 type IShoppingListPageProps = {
     getMercadonaProducts: () => void,
     closeSupermarketProducts: () => void,
-    displaySupermarketProducts: (supermarketSelected: string) => void,
+    displaySupermarketProducts: (
+        supermarketSelected: string,
+        parentCategorySelected: string,
+        productCategorySelected?: string | null,
+    ) => void,
     mercadonaProducts: MercadonaCategoryProducts,
     isProductsDisplayed: boolean,
     supermarketProductsSelected: string,
