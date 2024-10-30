@@ -13,10 +13,18 @@ interface IAction<P = unknown> {
 
 export const getMercadonaProducts = (): IAction<string> => ({
     type: GET_MERCADONA_PRODUCTS,
-    payload: {  },
+    payload: {},
 });
 
-export const displaySupermarketProducts = (supermarketSelected:string): IAction<string> => ({
+export const displaySupermarketProducts = (
+    supermarketSelected: string,
+    parentCategorySelected: string,
+    productCategorySelected?: string | null,
+): IAction<string | null> => ({
     type: DISPLAY_SUPERMARKET_PRODUCTS,
-    payload: { supermarketSelected },
+    payload: {
+        supermarketSelected,
+        parentCategorySelected,
+        productCategorySelected,
+    },
 });

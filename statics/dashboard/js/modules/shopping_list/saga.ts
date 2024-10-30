@@ -13,6 +13,8 @@ import { ISagaParam } from '@src/interfaces/global';
 
 interface IDisplaySupermarketProductsSaga {
     supermarketSelected: string,
+    parentCategorySelected: string,
+    productCategorySelected?: string | null,
 };
 
 export function* getMercadonaProducts(): Generator<StrictEffect, void, never> {
@@ -29,6 +31,8 @@ export function* displaySupermarketProducts({payload}: ISagaParam<IDisplaySuperm
         type: DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS,
         payload: { 
             supermarketProductsSelected: payload.supermarketSelected,
+            parentCategorySelected: payload.parentCategorySelected,
+            productCategorySelected: payload.productCategorySelected,
             isProductsDisplayed: true,
         },
     });

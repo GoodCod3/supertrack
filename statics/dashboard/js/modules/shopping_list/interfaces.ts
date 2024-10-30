@@ -16,7 +16,9 @@ export type MercadonaCategoryProducts = {
 };
 
 export type IShoppingListState = {
-    mercadonaProducts: MercadonaCategoryProducts,
     isProductsDisplayed: boolean,
+    mercadonaProducts: MercadonaCategoryProducts,
+    parentCategorySelected: string | null,
+    productCategorySelected: string | null,
     supermarketProductsSelected: string | null,
 };

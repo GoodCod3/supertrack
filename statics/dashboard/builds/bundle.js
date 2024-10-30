@@ -5196,11 +5196,13 @@ var getMercadonaProducts = function getMercadonaProducts() {
     payload: {}
   };
 };
-var displaySupermarketProducts = function displaySupermarketProducts(supermarketSelected) {
+var displaySupermarketProducts = function displaySupermarketProducts(supermarketSelected, parentCategorySelected, productCategorySelected) {
   return {
     type: _action_types__WEBPACK_IMPORTED_MODULE_0__.DISPLAY_SUPERMARKET_PRODUCTS,
     payload: {
-      supermarketSelected: supermarketSelected
+      supermarketSelected: supermarketSelected,
+      parentCategorySelected: parentCategorySelected,
+      productCategorySelected: productCategorySelected
     }
   };
 };
@@ -5291,6 +5293,8 @@ function displaySupermarketProducts(_ref) {
             type: _action_types__WEBPACK_IMPORTED_MODULE_2__.DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS,
             payload: {
               supermarketProductsSelected: payload.supermarketSelected,
+              parentCategorySelected: payload.parentCategorySelected,
+              productCategorySelected: payload.productCategorySelected,
               isProductsDisplayed: true
             }
           });
@@ -5333,7 +5337,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mercadonaProducts: {},
   isProductsDisplayed: false,
-  supermarketProductsSelected: null
+  supermarketProductsSelected: null,
+  parentCategorySelected: null,
+  productCategorySelected: null
 });
 
 /***/ }),
@@ -5439,6 +5445,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+var SUPERMARKET_NAME = 'mercadona';
 var ShoppingListCategories = function ShoppingListCategories(_ref) {
   var mercadonaProducts = _ref.mercadonaProducts,
     displaySupermarketProducts = _ref.displaySupermarketProducts;
@@ -5449,30 +5456,18 @@ var ShoppingListCategories = function ShoppingListCategories(_ref) {
   var handleClose = function handleClose() {
     return setShow(false);
   };
-  var handleShow = function handleShow() {
-    return setShow(true);
-  };
   var entries = Object.entries(mercadonaProducts);
   var rows = [];
   for (var i = 0; i < entries.length; i += 2) {
     rows.push(entries.slice(i, i + 2));
   }
-  rows.map(function (row, rowIndex) {
-    row.map(function (_ref2, colIndex) {
-      var _ref3 = _slicedToArray(_ref2, 2),
-        key = _ref3[0],
-        value = _ref3[1];
-      var entries = Object.keys(value);
-      console.log(entries);
-    });
-  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_1__["default"], null, rows.map(function (row, rowIndex) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: rowIndex
-    }, row.map(function (_ref4, colIndex) {
-      var _ref5 = _slicedToArray(_ref4, 2),
-        key = _ref5[0],
-        value = _ref5[1];
+    }, row.map(function (_ref2, colIndex) {
+      var _ref3 = _slicedToArray(_ref2, 2),
+        key = _ref3[0],
+        value = _ref3[1];
       var subCategories = Object.keys(value);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_3__["default"], {
         xs: 6,
@@ -5489,7 +5484,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref) {
         className: "category-title"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Link, {
         onClick: function onClick() {
-          return displaySupermarketProducts(key);
+          return displaySupermarketProducts(SUPERMARKET_NAME, key);
         }
       }, key))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_ListGroup__WEBPACK_IMPORTED_MODULE_5__["default"], {
         className: "list-group-flush subcategory-list",
@@ -5499,7 +5494,9 @@ var ShoppingListCategories = function ShoppingListCategories(_ref) {
         }
       }, subCategories.map(function (categoryName, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_ListGroup__WEBPACK_IMPORTED_MODULE_5__["default"].Item, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Link, {
-          href: "#"
+          onClick: function onClick() {
+            return displaySupermarketProducts(SUPERMARKET_NAME, key, categoryName);
+          }
         }, categoryName));
       }))));
     }));
