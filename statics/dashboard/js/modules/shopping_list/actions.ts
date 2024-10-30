@@ -1,4 +1,5 @@
 import {
+    ADD_SHOPPING_LIST_PRODUCT,
     CLOSE_SUPERMARKET_PRODUCTS,
     DISPLAY_SUPERMARKET_PRODUCTS,
     GET_MERCADONA_PRODUCTS,
@@ -8,6 +9,7 @@ import {
 
 interface IAction<P = unknown> {
     type:
+    | typeof ADD_SHOPPING_LIST_PRODUCT
     | typeof CLOSE_SUPERMARKET_PRODUCTS
     | typeof DISPLAY_SUPERMARKET_PRODUCTS
     | typeof GET_MERCADONA_PRODUCTS
@@ -41,4 +43,9 @@ export const closeSupermarketProducts = (): IAction => ({
 export const getShoppingList = (): IAction => ({
     type: GET_SHOPPING_LIST,
     payload: {},
+});
+
+export const addShoppingListProduct = (productId: string): IAction => ({
+    type: ADD_SHOPPING_LIST_PRODUCT,
+    payload: { productId },
 });

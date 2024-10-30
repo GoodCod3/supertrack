@@ -1,6 +1,7 @@
 {
    "shoppingList": {
       "getMercadonaProducts": "shopping-list/mercadona/products/",
-      "getMercadonaShoppingList": "shopping-list/mercadona/"
+      "getMercadonaShoppingList": "shopping-list/mercadona/",
+      "addMercadonaShoppingListProduct": "shopping-list/mercadona/add-to-cart/"
    }
 }

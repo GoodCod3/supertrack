@@ -6,6 +6,7 @@ import ShoppingListMercadona from './components/ShoppingListMercadona';
 
 
 type IShoppingListPageProps = {
+    addShoppingListProduct: (productId: string) => void,
     getMercadonaProducts: () => void,
     closeSupermarketProducts: () => void,
     getShoppingList: () => void,
@@ -22,6 +23,7 @@ type IShoppingListPageProps = {
 };
 
 const ShoppingListPage = ({
+    addShoppingListProduct,
     closeSupermarketProducts,
     displaySupermarketProducts,
     getMercadonaProducts,
@@ -49,6 +51,7 @@ const ShoppingListPage = ({
                 </Accordion.Item>
             </Accordion>
             <ShoppingListMercadona
+                addShoppingListProduct={addShoppingListProduct}
                 closeSupermarketProducts={closeSupermarketProducts}
                 displaySupermarketProducts={displaySupermarketProducts}
                 isProductsDisplayed={isProductsDisplayed}

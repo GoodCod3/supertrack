@@ -15,6 +15,7 @@ import type {
 
 
 type IShoppingListCategories = {
+    addShoppingListProduct: (productId: string) => void,
     mercadonaProducts: MercadonaCategoryProducts,
     isProductsDisplayed: boolean,
     supermarketProductsSelected: string,
@@ -39,7 +40,6 @@ const getProductsBySelection = (
     categoryName: string,
     subcategoryName?: string | null
 ): FilteredProductsResult => {
-    // Si se selecciona una subcategoría específica
     if (subcategoryName) {
         return [
             {
@@ -49,7 +49,6 @@ const getProductsBySelection = (
         ];
     }
 
-    // Si se selecciona la categoría padre, combinamos todas las subcategorías
     return Object.entries(products[categoryName]).map(([subcatName, subcatProducts]) => ({
         subcategoryName: subcatName,
         products: subcatProducts,
@@ -57,6 +56,7 @@ const getProductsBySelection = (
 };
 
 const ShoppingListCategories = ({
+    addShoppingListProduct,
     closeSupermarketProducts,
     displaySupermarketProducts,
     isProductsDisplayed,
@@ -131,15 +131,18 @@ const ShoppingListCategories = ({
                                     <Accordion.Body>
                                         <ol id="product-info" className="list-group list-group-numbered">
                                             {subCategory.products.map((product, productIndex) => (
-                                                <li 
-                                                    className='list-group-item d-flex justify-content-between align-items-start'
-                                                    key={`product-${productIndex}`}
-                                                >
-                                                    <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
-                                                    <div className="ms-2 me-auto">
-                                                        <div className="fw-bold">{product.name} ({product.price} €)</div>
-                                                    </div>
-                                                </li>
+                                                <Card.Link onClick={() => addShoppingListProduct(product.id)}>
+                                                    <li
+                                                        className='list-group-item d-flex justify-content-between align-items-start'
+                                                        key={`product-${productIndex}`}
+                                                    >
+                                                        <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
+                                                        <div className="ms-2 me-auto">
+                                                            <div className="fw-bold">{product.name} ({product.price} €)</div>
+                                                        </div>
+                                                    </li>
+
+                                                </Card.Link>
                                             ))}
                                         </ol>
                                     </Accordion.Body>

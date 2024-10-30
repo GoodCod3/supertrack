@@ -4909,11 +4909,20 @@ var RESPONSE_FAIL = {
   success: false,
   errorStatus: 403
 };
+var getCsrfToken = function getCsrfToken() {
+  var _document$cookie$spli;
+  var name = 'csrftoken';
+  var cookieValue = (_document$cookie$spli = document.cookie.split('; ').find(function (row) {
+    return row.startsWith(name);
+  })) === null || _document$cookie$spli === void 0 ? void 0 : _document$cookie$spli.split('=')[1];
+  return cookieValue || null;
+};
 var buildHeaders = function buildHeaders(hasBodyImage) {
   var AXIOS_CONFIG = {
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json; charset=utf-8'
+      'Content-Type': 'application/json; charset=utf-8',
+      'X-CSRFToken': getCsrfToken() || ''
     },
     withCredentials: true
   };
@@ -4977,7 +4986,7 @@ var post = /*#__PURE__*/function () {
           axiosConfig = buildHeaders(hasBodyImage);
           _context2.prev = 2;
           _context2.next = 5;
-          return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(ENDPOINT_BASE_URL, "/").concat(API_VERSION, "/").concat(url), body, axiosConfig);
+          return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("".concat(ENDPOINT_BASE_URL, "/").concat(url), body, axiosConfig);
         case 5:
           response = _context2.sent;
           return _context2.abrupt("return", response.data);
@@ -5017,6 +5026,7 @@ var post = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addShoppingListProduct: () => (/* binding */ addShoppingListProduct),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   getMercadonaProducts: () => (/* binding */ getMercadonaProducts),
 /* harmony export */   getShoppingList: () => (/* binding */ getShoppingList)
@@ -5031,7 +5041,13 @@ var getMercadonaProducts = function getMercadonaProducts() {
 var getShoppingList = function getShoppingList() {
   return _base__WEBPACK_IMPORTED_MODULE_0__["default"].get(_urls_json__WEBPACK_IMPORTED_MODULE_1__.shoppingList.getMercadonaShoppingList);
 };
+var addShoppingListProduct = function addShoppingListProduct(productId) {
+  return _base__WEBPACK_IMPORTED_MODULE_0__["default"].post(_urls_json__WEBPACK_IMPORTED_MODULE_1__.shoppingList.addMercadonaShoppingListProduct, {
+    productId: productId
+  });
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  addShoppingListProduct: addShoppingListProduct,
   getMercadonaProducts: getMercadonaProducts,
   getShoppingList: getShoppingList
 });
@@ -5167,6 +5183,8 @@ var pushToHistory = function pushToHistory(url) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ADD_SHOPPING_LIST_PRODUCT: () => (/* binding */ ADD_SHOPPING_LIST_PRODUCT),
+/* harmony export */   ADD_SHOPPING_LIST_PRODUCT_SUCCESS: () => (/* binding */ ADD_SHOPPING_LIST_PRODUCT_SUCCESS),
 /* harmony export */   CLOSE_SUPERMARKET_PRODUCTS: () => (/* binding */ CLOSE_SUPERMARKET_PRODUCTS),
 /* harmony export */   CLOSE_SUPERMARKET_PRODUCTS_SUCCESS: () => (/* binding */ CLOSE_SUPERMARKET_PRODUCTS_SUCCESS),
 /* harmony export */   DISPLAY_SUPERMARKET_PRODUCTS: () => (/* binding */ DISPLAY_SUPERMARKET_PRODUCTS),
@@ -5186,6 +5204,8 @@ var DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS = 'shopping_list/DISPLAY_SUPERMARKET_PR
 var SUPERMARKET_PRODUCTS_SELECTED = 'shopping_list/SUPERMARKET_PRODUCTS_SELECTED';
 var GET_SHOPPING_LIST = 'shopping_list/GET_SHOPPING_LIST';
 var GET_SHOPPING_LIST_SUCCESS = 'shopping_list/GET_SHOPPING_LIST_SUCCESS';
+var ADD_SHOPPING_LIST_PRODUCT = 'shopping_list/ADD_SHOPPING_LIST_PRODUCT';
+var ADD_SHOPPING_LIST_PRODUCT_SUCCESS = 'shopping_list/ADD_SHOPPING_LIST_PRODUCT_SUCCESS';
 
 /***/ }),
 
@@ -5198,6 +5218,7 @@ var GET_SHOPPING_LIST_SUCCESS = 'shopping_list/GET_SHOPPING_LIST_SUCCESS';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addShoppingListProduct: () => (/* binding */ addShoppingListProduct),
 /* harmony export */   closeSupermarketProducts: () => (/* binding */ closeSupermarketProducts),
 /* harmony export */   displaySupermarketProducts: () => (/* binding */ displaySupermarketProducts),
 /* harmony export */   getMercadonaProducts: () => (/* binding */ getMercadonaProducts),
@@ -5233,6 +5254,14 @@ var getShoppingList = function getShoppingList() {
     payload: {}
   };
 };
+var addShoppingListProduct = function addShoppingListProduct(productId) {
+  return {
+    type: _action_types__WEBPACK_IMPORTED_MODULE_0__.ADD_SHOPPING_LIST_PRODUCT,
+    payload: {
+      productId: productId
+    }
+  };
+};
 
 /***/ }),
 
@@ -5253,7 +5282,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var reducerMap = [_action_types__WEBPACK_IMPORTED_MODULE_1__.CLOSE_SUPERMARKET_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.GET_MERCADONA_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.GET_SHOPPING_LIST_SUCCESS];
+var reducerMap = [_action_types__WEBPACK_IMPORTED_MODULE_1__.ADD_SHOPPING_LIST_PRODUCT_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.CLOSE_SUPERMARKET_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.GET_MERCADONA_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.GET_SHOPPING_LIST_SUCCESS];
 var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _state__WEBPACK_IMPORTED_MODULE_2__["default"];
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -5272,8 +5301,9 @@ var reducer = function reducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addShoppingListProduct: () => (/* binding */ addShoppingListProduct),
 /* harmony export */   closeSupermarketProducts: () => (/* binding */ closeSupermarketProducts),
-/* harmony export */   "default": () => (/* binding */ _callee2),
+/* harmony export */   "default": () => (/* binding */ _callee3),
 /* harmony export */   displaySupermarketProducts: () => (/* binding */ displaySupermarketProducts),
 /* harmony export */   getMercadonaProducts: () => (/* binding */ getMercadonaProducts),
 /* harmony export */   getShoppingList: () => (/* binding */ getShoppingList)
@@ -5286,10 +5316,11 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 var _marked = /*#__PURE__*/_regeneratorRuntime().mark(getMercadonaProducts),
   _marked2 = /*#__PURE__*/_regeneratorRuntime().mark(closeSupermarketProducts),
   _marked3 = /*#__PURE__*/_regeneratorRuntime().mark(getShoppingList),
-  _marked4 = /*#__PURE__*/_regeneratorRuntime().mark(_callee2);
+  _marked4 = /*#__PURE__*/_regeneratorRuntime().mark(_callee3);
 
 
 
+;
 ;
 function getMercadonaProducts() {
   var mercadonaProductsResponse;
@@ -5378,24 +5409,59 @@ function getShoppingList() {
     }
   }, _marked3);
 }
-function _callee2() {
-  return _regeneratorRuntime().wrap(function _callee2$(_context5) {
-    while (1) switch (_context5.prev = _context5.next) {
+function addShoppingListProduct(_ref2) {
+  var payload = _ref2.payload;
+  return /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var mercadonaProductsResponse;
+    return _regeneratorRuntime().wrap(function _callee2$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+          _context5.next = 3;
+          return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.call)(_api_shoppingList__WEBPACK_IMPORTED_MODULE_1__["default"].addShoppingListProduct, payload.productId);
+        case 3:
+          mercadonaProductsResponse = _context5.sent;
+          _context5.next = 6;
+          return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.put)({
+            type: _action_types__WEBPACK_IMPORTED_MODULE_2__.GET_SHOPPING_LIST_SUCCESS,
+            payload: {
+              mercadonaShoppingList: mercadonaProductsResponse
+            }
+          });
+        case 6:
+          _context5.next = 10;
+          break;
+        case 8:
+          _context5.prev = 8;
+          _context5.t0 = _context5["catch"](0);
+        case 10:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee2, null, [[0, 8]]);
+  })();
+}
+function _callee3() {
+  return _regeneratorRuntime().wrap(function _callee3$(_context6) {
+    while (1) switch (_context6.prev = _context6.next) {
       case 0:
-        _context5.next = 2;
+        _context6.next = 2;
         return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_2__.GET_MERCADONA_PRODUCTS, getMercadonaProducts);
       case 2:
-        _context5.next = 4;
+        _context6.next = 4;
         return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_2__.DISPLAY_SUPERMARKET_PRODUCTS, displaySupermarketProducts);
       case 4:
-        _context5.next = 6;
+        _context6.next = 6;
         return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_2__.CLOSE_SUPERMARKET_PRODUCTS, closeSupermarketProducts);
       case 6:
-        _context5.next = 8;
+        _context6.next = 8;
         return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_2__.GET_SHOPPING_LIST, getShoppingList);
       case 8:
+        _context6.next = 10;
+        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_2__.ADD_SHOPPING_LIST_PRODUCT, addShoppingListProduct);
+      case 10:
       case "end":
-        return _context5.stop();
+        return _context6.stop();
     }
   }, _marked4);
 }
@@ -5453,6 +5519,7 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 var mapActionsToProps = {
+  addShoppingListProduct: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.addShoppingListProduct,
   closeSupermarketProducts: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.closeSupermarketProducts,
   displaySupermarketProducts: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.displaySupermarketProducts,
   getMercadonaProducts: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.getMercadonaProducts,
@@ -5481,7 +5548,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ShoppingListPage = function ShoppingListPage(_ref) {
-  var closeSupermarketProducts = _ref.closeSupermarketProducts,
+  var addShoppingListProduct = _ref.addShoppingListProduct,
+    closeSupermarketProducts = _ref.closeSupermarketProducts,
     displaySupermarketProducts = _ref.displaySupermarketProducts,
     getMercadonaProducts = _ref.getMercadonaProducts,
     getShoppingList = _ref.getShoppingList,
@@ -5504,6 +5572,7 @@ var ShoppingListPage = function ShoppingListPage(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
     eventKey: "shopping-list"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Header, null, "Mi lista de la compra"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Body, null, "A\xFAn no has agregado ning\xFAn producto."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    addShoppingListProduct: addShoppingListProduct,
     closeSupermarketProducts: closeSupermarketProducts,
     displaySupermarketProducts: displaySupermarketProducts,
     isProductsDisplayed: isProductsDisplayed,
@@ -5553,15 +5622,12 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 var SUPERMARKET_NAME = 'mercadona';
 var getProductsBySelection = function getProductsBySelection(products, categoryName, subcategoryName) {
-  // Si se selecciona una subcategoría específica
   if (subcategoryName) {
     return [{
       subcategoryName: subcategoryName,
       products: products[categoryName][subcategoryName]
     }];
   }
-
-  // Si se selecciona la categoría padre, combinamos todas las subcategorías
   return Object.entries(products[categoryName]).map(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
       subcatName = _ref2[0],
@@ -5573,7 +5639,8 @@ var getProductsBySelection = function getProductsBySelection(products, categoryN
   });
 };
 var ShoppingListCategories = function ShoppingListCategories(_ref3) {
-  var closeSupermarketProducts = _ref3.closeSupermarketProducts,
+  var addShoppingListProduct = _ref3.addShoppingListProduct,
+    closeSupermarketProducts = _ref3.closeSupermarketProducts,
     displaySupermarketProducts = _ref3.displaySupermarketProducts,
     isProductsDisplayed = _ref3.isProductsDisplayed,
     mercadonaProducts = _ref3.mercadonaProducts,
@@ -5643,7 +5710,11 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
       id: "product-info",
       className: "list-group list-group-numbered"
     }, subCategory.products.map(function (product, productIndex) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Link, {
+        onClick: function onClick() {
+          return addShoppingListProduct(product.id);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         className: "list-group-item d-flex justify-content-between align-items-start",
         key: "product-".concat(productIndex)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
@@ -5657,7 +5728,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
         className: "ms-2 me-auto"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "fw-bold"
-      }, product.name, " (", product.price, " \u20AC)")));
+      }, product.name, " (", product.price, " \u20AC)"))));
     }))));
   })))));
 };
@@ -61247,7 +61318,7 @@ function invariant(condition, message) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"shoppingList":{"getMercadonaProducts":"shopping-list/mercadona/products/","getMercadonaShoppingList":"shopping-list/mercadona/"}}');
+module.exports = /*#__PURE__*/JSON.parse('{"shoppingList":{"getMercadonaProducts":"shopping-list/mercadona/products/","getMercadonaShoppingList":"shopping-list/mercadona/","addMercadonaShoppingListProduct":"shopping-list/mercadona/add-to-cart/"}}');
 
 /***/ })
 

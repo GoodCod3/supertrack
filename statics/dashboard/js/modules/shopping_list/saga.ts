@@ -1,8 +1,9 @@
 import { put, StrictEffect, takeLatest, select, call } from 'redux-saga/effects';
 
 import shoppingListAPI from '@api/shoppingList';
-import type {MercadonaCategoryProducts} from '@src/modules/shopping_list/interfaces';
+import type { MercadonaCategoryProducts } from '@src/modules/shopping_list/interfaces';
 import {
+    ADD_SHOPPING_LIST_PRODUCT,
     CLOSE_SUPERMARKET_PRODUCTS,
     CLOSE_SUPERMARKET_PRODUCTS_SUCCESS,
     GET_MERCADONA_PRODUCTS,
@@ -21,6 +22,10 @@ interface IDisplaySupermarketProductsSaga {
     productCategorySelected?: string | null,
 };
 
+interface IAddShoppingListProductSaga {
+    productId: string,
+};
+
 export function* getMercadonaProducts(): Generator<StrictEffect, void, never> {
     const mercadonaProductsResponse: MercadonaCategoryProducts = yield call(shoppingListAPI.getMercadonaProducts);
 
@@ -30,10 +35,10 @@ export function* getMercadonaProducts(): Generator<StrictEffect, void, never> {
     });
 }
 
-export function* displaySupermarketProducts({payload}: ISagaParam<IDisplaySupermarketProductsSaga>): Generator<StrictEffect, void, never> {
+export function* displaySupermarketProducts({ payload }: ISagaParam<IDisplaySupermarketProductsSaga>): Generator<StrictEffect, void, never> {
     yield put({
         type: DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS,
-        payload: { 
+        payload: {
             supermarketProductsSelected: payload.supermarketSelected,
             parentCategorySelected: payload.parentCategorySelected,
             productCategorySelected: payload.productCategorySelected,
@@ -45,7 +50,7 @@ export function* displaySupermarketProducts({payload}: ISagaParam<IDisplaySuperm
 export function* closeSupermarketProducts(): Generator<StrictEffect, void, never> {
     yield put({
         type: CLOSE_SUPERMARKET_PRODUCTS_SUCCESS,
-        payload: { 
+        payload: {
             supermarketProductsSelected: null,
             parentCategorySelected: null,
             productCategorySelected: null,
@@ -59,10 +64,28 @@ export function* getShoppingList(): Generator<StrictEffect, void, never> {
 
     yield put({
         type: GET_SHOPPING_LIST_SUCCESS,
-        payload: { 
+        payload: {
             mercadonaShoppingList: mercadonaProductsResponse,
         },
     });
+}
+
+export function* addShoppingListProduct({ payload }: ISagaParam<IAddShoppingListProductSaga>): Generator<StrictEffect, void, never> {
+    try {
+        const mercadonaProductsResponse: MercadonaCategoryProducts = yield call(
+            shoppingListAPI.addShoppingListProduct,
+            payload.productId,
+        );
+        yield put({
+            type: GET_SHOPPING_LIST_SUCCESS,
+            payload: {
+                mercadonaShoppingList: mercadonaProductsResponse,
+            },
+        });
+    } catch (error) {
+
+    }
+
 }
 
 export default function* (): Generator {
@@ -70,5 +93,6 @@ export default function* (): Generator {
     yield takeLatest(DISPLAY_SUPERMARKET_PRODUCTS, displaySupermarketProducts);
     yield takeLatest(CLOSE_SUPERMARKET_PRODUCTS, closeSupermarketProducts);
     yield takeLatest(GET_SHOPPING_LIST, getShoppingList);
+    yield takeLatest(ADD_SHOPPING_LIST_PRODUCT, addShoppingListProduct);
 }
 

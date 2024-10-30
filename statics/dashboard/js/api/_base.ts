@@ -13,11 +13,22 @@ type IAxiosError = {
     status: number,
 };
 
+const getCsrfToken = (): string | null => {
+    const name = 'csrftoken';
+    const cookieValue = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith(name))
+        ?.split('=')[1];
+
+    return cookieValue || null;
+};
+
 const buildHeaders = (hasBodyImage?: boolean) => {
     const AXIOS_CONFIG = {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json; charset=utf-8',
+            'X-CSRFToken': getCsrfToken() || ''
         } as Record<string, string>,
         withCredentials: true,
     };
@@ -60,7 +71,7 @@ const post = async (url: string, body: Record<never, never>, hasBodyImage = fals
     const axiosConfig = buildHeaders(hasBodyImage);
     try {
         const response = await axios.post(
-            `${ENDPOINT_BASE_URL}/${API_VERSION}/${url}`,
+            `${ENDPOINT_BASE_URL}/${url}`,
             body,
             axiosConfig);
 

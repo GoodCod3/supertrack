@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import {
+    addShoppingListProduct,
     closeSupermarketProducts,
     displaySupermarketProducts,
     getMercadonaProducts,
@@ -21,6 +22,7 @@ export const mapStateToProps = (state: IState): ICommonRecord => ({
 });
 
 export const mapActionsToProps = {
+    addShoppingListProduct,
     closeSupermarketProducts,
     displaySupermarketProducts,
     getMercadonaProducts,
