@@ -118,7 +118,7 @@ export function* removeShoppingListProduct({ payload }: ISagaParam<IAddShoppingL
             payload.supermarket,
         );
         if (mercadonaProductsResponse.status == "success") {
-            yield put({ type: GET_SHOPPING_LIST, payload: {} });
+            yield put({ type: GET_SHOPPING_LIST, payload: { supermarket: payload.supermarket } });
         }
     } catch (error) {
 

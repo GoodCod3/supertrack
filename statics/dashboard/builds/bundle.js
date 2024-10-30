@@ -6437,7 +6437,9 @@ function removeShoppingListProduct(_ref4) {
           _context6.next = 7;
           return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.put)({
             type: _action_types__WEBPACK_IMPORTED_MODULE_3__.GET_SHOPPING_LIST,
-            payload: {}
+            payload: {
+              supermarket: payload.supermarket
+            }
           });
         case 7:
           _context6.next = 11;
