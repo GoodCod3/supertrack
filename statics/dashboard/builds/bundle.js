@@ -6518,8 +6518,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Accordion */ "./node_modules/react-bootstrap/esm/Accordion.js");
-/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
 /* harmony import */ var react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Tab */ "./node_modules/react-bootstrap/esm/Tab.js");
 /* harmony import */ var react_bootstrap_Tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Tabs */ "./node_modules/react-bootstrap/esm/Tabs.js");
 /* harmony import */ var _components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/ShoppingListMercadona */ "./statics/dashboard/js/modules/shopping_list/ui/shopping_list/components/ShoppingListMercadona.tsx");
@@ -6529,8 +6527,6 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
 
 
 
@@ -6563,7 +6559,6 @@ var filterResults = function filterResults(searchTerm, products) {
   return results;
 };
 var ShoppingListPage = function ShoppingListPage(_ref5) {
-  var _mercadonaShoppingLis, _mercadonaShoppingLis2;
   var addShoppingListProduct = _ref5.addShoppingListProduct,
     closeSupermarketProducts = _ref5.closeSupermarketProducts,
     displaySupermarketProducts = _ref5.displaySupermarketProducts,
@@ -6601,9 +6596,6 @@ var ShoppingListPage = function ShoppingListPage(_ref5) {
   var handleSearch = function handleSearch(event) {
     setSearchTerm(event.target.value);
   };
-  var defaultActiveKeys = filteredResults.map(function (_, index) {
-    return "search-result-list-".concat(index);
-  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     placeholder: "Buscar productos, categor\xEDas o subcategor\xEDas...",
@@ -6618,71 +6610,7 @@ var ShoppingListPage = function ShoppingListPage(_ref5) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
     eventKey: "mercadona",
     title: "Mercadona"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    defaultActiveKey: "0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_4__["default"].Item, {
-    eventKey: "shopping-list"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_4__["default"].Header, null, "Mi lista de la compra", (mercadonaShoppingList === null || mercadonaShoppingList === void 0 || (_mercadonaShoppingLis = mercadonaShoppingList.products) === null || _mercadonaShoppingLis === void 0 ? void 0 : _mercadonaShoppingLis.length) > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, " (Total: ", mercadonaShoppingList.total, " \u20AC)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_4__["default"].Body, null, (mercadonaShoppingList === null || mercadonaShoppingList === void 0 || (_mercadonaShoppingLis2 = mercadonaShoppingList.products) === null || _mercadonaShoppingLis2 === void 0 ? void 0 : _mercadonaShoppingLis2.length) > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", {
-    className: "list-group list-group-numbered"
-  }, mercadonaShoppingList.products.map(function (product, productIndex) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-      className: "list-group-item d-flex justify-content-between align-items-start",
-      key: "product-".concat(productIndex)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-      src: product.image,
-      className: "card-img-top",
-      style: {
-        "width": "4rem"
-      },
-      loading: "lazy"
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "ms-2 me-auto"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "product-name-shopping-list"
-    }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "fw-bold product-name-shopping-list"
-    }, product.total_price, " \u20AC")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-      className: "badge text-bg-primary rounded-pill"
-    }, product.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-      className: "btn btn-danger btn-sm ms-2 remove-product",
-      onClick: function onClick() {
-        return removeShoppingListProduct(product.id);
-      }
-    }, "Eliminar"));
-  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "A\xFAn no has agregado ning\xFAn producto.")))), !!searchTerm && filteredResults.length > 0 ? filteredResults.map(function (filteredResult, filteredResultIndex) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), {
-      key: "search-result-list-".concat(filteredResultIndex)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, filteredResult.categoryName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      defaultActiveKey: defaultActiveKeys,
-      alwaysOpen: true
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_4__["default"].Item, {
-      eventKey: "search-result-list-".concat(filteredResultIndex)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_4__["default"].Header, null, filteredResult.subcategoryName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_4__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", {
-      className: "list-group list-group-numbered",
-      key: "product-list".concat(filteredResult.subcategoryName, "-").concat(filteredResultIndex)
-    }, filteredResult.products.map(function (product, productIndex) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_5__["default"].Link, {
-        onClick: function onClick() {
-          return addShoppingListProduct(product.id);
-        },
-        key: "product-".concat(product.id)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-        className: "list-group-item d-flex justify-content-between align-items-start",
-        key: "product-".concat(filteredResult.subcategoryName, "-").concat(filteredResultIndex, "-").concat(productIndex)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: product.image,
-        className: "card-img-top",
-        style: {
-          "width": "4rem"
-        },
-        loading: "lazy"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "ms-2 me-auto"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "fw-bold"
-      }, product.name, " (", product.price, " \u20AC)"))));
-    }))))));
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__["default"], {
     addShoppingListProduct: addShoppingListProduct,
     closeSupermarketProducts: closeSupermarketProducts,
     displaySupermarketProducts: displaySupermarketProducts,
@@ -6690,7 +6618,11 @@ var ShoppingListPage = function ShoppingListPage(_ref5) {
     mercadonaProducts: mercadonaProducts,
     parentCategorySelected: parentCategorySelected,
     productCategorySelected: productCategorySelected,
-    supermarketProductsSelected: supermarketProductsSelected
+    supermarketProductsSelected: supermarketProductsSelected,
+    mercadonaShoppingList: mercadonaShoppingList,
+    removeShoppingListProduct: removeShoppingListProduct,
+    filteredResults: filteredResults,
+    searchTerm: searchTerm
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
     eventKey: "consum",
     title: "Consum"
@@ -6714,12 +6646,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Container */ "./node_modules/react-bootstrap/esm/Container.js");
-/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Row */ "./node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap_ListGroup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/ListGroup */ "./node_modules/react-bootstrap/esm/ListGroup.js");
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Col */ "./node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap/Accordion */ "./node_modules/react-bootstrap/esm/Accordion.js");
-/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
-/* harmony import */ var react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Offcanvas */ "./node_modules/react-bootstrap/esm/Offcanvas.js");
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Row */ "./node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap_ListGroup__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/ListGroup */ "./node_modules/react-bootstrap/esm/ListGroup.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Col */ "./node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Accordion */ "./node_modules/react-bootstrap/esm/Accordion.js");
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap/Offcanvas */ "./node_modules/react-bootstrap/esm/Offcanvas.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -6753,6 +6685,7 @@ var getProductsBySelection = function getProductsBySelection(products, categoryN
   });
 };
 var ShoppingListCategories = function ShoppingListCategories(_ref3) {
+  var _mercadonaShoppingLis, _mercadonaShoppingLis2;
   var addShoppingListProduct = _ref3.addShoppingListProduct,
     closeSupermarketProducts = _ref3.closeSupermarketProducts,
     displaySupermarketProducts = _ref3.displaySupermarketProducts,
@@ -6760,71 +6693,141 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
     mercadonaProducts = _ref3.mercadonaProducts,
     parentCategorySelected = _ref3.parentCategorySelected,
     productCategorySelected = _ref3.productCategorySelected,
-    supermarketProductsSelected = _ref3.supermarketProductsSelected;
+    supermarketProductsSelected = _ref3.supermarketProductsSelected,
+    searchTerm = _ref3.searchTerm,
+    mercadonaShoppingList = _ref3.mercadonaShoppingList,
+    removeShoppingListProduct = _ref3.removeShoppingListProduct,
+    filteredResults = _ref3.filteredResults;
   var filteredProducts = [];
   if (isProductsDisplayed && parentCategorySelected) {
     filteredProducts = getProductsBySelection(mercadonaProducts, parentCategorySelected, productCategorySelected);
-    console.log(filteredProducts);
   }
   var entries = Object.entries(mercadonaProducts);
   var rows = [];
   for (var i = 0; i < entries.length; i += 2) {
     rows.push(entries.slice(i, i + 2));
   }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_1__["default"], null, rows.map(function (row, rowIndex) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  var defaultActiveKeys = filteredResults.map(function (_, index) {
+    return "search-result-list-".concat(index);
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    defaultActiveKey: "0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+    eventKey: "shopping-list"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Header, null, "Mi lista de la compra", (mercadonaShoppingList === null || mercadonaShoppingList === void 0 || (_mercadonaShoppingLis = mercadonaShoppingList.products) === null || _mercadonaShoppingLis === void 0 ? void 0 : _mercadonaShoppingLis.length) > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, " (Total: ", mercadonaShoppingList.total, " \u20AC)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Body, null, (mercadonaShoppingList === null || mercadonaShoppingList === void 0 || (_mercadonaShoppingLis2 = mercadonaShoppingList.products) === null || _mercadonaShoppingLis2 === void 0 ? void 0 : _mercadonaShoppingLis2.length) > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", {
+    className: "list-group list-group-numbered"
+  }, mercadonaShoppingList.products.map(function (product, productIndex) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+      className: "list-group-item d-flex justify-content-between align-items-start",
+      key: "product-".concat(productIndex)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: product.image,
+      className: "card-img-top",
+      style: {
+        "width": "4rem"
+      },
+      loading: "lazy"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ms-2 me-auto"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "product-name-shopping-list"
+    }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "fw-bold product-name-shopping-list"
+    }, product.total_price, " \u20AC")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: "badge text-bg-primary rounded-pill"
+    }, product.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      className: "btn btn-danger btn-sm ms-2 remove-product",
+      onClick: function onClick() {
+        return removeShoppingListProduct(product.id);
+      }
+    }, "Eliminar"));
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "A\xFAn no has agregado ning\xFAn producto.")))), !!searchTerm && filteredResults.length > 0 ? filteredResults.map(function (filteredResult, filteredResultIndex) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), {
+      key: "search-result-list-".concat(filteredResultIndex)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, filteredResult.categoryName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      defaultActiveKey: defaultActiveKeys,
+      alwaysOpen: true
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+      eventKey: "search-result-list-".concat(filteredResultIndex)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Header, null, filteredResult.subcategoryName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", {
+      className: "list-group list-group-numbered",
+      key: "product-list".concat(filteredResult.subcategoryName, "-").concat(filteredResultIndex)
+    }, filteredResult.products.map(function (product, productIndex) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
+        onClick: function onClick() {
+          return addShoppingListProduct(product.id);
+        },
+        key: "product-".concat(product.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        className: "list-group-item d-flex justify-content-between align-items-start",
+        key: "product-".concat(filteredResult.subcategoryName, "-").concat(filteredResultIndex, "-").concat(productIndex)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: product.image,
+        className: "card-img-top",
+        style: {
+          "width": "4rem"
+        },
+        loading: "lazy"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "ms-2 me-auto"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "fw-bold"
+      }, product.name, " (", product.price, " \u20AC)"))));
+    }))))));
+  }) : rows.map(function (row, rowIndex) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: rowIndex
     }, row.map(function (_ref4, colIndex) {
       var _ref5 = _slicedToArray(_ref4, 2),
         key = _ref5[0],
         value = _ref5[1];
       var subCategories = Object.keys(value);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], {
         xs: 6,
         key: colIndex,
         className: "equal-height-card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Img, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Img, {
         variant: "top",
         src: "holder.js/100px180?text=Image cap"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Title, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Title, {
         className: "category-title category-name"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Link, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
         onClick: function onClick() {
           return displaySupermarketProducts(SUPERMARKET_NAME, key);
         }
-      }, key))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_ListGroup__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }, key))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_ListGroup__WEBPACK_IMPORTED_MODULE_6__["default"], {
         className: "list-group-flush subcategory-list",
         style: {
           fontSize: '0.8rem',
           textAlign: 'center'
         }
       }, subCategories.map(function (categoryName, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_ListGroup__WEBPACK_IMPORTED_MODULE_5__["default"].Item, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_ListGroup__WEBPACK_IMPORTED_MODULE_6__["default"].Item, {
           key: "subcategories-".concat(index)
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Link, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
           onClick: function onClick() {
             return displaySupermarketProducts(SUPERMARKET_NAME, key, categoryName);
           }
         }, categoryName));
       }))));
     }));
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_7__["default"], {
     show: isProductsDisplayed,
     onHide: closeSupermarketProducts,
     backdrop: "static",
     responsive: "lg"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_6__["default"].Header, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_7__["default"].Header, {
     closeButton: true
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_6__["default"].Title, null, parentCategorySelected)), productCategorySelected && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_6__["default"].Header, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_6__["default"].Title, null, productCategorySelected)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_6__["default"].Body, null, "Haz click en un producto para a\xF1adirlo a la lista", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_7__["default"].Title, null, parentCategorySelected)), productCategorySelected && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_7__["default"].Header, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_7__["default"].Title, null, productCategorySelected)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Offcanvas__WEBPACK_IMPORTED_MODULE_7__["default"].Body, null, "Haz click en un producto para a\xF1adirlo a la lista", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"], {
     defaultActiveKey: "0"
   }, filteredProducts.length > 0 && filteredProducts.map(function (subCategory, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_7__["default"].Item, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
       eventKey: "".concat(index)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_7__["default"].Header, null, subCategory.subcategoryName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_7__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Header, null, subCategory.subcategoryName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", {
       id: "product-info",
       className: "list-group list-group-numbered"
     }, subCategory.products.map(function (product, productIndex) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_4__["default"].Link, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
         onClick: function onClick() {
           return addShoppingListProduct(product.id);
         }
