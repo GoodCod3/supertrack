@@ -8,8 +8,8 @@ import urls from './urls.json';
 
 export type IAddShoppingListProductResponse = {
     status: string,
-    error?:string,
-    message?:string,
+    error?: string,
+    message?: string,
 };
 
 export const getMercadonaProducts = (): Promise<IMercadonaCategory> => (
@@ -20,8 +20,8 @@ export const getShoppingList = (): Promise<MercadonaShoppingList> => (
     _base.get(urls.shoppingList.getMercadonaShoppingList)
 );
 
-export const addShoppingListProduct = (productId: string): Promise<IAddShoppingListProductResponse> => (
-    _base.post(urls.shoppingList.addMercadonaShoppingListProduct, { productId })
+export const addShoppingListProduct = (productId: string, supermarket: string): Promise<IAddShoppingListProductResponse> => (
+    _base.post(urls.shoppingList.addMercadonaShoppingListProduct, { productId, supermarket })
 );
 
 export const removeShoppingListProduct = (productId: string): Promise<IAddShoppingListProductResponse> => (

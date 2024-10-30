@@ -4,6 +4,8 @@ from django.contrib import admin
 from supertrack.apps.shopping_list.models import (
     MercadonaShoppingList,
     MercadonaShoppingListProduct,
+    ConsumShoppingList,
+    ConsumShoppingListProduct,
 )
 from supertrack.helpers.admin import BaseModelAdmin
 
@@ -28,3 +30,25 @@ class MercadonaShoppingListModelAdmin(BaseModelAdmin):
 
 
 admin.site.register(MercadonaShoppingList, MercadonaShoppingListModelAdmin)
+
+# Consum
+class ConsumShoppingListProductModelInline(admin.TabularInline):
+    model = ConsumShoppingListProduct
+    extra = 1
+
+
+# ======================= Consum =======================
+class ConsumShoppingListModelAdmin(BaseModelAdmin):
+    model = ConsumShoppingList
+    empty_value_display = "-empty-"
+
+    list_display = (
+        "public_id",
+        "user",
+    )
+    search_fields = ("name",)
+    # list_filter = ()
+    inlines = [ConsumShoppingListProductModelInline]
+
+
+admin.site.register(ConsumShoppingList, ConsumShoppingListModelAdmin)

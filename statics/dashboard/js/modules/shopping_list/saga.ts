@@ -34,6 +34,7 @@ interface IDisplaySupermarketProductsSaga {
 
 interface IAddShoppingListProductSaga {
     productId: string,
+    supermarket: string,
 };
 
 export function* getMercadonaProducts(): Generator<StrictEffect, void, never> {
@@ -85,6 +86,7 @@ export function* addShoppingListProduct({ payload }: ISagaParam<IAddShoppingList
         const mercadonaProductsResponse: IAddShoppingListProductResponse = yield call(
             shoppingListAPI.addShoppingListProduct,
             payload.productId,
+            payload.supermarket,
         );
         if (mercadonaProductsResponse.status == "success") {
             yield put({ type: GET_SHOPPING_LIST, payload: {} });
@@ -117,6 +119,7 @@ export function* getConsumProducts(): Generator<StrictEffect, void, never> {
         payload: { consumProducts: consumProductsResponse },
     });
 }
+
 
 export default function* (): Generator {
     yield takeLatest(GET_MERCADONA_PRODUCTS, getMercadonaProducts);

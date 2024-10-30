@@ -17,7 +17,7 @@ import type {
 
 
 type IShoppingListCategories = {
-    addShoppingListProduct: (productId: string) => void,
+    addShoppingListProduct: (productId: string, supermarket: string) => void,
     mercadonaProducts: MercadonaCategoryProducts,
     isProductsDisplayed: boolean,
     supermarketProductsSelected: string,
@@ -137,7 +137,7 @@ const ShoppingListCategories = ({
                                     >
                                         {filteredResult.products.map((product, productIndex) => (
                                             <Card.Link
-                                                onClick={() => addShoppingListProduct(product.id)}
+                                                onClick={() => addShoppingListProduct(product.id, SUPERMARKET_NAME)}
                                                 key={`product-${product.id}`}
                                             >
                                                 <li
@@ -215,7 +215,7 @@ const ShoppingListCategories = ({
                                         <Accordion.Body>
                                             <ol id="product-info" className="list-group list-group-numbered">
                                                 {subCategory.products.map((product, productIndex) => (
-                                                    <Card.Link onClick={() => addShoppingListProduct(product.id)}>
+                                                    <Card.Link onClick={() => addShoppingListProduct(product.id, SUPERMARKET_NAME)}>
                                                         <li
                                                             className='list-group-item d-flex justify-content-between align-items-start'
                                                             key={`product-${productIndex}`}

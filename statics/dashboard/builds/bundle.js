@@ -5911,9 +5911,10 @@ var getMercadonaProducts = function getMercadonaProducts() {
 var getShoppingList = function getShoppingList() {
   return _base__WEBPACK_IMPORTED_MODULE_0__["default"].get(_urls_json__WEBPACK_IMPORTED_MODULE_1__.shoppingList.getMercadonaShoppingList);
 };
-var addShoppingListProduct = function addShoppingListProduct(productId) {
+var addShoppingListProduct = function addShoppingListProduct(productId, supermarket) {
   return _base__WEBPACK_IMPORTED_MODULE_0__["default"].post(_urls_json__WEBPACK_IMPORTED_MODULE_1__.shoppingList.addMercadonaShoppingListProduct, {
-    productId: productId
+    productId: productId,
+    supermarket: supermarket
   });
 };
 var removeShoppingListProduct = function removeShoppingListProduct(productId) {
@@ -6142,11 +6143,12 @@ var getShoppingList = function getShoppingList() {
     payload: {}
   };
 };
-var addShoppingListProduct = function addShoppingListProduct(productId) {
+var addShoppingListProduct = function addShoppingListProduct(productId, supermarket) {
   return {
     type: _action_types__WEBPACK_IMPORTED_MODULE_0__.ADD_SHOPPING_LIST_PRODUCT,
     payload: {
-      productId: productId
+      productId: productId,
+      supermarket: supermarket
     }
   };
 };
@@ -6372,7 +6374,7 @@ function addShoppingListProduct(_ref2) {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
-          return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.call)(_api_shoppingList__WEBPACK_IMPORTED_MODULE_2__["default"].addShoppingListProduct, payload.productId);
+          return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.call)(_api_shoppingList__WEBPACK_IMPORTED_MODULE_2__["default"].addShoppingListProduct, payload.productId, payload.supermarket);
         case 3:
           mercadonaProductsResponse = _context5.sent;
           if (!(mercadonaProductsResponse.status == "success")) {
@@ -6802,7 +6804,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
     }, filteredResult.products.map(function (product, productIndex) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
         onClick: function onClick() {
-          return addShoppingListProduct(product.id);
+          return addShoppingListProduct(product.id, SUPERMARKET_NAME);
         },
         key: "product-".concat(product.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
@@ -6878,7 +6880,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
     }, subCategory.products.map(function (product, productIndex) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
         onClick: function onClick() {
-          return addShoppingListProduct(product.id);
+          return addShoppingListProduct(product.id, SUPERMARKET_NAME);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         className: "list-group-item d-flex justify-content-between align-items-start",
@@ -7027,7 +7029,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
     }, filteredResult.products.map(function (product, productIndex) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
         onClick: function onClick() {
-          return addShoppingListProduct(product.id);
+          return addShoppingListProduct(product.id, SUPERMARKET_NAME);
         },
         key: "product-".concat(product.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
@@ -7103,7 +7105,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
     }, subCategory.products.map(function (product, productIndex) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
         onClick: function onClick() {
-          return addShoppingListProduct(product.id);
+          return addShoppingListProduct(product.id, SUPERMARKET_NAME);
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         className: "list-group-item d-flex justify-content-between align-items-start",

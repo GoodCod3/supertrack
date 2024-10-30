@@ -49,9 +49,9 @@ export const getShoppingList = (): IAction => ({
     payload: {},
 });
 
-export const addShoppingListProduct = (productId: string): IAction => ({
+export const addShoppingListProduct = (productId: string, supermarket:string): IAction => ({
     type: ADD_SHOPPING_LIST_PRODUCT,
-    payload: { productId },
+    payload: { productId, supermarket },
 });
 
 export const removeShoppingListProduct = (productId: string): IAction => ({

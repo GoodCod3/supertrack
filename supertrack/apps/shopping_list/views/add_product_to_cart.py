@@ -7,8 +7,10 @@ from django.shortcuts import get_object_or_404
 from supertrack.apps.shopping_list.models import (
     MercadonaShoppingList,
     MercadonaShoppingListProduct,
+    ConsumShoppingList,
+    ConsumShoppingListProduct,
 )
-from supertrack.apps.scrappy.models import MercadonaProductModel
+from supertrack.apps.scrappy.models import MercadonaProductModel, ConsumProductModel
 
 
 @require_POST
@@ -20,12 +22,25 @@ def add_product_to_cart(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
     else:
         product_id = data.get("productId")
-        if product_id:
-            product = get_object_or_404(MercadonaProductModel, public_id=product_id)
-            mercadona_list, created = MercadonaShoppingList.objects.get_or_create(
+        supermarket = data.get("supermarket")
+        if product_id and supermarket:
+            if supermarket == "mercadona":
+                productModel = MercadonaProductModel
+                supermarketShoppingList = MercadonaShoppingList
+                supermarketShoppingListProduct = MercadonaShoppingListProduct
+            elif supermarket == "consum":
+                productModel = ConsumProductModel
+                supermarketShoppingList = ConsumShoppingList
+                supermarketShoppingListProduct = ConsumShoppingListProduct
+            else:
+                return JsonResponse({"error": "Supermarket not exist"}, status=400)
+                
+                
+            product = get_object_or_404(productModel, public_id=product_id)
+            mercadona_list, created = supermarketShoppingList.objects.get_or_create(
                 user=request.user
             )
-            shopping_list_product, created = MercadonaShoppingListProduct.objects.get_or_create(
+            shopping_list_product, created = supermarketShoppingListProduct.objects.get_or_create(
                 shopping_list=mercadona_list,
                 product=product,
                 is_deleted=False,
