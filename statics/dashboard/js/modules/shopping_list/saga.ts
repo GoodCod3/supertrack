@@ -1,4 +1,5 @@
 import { put, StrictEffect, takeLatest, select, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import shoppingListAPI, {
     IAddShoppingListProductResponse,
@@ -83,6 +84,7 @@ export function* addShoppingListProduct({ payload }: ISagaParam<IAddShoppingList
         );
         if (mercadonaProductsResponse.status == "success") {
             yield put({ type: GET_SHOPPING_LIST, payload: {} });
+            toast.success('Producto añadido a la lista');
         }
     } catch (error) {
 

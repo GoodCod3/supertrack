@@ -1,8 +1,9 @@
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import { History } from 'history';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import FullLoader from '@components/FullLoader';
 import ShoppingListPage from '@src/modules/shopping_list/ui/shopping_list';
 
 import {
@@ -25,7 +26,7 @@ class AppRoutes extends React.Component<IAppRoutesProps> {
                         </Route>
                     </Switch>
                 </Router>
-
+                <ToastContainer limit={3} autoClose={800}/>
             </>
         );
     }

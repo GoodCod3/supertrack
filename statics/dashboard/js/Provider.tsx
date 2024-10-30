@@ -15,7 +15,7 @@ type IProviderAppProps = Record<never, never>;
 class ProviderApp extends React.Component {
     store: Store;
     history: History;
-    
+
     constructor(props: IProviderAppProps) {
         super(props);
 

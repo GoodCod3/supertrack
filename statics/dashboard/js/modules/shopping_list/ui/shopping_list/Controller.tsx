@@ -58,7 +58,6 @@ const filterResults = (
     return results;
 };
 
-
 const ShoppingListPage = ({
     addShoppingListProduct,
     closeSupermarketProducts,
