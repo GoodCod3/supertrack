@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
 from supertrack.apps.shopping_list.models import (
+    ConsumShoppingList,
+    ConsumShoppingListProduct,
     MercadonaShoppingList,
     MercadonaShoppingListProduct,
 )
@@ -20,10 +22,21 @@ def delete_product_to_cart(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
     else:
         product_id = data.get("productId")
-        if product_id:
-            mercadona_list = get_object_or_404(MercadonaShoppingList, user=request.user)
+        supermarket = data.get("supermarket")
+        if product_id and supermarket:
+            if supermarket == "mercadona":
+                supermarketShoppingList = MercadonaShoppingList
+                supermarketShoppingListProduct = MercadonaShoppingListProduct
+            elif supermarket == "consum":
+                supermarketShoppingList = ConsumShoppingList
+                supermarketShoppingListProduct = ConsumShoppingListProduct
+                
+            else:
+                return JsonResponse({"error": "Supermarket does not exist"}, status=400)
+                
+            mercadona_list = get_object_or_404(supermarketShoppingList, user=request.user)
             product_in_list = get_object_or_404(
-                MercadonaShoppingListProduct,
+                supermarketShoppingListProduct,
                 shopping_list=mercadona_list,
                 product__public_id=product_id,
                 is_deleted=False,

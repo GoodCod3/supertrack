@@ -17,8 +17,8 @@ import ShoppingListConsum from './components/ShoppingListConsum';
 
 
 type IShoppingListPageProps = {
-    addShoppingListProduct: (productId: string, supermarket:string) => void,
-    removeShoppingListProduct: (productId: string) => void,
+    addShoppingListProduct: (productId: string, supermarket: string) => void,
+    removeShoppingListProduct: (productId: string, supermarket: string) => void,
     getMercadonaProducts: () => void,
     getConsumProducts: () => void,
     closeSupermarketProducts: () => void,

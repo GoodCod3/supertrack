@@ -5917,9 +5917,10 @@ var addShoppingListProduct = function addShoppingListProduct(productId, supermar
     supermarket: supermarket
   });
 };
-var removeShoppingListProduct = function removeShoppingListProduct(productId) {
+var removeShoppingListProduct = function removeShoppingListProduct(productId, supermarket) {
   return _base__WEBPACK_IMPORTED_MODULE_0__["default"].post(_urls_json__WEBPACK_IMPORTED_MODULE_1__.shoppingList.removeMercadonaShoppingListProduct, {
-    productId: productId
+    productId: productId,
+    supermarket: supermarket
   });
 };
 var getConsumProducts = function getConsumProducts() {
@@ -6152,11 +6153,12 @@ var addShoppingListProduct = function addShoppingListProduct(productId, supermar
     }
   };
 };
-var removeShoppingListProduct = function removeShoppingListProduct(productId) {
+var removeShoppingListProduct = function removeShoppingListProduct(productId, supermarket) {
   return {
     type: _action_types__WEBPACK_IMPORTED_MODULE_0__.REMOVE_SHOPPING_LIST_PRODUCT,
     payload: {
-      productId: productId
+      productId: productId,
+      supermarket: supermarket
     }
   };
 };
@@ -6410,7 +6412,7 @@ function removeShoppingListProduct(_ref3) {
         case 0:
           _context6.prev = 0;
           _context6.next = 3;
-          return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.call)(_api_shoppingList__WEBPACK_IMPORTED_MODULE_2__["default"].removeShoppingListProduct, payload.productId);
+          return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.call)(_api_shoppingList__WEBPACK_IMPORTED_MODULE_2__["default"].removeShoppingListProduct, payload.productId, payload.supermarket);
         case 3:
           mercadonaProductsResponse = _context6.sent;
           if (!(mercadonaProductsResponse.status == "success")) {
@@ -6787,7 +6789,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
     }, product.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       className: "btn btn-danger btn-sm ms-2 remove-product",
       onClick: function onClick() {
-        return removeShoppingListProduct(product.id);
+        return removeShoppingListProduct(product.id, SUPERMARKET_NAME);
       }
     }, "Eliminar"));
   })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "A\xFAn no has agregado ning\xFAn producto.")))), !!searchTerm && filteredResults.length > 0 ? filteredResults.map(function (filteredResult, filteredResultIndex) {
@@ -7012,7 +7014,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
     }, product.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       className: "btn btn-danger btn-sm ms-2 remove-product",
       onClick: function onClick() {
-        return removeShoppingListProduct(product.id);
+        return removeShoppingListProduct(product.id, SUPERMARKET_NAME);
       }
     }, "Eliminar"));
   })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "A\xFAn no has agregado ning\xFAn producto.")))), !!searchTerm && filteredResults.length > 0 ? filteredResults.map(function (filteredResult, filteredResultIndex) {

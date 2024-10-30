@@ -31,7 +31,7 @@ type IShoppingListCategories = {
     ) => void,
     searchTerm: string,
     mercadonaShoppingList: MercadonaShoppingList,
-    removeShoppingListProduct: (productId: string) => void,
+    removeShoppingListProduct: (productId: string, supermarket: string) => void,
     filteredResults: MercadonaSearchFilteredResult[],
 };
 
@@ -109,7 +109,7 @@ const ShoppingListCategories = ({
                                         <span className="badge text-bg-primary rounded-pill">{product.quantity}</span>
                                         <button
                                             className="btn btn-danger btn-sm ms-2 remove-product"
-                                            onClick={() => removeShoppingListProduct(product.id)}
+                                            onClick={() => removeShoppingListProduct(product.id, SUPERMARKET_NAME)}
                                         >
                                             Eliminar
                                         </button>

@@ -102,6 +102,7 @@ export function* removeShoppingListProduct({ payload }: ISagaParam<IAddShoppingL
         const mercadonaProductsResponse: IAddShoppingListProductResponse = yield call(
             shoppingListAPI.removeShoppingListProduct,
             payload.productId,
+            payload.supermarket,
         );
         if (mercadonaProductsResponse.status == "success") {
             yield put({ type: GET_SHOPPING_LIST, payload: {} });

@@ -24,8 +24,8 @@ export const addShoppingListProduct = (productId: string, supermarket: string): 
     _base.post(urls.shoppingList.addMercadonaShoppingListProduct, { productId, supermarket })
 );
 
-export const removeShoppingListProduct = (productId: string): Promise<IAddShoppingListProductResponse> => (
-    _base.post(urls.shoppingList.removeMercadonaShoppingListProduct, { productId })
+export const removeShoppingListProduct = (productId: string, supermarket: string): Promise<IAddShoppingListProductResponse> => (
+    _base.post(urls.shoppingList.removeMercadonaShoppingListProduct, { productId, supermarket })
 );
 
 export const getConsumProducts = (): Promise<IConsumCategoryProducts> => (

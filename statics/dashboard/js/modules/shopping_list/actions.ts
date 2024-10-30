@@ -54,9 +54,9 @@ export const addShoppingListProduct = (productId: string, supermarket:string): I
     payload: { productId, supermarket },
 });
 
-export const removeShoppingListProduct = (productId: string): IAction => ({
+export const removeShoppingListProduct = (productId: string, supermarket: string): IAction => ({
     type: REMOVE_SHOPPING_LIST_PRODUCT,
-    payload: { productId },
+    payload: { productId, supermarket },
 });
 
 export const getConsumProducts = (): IAction<string> => ({

@@ -33,7 +33,7 @@ def add_product_to_cart(request):
                 supermarketShoppingList = ConsumShoppingList
                 supermarketShoppingListProduct = ConsumShoppingListProduct
             else:
-                return JsonResponse({"error": "Supermarket not exist"}, status=400)
+                return JsonResponse({"error": "Supermarket does not exist"}, status=400)
                 
                 
             product = get_object_or_404(productModel, public_id=product_id)
