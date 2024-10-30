@@ -128,7 +128,7 @@
 
   /* Product cards */
 
-  .equal-height-card {
+.equal-height-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
@@ -143,4 +143,8 @@
   overflow-y: auto;
   max-height: 3rem;
   min-height: 3rem;
+}
+
+.offcanvas-lg.offcanvas-start {
+  width: 100%;
 }

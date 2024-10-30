@@ -5,8 +5,15 @@ import type {MercadonaCategoryProducts} from '@src/modules/shopping_list/interfa
 import {
     GET_MERCADONA_PRODUCTS,
     GET_MERCADONA_PRODUCTS_SUCCESS,
+    DISPLAY_SUPERMARKET_PRODUCTS,
+    DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS,
 } from './action-types';
+import { ISagaParam } from '@src/interfaces/global';
 
+
+interface IDisplaySupermarketProductsSaga {
+    supermarketSelected: string,
+};
 
 export function* getMercadonaProducts(): Generator<StrictEffect, void, never> {
     const mercadonaProductsResponse: MercadonaCategoryProducts = yield call(shoppingListAPI.getMercadonaProducts);
@@ -17,7 +24,18 @@ export function* getMercadonaProducts(): Generator<StrictEffect, void, never> {
     });
 }
 
+export function* displaySupermarketProducts({payload}: ISagaParam<IDisplaySupermarketProductsSaga>): Generator<StrictEffect, void, never> {
+    yield put({
+        type: DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS,
+        payload: { 
+            supermarketProductsSelected: payload.supermarketSelected,
+            isProductsDisplayed: true,
+        },
+    });
+}
+
 export default function* (): Generator {
     yield takeLatest(GET_MERCADONA_PRODUCTS, getMercadonaProducts);
+    yield takeLatest(DISPLAY_SUPERMARKET_PRODUCTS, displaySupermarketProducts);
 }
 
