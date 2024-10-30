@@ -8,11 +8,30 @@ export type Product = {
 export type Subcategory = Product[];
 
 export type Category = {
-    [subcategoryName: string]: Subcategory;
+    [subcategoryName: string]: Subcategory,
 };
 
 export type MercadonaCategoryProducts = {
-    [categoryName: string]: Category;
+    [categoryName: string]: Category,
+};
+
+export type MercadonaShoppingListProduct = {
+    id: string,
+    image: string,
+    name: string,
+    price: number,
+    quantity: number,
+    total_price: number,
+};
+
+export type MercadonaShoppingList = {
+    total: number,
+    products: MercadonaShoppingListProduct[]
+};
+
+
+export type IMercadonaCategory = {
+    name: string,
 };
 
 export type IShoppingListState = {

@@ -1,7 +1,12 @@
 import { put, StrictEffect, takeLatest, select, call } from 'redux-saga/effects';
 
-import shoppingListAPI from '@api/shoppingList';
-import type { MercadonaCategoryProducts } from '@src/modules/shopping_list/interfaces';
+import shoppingListAPI, {
+    IAddShoppingListProductResponse,
+} from '@api/shoppingList';
+import type {
+    MercadonaCategoryProducts,
+    MercadonaShoppingList,
+} from '@src/modules/shopping_list/interfaces';
 import {
     ADD_SHOPPING_LIST_PRODUCT,
     CLOSE_SUPERMARKET_PRODUCTS,
@@ -60,7 +65,7 @@ export function* closeSupermarketProducts(): Generator<StrictEffect, void, never
 }
 
 export function* getShoppingList(): Generator<StrictEffect, void, never> {
-    const mercadonaProductsResponse: MercadonaCategoryProducts = yield call(shoppingListAPI.getShoppingList);
+    const mercadonaProductsResponse: MercadonaShoppingList = yield call(shoppingListAPI.getShoppingList);
 
     yield put({
         type: GET_SHOPPING_LIST_SUCCESS,
@@ -72,16 +77,13 @@ export function* getShoppingList(): Generator<StrictEffect, void, never> {
 
 export function* addShoppingListProduct({ payload }: ISagaParam<IAddShoppingListProductSaga>): Generator<StrictEffect, void, never> {
     try {
-        const mercadonaProductsResponse: MercadonaCategoryProducts = yield call(
+        const mercadonaProductsResponse: IAddShoppingListProductResponse = yield call(
             shoppingListAPI.addShoppingListProduct,
             payload.productId,
         );
-        yield put({
-            type: GET_SHOPPING_LIST_SUCCESS,
-            payload: {
-                mercadonaShoppingList: mercadonaProductsResponse,
-            },
-        });
+        if (mercadonaProductsResponse.status == "success") {
+            yield put({ type: GET_SHOPPING_LIST, payload: {} });
+        }
     } catch (error) {
 
     }

@@ -5421,24 +5421,26 @@ function addShoppingListProduct(_ref2) {
           return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.call)(_api_shoppingList__WEBPACK_IMPORTED_MODULE_1__["default"].addShoppingListProduct, payload.productId);
         case 3:
           mercadonaProductsResponse = _context5.sent;
-          _context5.next = 6;
+          if (!(mercadonaProductsResponse.status == "success")) {
+            _context5.next = 7;
+            break;
+          }
+          _context5.next = 7;
           return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.put)({
-            type: _action_types__WEBPACK_IMPORTED_MODULE_2__.GET_SHOPPING_LIST_SUCCESS,
-            payload: {
-              mercadonaShoppingList: mercadonaProductsResponse
-            }
+            type: _action_types__WEBPACK_IMPORTED_MODULE_2__.GET_SHOPPING_LIST,
+            payload: {}
           });
-        case 6:
-          _context5.next = 10;
+        case 7:
+          _context5.next = 11;
           break;
-        case 8:
-          _context5.prev = 8;
+        case 9:
+          _context5.prev = 9;
           _context5.t0 = _context5["catch"](0);
-        case 10:
+        case 11:
         case "end":
           return _context5.stop();
       }
-    }, _callee2, null, [[0, 8]]);
+    }, _callee2, null, [[0, 9]]);
   })();
 }
 function _callee3() {
