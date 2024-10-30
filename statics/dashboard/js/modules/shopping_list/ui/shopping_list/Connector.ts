@@ -6,6 +6,7 @@ import {
     displaySupermarketProducts,
     getMercadonaProducts,
     getShoppingList,
+    removeShoppingListProduct,
 } from '@src/modules/shopping_list/actions';
 import type ICommonRecord from '@src/interfaces/commonRecord';
 import type IState from '@src/interfaces/state';
@@ -28,6 +29,7 @@ export const mapActionsToProps = {
     displaySupermarketProducts,
     getMercadonaProducts,
     getShoppingList,
+    removeShoppingListProduct,
 };
 
 export default connect(

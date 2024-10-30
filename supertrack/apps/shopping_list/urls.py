@@ -24,7 +24,7 @@ urlpatterns = [
         name="shopping_list__get_products",
     ),
     path(
-        "delete-product-cart/",
+        "mercadona/delete-product-cart/",
         delete_product_to_cart,
         name="shopping_list__delete_cart",
     ),

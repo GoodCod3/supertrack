@@ -4,6 +4,7 @@ import {
     DISPLAY_SUPERMARKET_PRODUCTS,
     GET_MERCADONA_PRODUCTS,
     GET_SHOPPING_LIST,
+    REMOVE_SHOPPING_LIST_PRODUCT,
 } from './action-types';
 
 
@@ -14,6 +15,7 @@ interface IAction<P = unknown> {
     | typeof DISPLAY_SUPERMARKET_PRODUCTS
     | typeof GET_MERCADONA_PRODUCTS
     | typeof GET_SHOPPING_LIST
+    | typeof REMOVE_SHOPPING_LIST_PRODUCT
     payload?: Record<string, P>;
 }
 
@@ -47,5 +49,10 @@ export const getShoppingList = (): IAction => ({
 
 export const addShoppingListProduct = (productId: string): IAction => ({
     type: ADD_SHOPPING_LIST_PRODUCT,
+    payload: { productId },
+});
+
+export const removeShoppingListProduct = (productId: string): IAction => ({
+    type: REMOVE_SHOPPING_LIST_PRODUCT,
     payload: { productId },
 });

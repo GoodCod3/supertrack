@@ -12,6 +12,7 @@ import ShoppingListMercadona from './components/ShoppingListMercadona';
 
 type IShoppingListPageProps = {
     addShoppingListProduct: (productId: string) => void,
+    removeShoppingListProduct: (productId: string) => void,
     getMercadonaProducts: () => void,
     closeSupermarketProducts: () => void,
     getShoppingList: () => void,
@@ -70,6 +71,7 @@ const ShoppingListPage = ({
     productCategorySelected,
     supermarketProductsSelected,
     mercadonaShoppingList,
+    removeShoppingListProduct,
 }: IShoppingListPageProps) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [filteredResults, setFilteredResults] = useState<SearchFilteredResult[]>([]);
@@ -121,12 +123,17 @@ const ShoppingListPage = ({
                                         key={`product-${productIndex}`}
                                     >
                                         <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
-                                        <div className="ms-2 me-auto ">
+                                        <div className="ms-2 me-auto">
                                             <div className="product-name-shopping-list">{product.name}</div>
                                             <div className="fw-bold product-name-shopping-list">{product.total_price} €</div>
                                         </div>
                                         <span className="badge text-bg-primary rounded-pill">{product.quantity}</span>
-                                        <button className="btn btn-danger btn-sm ms-2 remove-product" data-id="{{product.id}}">Eliminar</button>
+                                        <button
+                                            className="btn btn-danger btn-sm ms-2 remove-product" 
+                                            onClick={() => removeShoppingListProduct(product.id)}
+                                        >
+                                            Eliminar
+                                        </button>
                                     </li>
 
                                 ))}

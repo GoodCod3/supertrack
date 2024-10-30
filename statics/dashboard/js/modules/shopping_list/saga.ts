@@ -18,6 +18,7 @@ import {
     DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS,
     GET_SHOPPING_LIST,
     GET_SHOPPING_LIST_SUCCESS,
+    REMOVE_SHOPPING_LIST_PRODUCT,
 } from './action-types';
 import { ISagaParam } from '@src/interfaces/global';
 
@@ -92,11 +93,27 @@ export function* addShoppingListProduct({ payload }: ISagaParam<IAddShoppingList
 
 }
 
+export function* removeShoppingListProduct({ payload }: ISagaParam<IAddShoppingListProductSaga>): Generator<StrictEffect, void, never> {
+    try {
+        const mercadonaProductsResponse: IAddShoppingListProductResponse = yield call(
+            shoppingListAPI.removeShoppingListProduct,
+            payload.productId,
+        );
+        if (mercadonaProductsResponse.status == "success") {
+            yield put({ type: GET_SHOPPING_LIST, payload: {} });
+        }
+    } catch (error) {
+
+    }
+
+}
+
 export default function* (): Generator {
     yield takeLatest(GET_MERCADONA_PRODUCTS, getMercadonaProducts);
     yield takeLatest(DISPLAY_SUPERMARKET_PRODUCTS, displaySupermarketProducts);
     yield takeLatest(CLOSE_SUPERMARKET_PRODUCTS, closeSupermarketProducts);
     yield takeLatest(GET_SHOPPING_LIST, getShoppingList);
     yield takeLatest(ADD_SHOPPING_LIST_PRODUCT, addShoppingListProduct);
+    yield takeLatest(REMOVE_SHOPPING_LIST_PRODUCT, removeShoppingListProduct);
 }
 
