@@ -150,7 +150,7 @@
 }
 
 .category-name {
-  word-break: keep-all; /* Mantiene la palabra completa en la misma línea o la mueve */
+  word-break: keep-all;
   white-space: normal;
   text-align: center;
 }

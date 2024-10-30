@@ -2,6 +2,7 @@ import {
     CLOSE_SUPERMARKET_PRODUCTS,
     DISPLAY_SUPERMARKET_PRODUCTS,
     GET_MERCADONA_PRODUCTS,
+    GET_SHOPPING_LIST,
 } from './action-types';
 
 
@@ -10,6 +11,7 @@ interface IAction<P = unknown> {
     | typeof CLOSE_SUPERMARKET_PRODUCTS
     | typeof DISPLAY_SUPERMARKET_PRODUCTS
     | typeof GET_MERCADONA_PRODUCTS
+    | typeof GET_SHOPPING_LIST
     payload?: Record<string, P>;
 }
 
@@ -33,5 +35,10 @@ export const displaySupermarketProducts = (
 
 export const closeSupermarketProducts = (): IAction => ({
     type: CLOSE_SUPERMARKET_PRODUCTS,
+    payload: {},
+});
+
+export const getShoppingList = (): IAction => ({
+    type: GET_SHOPPING_LIST,
     payload: {},
 });

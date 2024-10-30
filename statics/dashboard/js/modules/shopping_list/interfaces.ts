@@ -18,6 +18,7 @@ export type MercadonaCategoryProducts = {
 export type IShoppingListState = {
     isProductsDisplayed: boolean,
     mercadonaProducts: MercadonaCategoryProducts,
+    mercadonaShoppingList: string | null,
     parentCategorySelected: string | null,
     productCategorySelected: string | null,
     supermarketProductsSelected: string | null,

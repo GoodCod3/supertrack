@@ -6,6 +6,11 @@ export const getMercadonaProducts = (): Promise<IMercadonaCategory> => (
     _base.get(urls.shoppingList.getMercadonaProducts)
 );
 
+export const getShoppingList = (): Promise<IMercadonaCategory> => (
+    _base.get(urls.shoppingList.getMercadonaShoppingList)
+);
+
 export default {
     getMercadonaProducts,
+    getShoppingList,
 }

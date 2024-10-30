@@ -4,4 +4,5 @@ export default {
     supermarketProductsSelected: null,
     parentCategorySelected: null,
     productCategorySelected: null,
+    mercadonaShoppingList: null,
 };

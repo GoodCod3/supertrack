@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 
-import { 
+import {
     closeSupermarketProducts,
     displaySupermarketProducts,
-    getMercadonaProducts, 
+    getMercadonaProducts,
+    getShoppingList,
 } from '@src/modules/shopping_list/actions';
 import type ICommonRecord from '@src/interfaces/commonRecord';
 import type IState from '@src/interfaces/state';
@@ -23,6 +24,7 @@ export const mapActionsToProps = {
     closeSupermarketProducts,
     displaySupermarketProducts,
     getMercadonaProducts,
+    getShoppingList,
 };
 
 export default connect(

@@ -4,6 +4,8 @@ from supertrack.apps.shopping_list.views.ShoppingList import ShoppingListView
 from supertrack.apps.shopping_list.views.add_product_to_cart import add_product_to_cart
 from supertrack.apps.shopping_list.views.delete_product_to_cart import delete_product_to_cart
 from supertrack.apps.shopping_list.views.get_mercadona_products import get_mercadona_products
+from supertrack.apps.shopping_list.views.get_shopping_list import get_shopping_list
+
 
 urlpatterns = [
     path(
@@ -25,6 +27,11 @@ urlpatterns = [
         "delete-product-cart/",
         delete_product_to_cart,
         name="shopping_list__delete_cart",
+    ),
+    path(
+        "mercadona/",
+        get_shopping_list,
+        name="shopping_list__get_list",
     ),
 
 ]

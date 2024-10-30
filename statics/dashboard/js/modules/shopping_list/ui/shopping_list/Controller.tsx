@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Accordion from 'react-bootstrap/Accordion';
 
 import type { MercadonaCategoryProducts } from '@src/modules/shopping_list/interfaces';
 import ShoppingListMercadona from './components/ShoppingListMercadona';
@@ -7,6 +8,7 @@ import ShoppingListMercadona from './components/ShoppingListMercadona';
 type IShoppingListPageProps = {
     getMercadonaProducts: () => void,
     closeSupermarketProducts: () => void,
+    getShoppingList: () => void,
     displaySupermarketProducts: (
         supermarketSelected: string,
         parentCategorySelected: string,
@@ -23,6 +25,7 @@ const ShoppingListPage = ({
     closeSupermarketProducts,
     displaySupermarketProducts,
     getMercadonaProducts,
+    getShoppingList,
     isProductsDisplayed,
     mercadonaProducts,
     parentCategorySelected,
@@ -31,11 +34,20 @@ const ShoppingListPage = ({
 }: IShoppingListPageProps) => {
     useEffect(() => {
         getMercadonaProducts();
+        getShoppingList();
     }, []);
 
     return (
         <React.Fragment>
             <input type="text" id="searchInput" placeholder="Buscar productos..." className="form-control mb-3" />
+            <Accordion defaultActiveKey="0">
+                <Accordion.Item eventKey='shopping-list'>
+                    <Accordion.Header>Mi lista de la compra</Accordion.Header>
+                    <Accordion.Body>
+                        Aún no has agregado ningún producto.
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
             <ShoppingListMercadona
                 closeSupermarketProducts={closeSupermarketProducts}
                 displaySupermarketProducts={displaySupermarketProducts}
