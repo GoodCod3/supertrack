@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 
 import { 
-    getMercadonaProducts, 
+    closeSupermarketProducts,
     displaySupermarketProducts,
+    getMercadonaProducts, 
 } from '@src/modules/shopping_list/actions';
 import type ICommonRecord from '@src/interfaces/commonRecord';
 import type IState from '@src/interfaces/state';
@@ -19,8 +20,9 @@ export const mapStateToProps = (state: IState): ICommonRecord => ({
 });
 
 export const mapActionsToProps = {
-    getMercadonaProducts,
+    closeSupermarketProducts,
     displaySupermarketProducts,
+    getMercadonaProducts,
 };
 
 export default connect(

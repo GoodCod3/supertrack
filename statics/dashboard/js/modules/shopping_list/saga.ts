@@ -3,6 +3,8 @@ import { put, StrictEffect, takeLatest, select, call } from 'redux-saga/effects'
 import shoppingListAPI from '@api/shoppingList';
 import type {MercadonaCategoryProducts} from '@src/modules/shopping_list/interfaces';
 import {
+    CLOSE_SUPERMARKET_PRODUCTS,
+    CLOSE_SUPERMARKET_PRODUCTS_SUCCESS,
     GET_MERCADONA_PRODUCTS,
     GET_MERCADONA_PRODUCTS_SUCCESS,
     DISPLAY_SUPERMARKET_PRODUCTS,
@@ -38,8 +40,21 @@ export function* displaySupermarketProducts({payload}: ISagaParam<IDisplaySuperm
     });
 }
 
+export function* closeSupermarketProducts(): Generator<StrictEffect, void, never> {
+    yield put({
+        type: CLOSE_SUPERMARKET_PRODUCTS_SUCCESS,
+        payload: { 
+            supermarketProductsSelected: null,
+            parentCategorySelected: null,
+            productCategorySelected: null,
+            isProductsDisplayed: false,
+        },
+    });
+}
+
 export default function* (): Generator {
     yield takeLatest(GET_MERCADONA_PRODUCTS, getMercadonaProducts);
     yield takeLatest(DISPLAY_SUPERMARKET_PRODUCTS, displaySupermarketProducts);
+    yield takeLatest(CLOSE_SUPERMARKET_PRODUCTS, closeSupermarketProducts);
 }
 

@@ -16,6 +16,7 @@ type IShoppingListCategories = {
     supermarketProductsSelected: string,
     parentCategorySelected: string,
     productCategorySelected?: string | null,
+    closeSupermarketProducts: () => void,
     displaySupermarketProducts: (
         supermarketSelected: string,
         parentCategorySelected: string,
@@ -26,12 +27,13 @@ type IShoppingListCategories = {
 const SUPERMARKET_NAME = 'mercadona';
 
 const ShoppingListCategories = ({
-    mercadonaProducts,
+    closeSupermarketProducts,
     displaySupermarketProducts,
     isProductsDisplayed,
-    supermarketProductsSelected,
+    mercadonaProducts,
     parentCategorySelected,
     productCategorySelected,
+    supermarketProductsSelected,
 }: IShoppingListCategories) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -76,7 +78,7 @@ const ShoppingListCategories = ({
                     })}
                 </Row>
             ))}
-            <Offcanvas show={isProductsDisplayed} onHide={handleClose} backdrop="static" responsive="lg">
+            <Offcanvas show={isProductsDisplayed} onHide={closeSupermarketProducts} backdrop="static" responsive="lg">
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{parentCategorySelected}</Offcanvas.Title>
                 </Offcanvas.Header>

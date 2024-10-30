@@ -1,13 +1,15 @@
 import {
-    GET_MERCADONA_PRODUCTS,
+    CLOSE_SUPERMARKET_PRODUCTS,
     DISPLAY_SUPERMARKET_PRODUCTS,
+    GET_MERCADONA_PRODUCTS,
 } from './action-types';
 
 
 interface IAction<P = unknown> {
     type:
-    | typeof GET_MERCADONA_PRODUCTS
+    | typeof CLOSE_SUPERMARKET_PRODUCTS
     | typeof DISPLAY_SUPERMARKET_PRODUCTS
+    | typeof GET_MERCADONA_PRODUCTS
     payload?: Record<string, P>;
 }
 
@@ -20,11 +22,16 @@ export const displaySupermarketProducts = (
     supermarketSelected: string,
     parentCategorySelected: string,
     productCategorySelected?: string | null,
-): IAction<string | null> => ({
+): IAction<string | undefined | null> => ({
     type: DISPLAY_SUPERMARKET_PRODUCTS,
     payload: {
         supermarketSelected,
         parentCategorySelected,
         productCategorySelected,
     },
+});
+
+export const closeSupermarketProducts = (): IAction => ({
+    type: CLOSE_SUPERMARKET_PRODUCTS,
+    payload: {},
 });

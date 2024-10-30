@@ -6,6 +6,7 @@ import ShoppingListMercadona from './components/ShoppingListMercadona';
 
 type IShoppingListPageProps = {
     getMercadonaProducts: () => void,
+    closeSupermarketProducts: () => void,
     displaySupermarketProducts: (supermarketSelected: string) => void,
     mercadonaProducts: MercadonaCategoryProducts,
     isProductsDisplayed: boolean,
@@ -15,13 +16,14 @@ type IShoppingListPageProps = {
 };
 
 const ShoppingListPage = ({
-    getMercadonaProducts,
-    mercadonaProducts,
+    closeSupermarketProducts,
     displaySupermarketProducts,
+    getMercadonaProducts,
     isProductsDisplayed,
-    supermarketProductsSelected,
+    mercadonaProducts,
     parentCategorySelected,
     productCategorySelected,
+    supermarketProductsSelected,
 }: IShoppingListPageProps) => {
     useEffect(() => {
         getMercadonaProducts();
@@ -31,12 +33,13 @@ const ShoppingListPage = ({
         <React.Fragment>
             <input type="text" id="searchInput" placeholder="Buscar productos..." className="form-control mb-3" />
             <ShoppingListMercadona
-                mercadonaProducts={mercadonaProducts}
+                closeSupermarketProducts={closeSupermarketProducts}
                 displaySupermarketProducts={displaySupermarketProducts}
                 isProductsDisplayed={isProductsDisplayed}
-                supermarketProductsSelected={supermarketProductsSelected}
+                mercadonaProducts={mercadonaProducts}
                 parentCategorySelected={parentCategorySelected}
                 productCategorySelected={productCategorySelected}
+                supermarketProductsSelected={supermarketProductsSelected}
             />
         </React.Fragment>
     );
