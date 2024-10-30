@@ -34,7 +34,7 @@ def get_shopping_list(request):
                     "name": product.product.name,
                     "price": product.product.unit_price,
                     "quantity": product.quantity,
-                    "total_price": product.product.unit_price,
+                    "total_price": total_price,
                     "image": product.product.image,
                 })
             

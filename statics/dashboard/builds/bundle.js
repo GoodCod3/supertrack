@@ -5517,7 +5517,8 @@ var mapStateToProps = function mapStateToProps(state) {
     isProductsDisplayed: state.shoppingListReducer.isProductsDisplayed,
     supermarketProductsSelected: state.shoppingListReducer.supermarketProductsSelected,
     parentCategorySelected: state.shoppingListReducer.parentCategorySelected,
-    productCategorySelected: state.shoppingListReducer.productCategorySelected
+    productCategorySelected: state.shoppingListReducer.productCategorySelected,
+    mercadonaShoppingList: state.shoppingListReducer.mercadonaShoppingList
   };
 };
 var mapActionsToProps = {
@@ -5550,6 +5551,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ShoppingListPage = function ShoppingListPage(_ref) {
+  var _mercadonaShoppingLis, _mercadonaShoppingLis2;
   var addShoppingListProduct = _ref.addShoppingListProduct,
     closeSupermarketProducts = _ref.closeSupermarketProducts,
     displaySupermarketProducts = _ref.displaySupermarketProducts,
@@ -5559,7 +5561,8 @@ var ShoppingListPage = function ShoppingListPage(_ref) {
     mercadonaProducts = _ref.mercadonaProducts,
     parentCategorySelected = _ref.parentCategorySelected,
     productCategorySelected = _ref.productCategorySelected,
-    supermarketProductsSelected = _ref.supermarketProductsSelected;
+    supermarketProductsSelected = _ref.supermarketProductsSelected,
+    mercadonaShoppingList = _ref.mercadonaShoppingList;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getMercadonaProducts();
     getShoppingList();
@@ -5573,7 +5576,32 @@ var ShoppingListPage = function ShoppingListPage(_ref) {
     defaultActiveKey: "0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
     eventKey: "shopping-list"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Header, null, "Mi lista de la compra"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Body, null, "A\xFAn no has agregado ning\xFAn producto."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Header, null, "Mi lista de la compra", (mercadonaShoppingList === null || mercadonaShoppingList === void 0 || (_mercadonaShoppingLis = mercadonaShoppingList.products) === null || _mercadonaShoppingLis === void 0 ? void 0 : _mercadonaShoppingLis.length) > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, " (Total: ", mercadonaShoppingList.total, " \u20AC)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Body, null, (mercadonaShoppingList === null || mercadonaShoppingList === void 0 || (_mercadonaShoppingLis2 = mercadonaShoppingList.products) === null || _mercadonaShoppingLis2 === void 0 ? void 0 : _mercadonaShoppingLis2.length) > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", {
+    className: "list-group list-group-numbered"
+  }, mercadonaShoppingList.products.map(function (product, productIndex) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+      className: "list-group-item d-flex justify-content-between align-items-start",
+      key: "product-".concat(productIndex)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: product.image,
+      className: "card-img-top",
+      style: {
+        "width": "4rem"
+      },
+      loading: "lazy"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ms-2 me-auto "
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "product-name-shopping-list"
+    }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "fw-bold product-name-shopping-list"
+    }, product.total_price, " \u20AC")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: "badge text-bg-primary rounded-pill"
+    }, product.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      className: "btn btn-danger btn-sm ms-2 remove-product",
+      "data-id": "{{product.id}}"
+    }, "Eliminar"));
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "A\xFAn no has agregado ning\xFAn producto.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__["default"], {
     addShoppingListProduct: addShoppingListProduct,
     closeSupermarketProducts: closeSupermarketProducts,
     displaySupermarketProducts: displaySupermarketProducts,

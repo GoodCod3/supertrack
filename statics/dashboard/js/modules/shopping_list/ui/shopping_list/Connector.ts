@@ -19,6 +19,7 @@ export const mapStateToProps = (state: IState): ICommonRecord => ({
     supermarketProductsSelected: state.shoppingListReducer.supermarketProductsSelected,
     parentCategorySelected: state.shoppingListReducer.parentCategorySelected,
     productCategorySelected: state.shoppingListReducer.productCategorySelected,
+    mercadonaShoppingList: state.shoppingListReducer.mercadonaShoppingList,
 });
 
 export const mapActionsToProps = {
