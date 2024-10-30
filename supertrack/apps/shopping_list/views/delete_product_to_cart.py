@@ -3,12 +3,12 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 
 from supertrack.apps.shopping_list.models import (
     MercadonaShoppingList,
     MercadonaShoppingListProduct,
 )
-from supertrack.apps.scrappy.models import MercadonaProductModel
 
 
 @require_POST
@@ -26,8 +26,10 @@ def delete_product_to_cart(request):
                 MercadonaShoppingListProduct,
                 shopping_list=mercadona_list,
                 product__public_id=product_id,
+                is_deleted=False,
             )
             product_in_list.is_deleted = True
+            product_in_list.deleted_at = timezone.now()
             product_in_list.save()
         else:
             return JsonResponse({"error": "Product ID is required"}, status=400)

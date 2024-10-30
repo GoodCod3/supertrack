@@ -28,6 +28,7 @@ def add_product_to_cart(request):
             shopping_list_product, created = MercadonaShoppingListProduct.objects.get_or_create(
                 shopping_list=mercadona_list,
                 product=product,
+                is_deleted=False,
                 defaults={"quantity": 1}
             )
 
