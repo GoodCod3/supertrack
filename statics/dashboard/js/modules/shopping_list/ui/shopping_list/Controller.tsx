@@ -74,12 +74,14 @@ const ShoppingListPage = ({
             setConsumFilteredResults([]);
             return;
         }
+        if (searchTerm.length >= 3) {
+            const mercadonaResults: MercadonaSearchFilteredResult[] = filterResults(searchTerm, mercadonaProducts);
+            const consumResults: IConsumSearchFilteredResult[] = filterResults(searchTerm, consumProducts);
+            
+            setMercadonaFilteredResults(mercadonaResults);
+            setConsumFilteredResults(consumResults);
+        }
 
-        const mercadonaResults: MercadonaSearchFilteredResult[] = filterResults(searchTerm, mercadonaProducts);
-        const consumResults: IConsumSearchFilteredResult[] = filterResults(searchTerm, consumProducts);
-
-        setMercadonaFilteredResults(mercadonaResults);
-        setConsumFilteredResults(consumResults);
     }, [searchTerm, mercadonaProducts, consumProducts]);
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {

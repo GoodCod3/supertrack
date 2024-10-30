@@ -6647,10 +6647,12 @@ var ShoppingListPage = function ShoppingListPage(_ref) {
       setConsumFilteredResults([]);
       return;
     }
-    var mercadonaResults = (0,_src_modules_shopping_list_helpers__WEBPACK_IMPORTED_MODULE_1__.filterResults)(searchTerm, mercadonaProducts);
-    var consumResults = (0,_src_modules_shopping_list_helpers__WEBPACK_IMPORTED_MODULE_1__.filterResults)(searchTerm, consumProducts);
-    setMercadonaFilteredResults(mercadonaResults);
-    setConsumFilteredResults(consumResults);
+    if (searchTerm.length >= 3) {
+      var mercadonaResults = (0,_src_modules_shopping_list_helpers__WEBPACK_IMPORTED_MODULE_1__.filterResults)(searchTerm, mercadonaProducts);
+      var consumResults = (0,_src_modules_shopping_list_helpers__WEBPACK_IMPORTED_MODULE_1__.filterResults)(searchTerm, consumProducts);
+      setMercadonaFilteredResults(mercadonaResults);
+      setConsumFilteredResults(consumResults);
+    }
   }, [searchTerm, mercadonaProducts, consumProducts]);
   var handleSearch = function handleSearch(event) {
     setSearchTerm(event.target.value);
