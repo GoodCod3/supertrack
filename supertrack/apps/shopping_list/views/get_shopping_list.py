@@ -39,7 +39,7 @@ def get_shopping_list(request):
                 })
             
             return JsonResponse({
-                "total": total,
+                "total": "{:0.2f}".format(total),
                 "products": product_data
             })
 
