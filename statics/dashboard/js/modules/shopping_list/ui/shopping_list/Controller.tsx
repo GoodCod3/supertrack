@@ -7,8 +7,11 @@ import Tabs from 'react-bootstrap/Tabs';
 import type {
     MercadonaCategoryProducts,
     MercadonaShoppingList,
-    SearchFilteredResult,
+    MercadonaSearchFilteredResult,
+    IConsumCategoryProducts,
+    IConsumSearchFilteredResult,
 } from '@src/modules/shopping_list/interfaces';
+import { filterResults } from '@src/modules/shopping_list/helpers';
 import ShoppingListMercadona from './components/ShoppingListMercadona';
 
 
@@ -25,6 +28,7 @@ type IShoppingListPageProps = {
         productCategorySelected?: string | null,
     ) => void,
     mercadonaProducts: MercadonaCategoryProducts,
+    consumProducts: IConsumCategoryProducts,
     isProductsDisplayed: boolean,
     supermarketProductsSelected: string,
     parentCategorySelected: string,
@@ -32,39 +36,11 @@ type IShoppingListPageProps = {
     mercadonaShoppingList: MercadonaShoppingList,
 };
 
-const filterResults = (
-    searchTerm: string,
-    products: MercadonaCategoryProducts
-): SearchFilteredResult[] => {
-    const lowerCasedTerm = searchTerm.toLowerCase();
-    const results: SearchFilteredResult[] = [];
-
-    Object.entries(products).forEach(([categoryName, subcategories]) => {
-        let categoryMatch = categoryName.toLowerCase().includes(lowerCasedTerm);
-
-        Object.entries(subcategories).forEach(([subcategoryName, products]) => {
-            let subcategoryMatch = subcategoryName.toLowerCase().includes(lowerCasedTerm);
-
-            const matchingProducts = products.filter((product) =>
-                product.name.toLowerCase().includes(lowerCasedTerm)
-            );
-
-            if (categoryMatch || subcategoryMatch || matchingProducts.length > 0) {
-                results.push({
-                    categoryName,
-                    subcategoryName,
-                    products: matchingProducts,
-                });
-            }
-        });
-    });
-
-    return results;
-};
 
 const ShoppingListPage = ({
     addShoppingListProduct,
     closeSupermarketProducts,
+    consumProducts,
     displaySupermarketProducts,
     getConsumProducts,
     getMercadonaProducts,
@@ -78,7 +54,8 @@ const ShoppingListPage = ({
     supermarketProductsSelected,
 }: IShoppingListPageProps) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
-    const [filteredResults, setFilteredResults] = useState<SearchFilteredResult[]>([]);
+    const [mercadonaFilteredResults, setMercadonaFilteredResults] = useState<MercadonaSearchFilteredResult[]>([]);
+    const [consumFilteredResults, setConsumFilteredResults] = useState<IConsumSearchFilteredResult[]>([]);
 
     useEffect(() => {
         getMercadonaProducts();
@@ -88,13 +65,17 @@ const ShoppingListPage = ({
 
     useEffect(() => {
         if (searchTerm === '') {
-            setFilteredResults([]);
+            setMercadonaFilteredResults([]);
+            setConsumFilteredResults([]);
             return;
         }
 
-        const results: SearchFilteredResult[] = filterResults(searchTerm, mercadonaProducts);
-        setFilteredResults(results);
-    }, [searchTerm, mercadonaProducts]);
+        const mercadonaResults: MercadonaSearchFilteredResult[] = filterResults(searchTerm, mercadonaProducts);
+        const consumResults: IConsumSearchFilteredResult[] = filterResults(searchTerm, consumProducts);
+
+        setMercadonaFilteredResults(mercadonaResults);
+        setConsumFilteredResults(consumResults);
+    }, [searchTerm, mercadonaProducts, consumProducts]);
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
@@ -128,11 +109,26 @@ const ShoppingListPage = ({
                         supermarketProductsSelected={supermarketProductsSelected}
                         mercadonaShoppingList={mercadonaShoppingList}
                         removeShoppingListProduct={removeShoppingListProduct}
-                        filteredResults={filteredResults}
+                        filteredResults={mercadonaFilteredResults}
                         searchTerm={searchTerm}
                     />
                 </Tab>
-                <Tab eventKey="consum" title="Consum"></Tab>
+                <Tab eventKey="consum" title="Consum">
+                    <ShoppingListMercadona
+                        addShoppingListProduct={addShoppingListProduct}
+                        closeSupermarketProducts={closeSupermarketProducts}
+                        displaySupermarketProducts={displaySupermarketProducts}
+                        isProductsDisplayed={isProductsDisplayed}
+                        mercadonaProducts={consumProducts}
+                        parentCategorySelected={parentCategorySelected}
+                        productCategorySelected={productCategorySelected}
+                        supermarketProductsSelected={supermarketProductsSelected}
+                        mercadonaShoppingList={mercadonaShoppingList}
+                        removeShoppingListProduct={removeShoppingListProduct}
+                        filteredResults={consumFilteredResults}
+                        searchTerm={searchTerm}
+                    />
+                </Tab>
             </Tabs>
         </React.Fragment>
     );

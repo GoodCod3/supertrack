@@ -10,9 +10,9 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 import type {
     MercadonaCategoryProducts,
-    FilteredProductsResult,
+    MercadonaFilteredProductsResult,
     MercadonaShoppingList,
-    SearchFilteredResult,
+    MercadonaSearchFilteredResult,
 } from '@src/modules/shopping_list/interfaces';
 
 
@@ -32,7 +32,7 @@ type IShoppingListCategories = {
     searchTerm: string,
     mercadonaShoppingList: MercadonaShoppingList,
     removeShoppingListProduct: (productId: string) => void,
-    filteredResults: SearchFilteredResult[],
+    filteredResults: MercadonaSearchFilteredResult[],
 };
 
 const SUPERMARKET_NAME = 'mercadona';
@@ -40,7 +40,7 @@ const getProductsBySelection = (
     products: MercadonaCategoryProducts,
     categoryName: string,
     subcategoryName?: string | null
-): FilteredProductsResult => {
+): MercadonaFilteredProductsResult => {
     if (subcategoryName) {
         return [
             {
@@ -70,7 +70,7 @@ const ShoppingListCategories = ({
     removeShoppingListProduct,
     filteredResults,
 }: IShoppingListCategories) => {
-    let filteredProducts: FilteredProductsResult = [];
+    let filteredProducts: MercadonaFilteredProductsResult = [];
     if (isProductsDisplayed && parentCategorySelected) {
         filteredProducts = getProductsBySelection(mercadonaProducts, parentCategorySelected, productCategorySelected);
     }

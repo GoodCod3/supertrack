@@ -1,4 +1,5 @@
 import {
+    IConsumCategoryProducts,
     IMercadonaCategory,
     MercadonaShoppingList,
 } from '@src/modules/shopping_list/interfaces';
@@ -27,7 +28,7 @@ export const removeShoppingListProduct = (productId: string): Promise<IAddShoppi
     _base.post(urls.shoppingList.removeMercadonaShoppingListProduct, { productId })
 );
 
-export const getConsumProducts = (): Promise<IMercadonaCategory> => (
+export const getConsumProducts = (): Promise<IConsumCategoryProducts> => (
     _base.get(urls.shoppingList.getConsumProducts)
 );
 

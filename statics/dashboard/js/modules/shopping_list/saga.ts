@@ -5,6 +5,7 @@ import shoppingListAPI, {
     IAddShoppingListProductResponse,
 } from '@api/shoppingList';
 import type {
+    IConsumCategoryProducts,
     MercadonaCategoryProducts,
     MercadonaShoppingList,
 } from '@src/modules/shopping_list/interfaces';
@@ -109,7 +110,7 @@ export function* removeShoppingListProduct({ payload }: ISagaParam<IAddShoppingL
 }
 
 export function* getConsumProducts(): Generator<StrictEffect, void, never> {
-    const consumProductsResponse: MercadonaCategoryProducts = yield call(shoppingListAPI.getConsumProducts);
+    const consumProductsResponse: IConsumCategoryProducts = yield call(shoppingListAPI.getConsumProducts);
 
     yield put({
         type: GET_CONSUM_PRODUCTS_SUCCESS,

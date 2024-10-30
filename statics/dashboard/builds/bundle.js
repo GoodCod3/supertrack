@@ -6167,6 +6167,53 @@ var getConsumProducts = function getConsumProducts() {
 
 /***/ }),
 
+/***/ "./statics/dashboard/js/modules/shopping_list/helpers.ts":
+/*!***************************************************************!*\
+  !*** ./statics/dashboard/js/modules/shopping_list/helpers.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   filterResults: () => (/* binding */ filterResults)
+/* harmony export */ });
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+var filterResults = function filterResults(searchTerm, products) {
+  var lowerCasedTerm = searchTerm.toLowerCase();
+  var results = [];
+  Object.entries(products).forEach(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+      categoryName = _ref2[0],
+      subcategories = _ref2[1];
+    var categoryMatch = categoryName.toLowerCase().includes(lowerCasedTerm);
+    Object.entries(subcategories).forEach(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+        subcategoryName = _ref4[0],
+        productList = _ref4[1];
+      var subcategoryMatch = subcategoryName.toLowerCase().includes(lowerCasedTerm);
+      var matchingProducts = productList.filter(function (product) {
+        return product.name.toLowerCase().includes(lowerCasedTerm);
+      });
+      if (categoryMatch || subcategoryMatch || matchingProducts.length > 0) {
+        results.push({
+          categoryName: categoryName,
+          subcategoryName: subcategoryName,
+          products: matchingProducts
+        });
+      }
+    });
+  });
+  return results;
+};
+
+/***/ }),
+
 /***/ "./statics/dashboard/js/modules/shopping_list/reducer.ts":
 /*!***************************************************************!*\
   !*** ./statics/dashboard/js/modules/shopping_list/reducer.ts ***!
@@ -6458,7 +6505,8 @@ __webpack_require__.r(__webpack_exports__);
   supermarketProductsSelected: null,
   parentCategorySelected: null,
   productCategorySelected: null,
-  mercadonaShoppingList: null
+  mercadonaShoppingList: null,
+  consumProducts: {}
 });
 
 /***/ }),
@@ -6489,7 +6537,8 @@ var mapStateToProps = function mapStateToProps(state) {
     supermarketProductsSelected: state.shoppingListReducer.supermarketProductsSelected,
     parentCategorySelected: state.shoppingListReducer.parentCategorySelected,
     productCategorySelected: state.shoppingListReducer.productCategorySelected,
-    mercadonaShoppingList: state.shoppingListReducer.mercadonaShoppingList
+    mercadonaShoppingList: state.shoppingListReducer.mercadonaShoppingList,
+    consumProducts: state.shoppingListReducer.consumProducts
   };
 };
 var mapActionsToProps = {
@@ -6518,9 +6567,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Tab */ "./node_modules/react-bootstrap/esm/Tab.js");
-/* harmony import */ var react_bootstrap_Tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Tabs */ "./node_modules/react-bootstrap/esm/Tabs.js");
-/* harmony import */ var _components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/ShoppingListMercadona */ "./statics/dashboard/js/modules/shopping_list/ui/shopping_list/components/ShoppingListMercadona.tsx");
+/* harmony import */ var react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Tab */ "./node_modules/react-bootstrap/esm/Tab.js");
+/* harmony import */ var react_bootstrap_Tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Tabs */ "./node_modules/react-bootstrap/esm/Tabs.js");
+/* harmony import */ var _src_modules_shopping_list_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @src/modules/shopping_list/helpers */ "./statics/dashboard/js/modules/shopping_list/helpers.ts");
+/* harmony import */ var _components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ShoppingListMercadona */ "./statics/dashboard/js/modules/shopping_list/ui/shopping_list/components/ShoppingListMercadona.tsx");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -6531,55 +6581,34 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-var filterResults = function filterResults(searchTerm, products) {
-  var lowerCasedTerm = searchTerm.toLowerCase();
-  var results = [];
-  Object.entries(products).forEach(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-      categoryName = _ref2[0],
-      subcategories = _ref2[1];
-    var categoryMatch = categoryName.toLowerCase().includes(lowerCasedTerm);
-    Object.entries(subcategories).forEach(function (_ref3) {
-      var _ref4 = _slicedToArray(_ref3, 2),
-        subcategoryName = _ref4[0],
-        products = _ref4[1];
-      var subcategoryMatch = subcategoryName.toLowerCase().includes(lowerCasedTerm);
-      var matchingProducts = products.filter(function (product) {
-        return product.name.toLowerCase().includes(lowerCasedTerm);
-      });
-      if (categoryMatch || subcategoryMatch || matchingProducts.length > 0) {
-        results.push({
-          categoryName: categoryName,
-          subcategoryName: subcategoryName,
-          products: matchingProducts
-        });
-      }
-    });
-  });
-  return results;
-};
-var ShoppingListPage = function ShoppingListPage(_ref5) {
-  var addShoppingListProduct = _ref5.addShoppingListProduct,
-    closeSupermarketProducts = _ref5.closeSupermarketProducts,
-    displaySupermarketProducts = _ref5.displaySupermarketProducts,
-    getConsumProducts = _ref5.getConsumProducts,
-    getMercadonaProducts = _ref5.getMercadonaProducts,
-    getShoppingList = _ref5.getShoppingList,
-    isProductsDisplayed = _ref5.isProductsDisplayed,
-    mercadonaProducts = _ref5.mercadonaProducts,
-    mercadonaShoppingList = _ref5.mercadonaShoppingList,
-    parentCategorySelected = _ref5.parentCategorySelected,
-    productCategorySelected = _ref5.productCategorySelected,
-    removeShoppingListProduct = _ref5.removeShoppingListProduct,
-    supermarketProductsSelected = _ref5.supermarketProductsSelected;
+
+var ShoppingListPage = function ShoppingListPage(_ref) {
+  var addShoppingListProduct = _ref.addShoppingListProduct,
+    closeSupermarketProducts = _ref.closeSupermarketProducts,
+    consumProducts = _ref.consumProducts,
+    displaySupermarketProducts = _ref.displaySupermarketProducts,
+    getConsumProducts = _ref.getConsumProducts,
+    getMercadonaProducts = _ref.getMercadonaProducts,
+    getShoppingList = _ref.getShoppingList,
+    isProductsDisplayed = _ref.isProductsDisplayed,
+    mercadonaProducts = _ref.mercadonaProducts,
+    mercadonaShoppingList = _ref.mercadonaShoppingList,
+    parentCategorySelected = _ref.parentCategorySelected,
+    productCategorySelected = _ref.productCategorySelected,
+    removeShoppingListProduct = _ref.removeShoppingListProduct,
+    supermarketProductsSelected = _ref.supermarketProductsSelected;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
     searchTerm = _useState2[0],
     setSearchTerm = _useState2[1];
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState4 = _slicedToArray(_useState3, 2),
-    filteredResults = _useState4[0],
-    setFilteredResults = _useState4[1];
+    mercadonaFilteredResults = _useState4[0],
+    setMercadonaFilteredResults = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    consumFilteredResults = _useState6[0],
+    setConsumFilteredResults = _useState6[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getMercadonaProducts();
     getShoppingList();
@@ -6587,12 +6616,15 @@ var ShoppingListPage = function ShoppingListPage(_ref5) {
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (searchTerm === '') {
-      setFilteredResults([]);
+      setMercadonaFilteredResults([]);
+      setConsumFilteredResults([]);
       return;
     }
-    var results = filterResults(searchTerm, mercadonaProducts);
-    setFilteredResults(results);
-  }, [searchTerm, mercadonaProducts]);
+    var mercadonaResults = (0,_src_modules_shopping_list_helpers__WEBPACK_IMPORTED_MODULE_1__.filterResults)(searchTerm, mercadonaProducts);
+    var consumResults = (0,_src_modules_shopping_list_helpers__WEBPACK_IMPORTED_MODULE_1__.filterResults)(searchTerm, consumProducts);
+    setMercadonaFilteredResults(mercadonaResults);
+    setConsumFilteredResults(consumResults);
+  }, [searchTerm, mercadonaProducts, consumProducts]);
   var handleSearch = function handleSearch(event) {
     setSearchTerm(event.target.value);
   };
@@ -6602,15 +6634,15 @@ var ShoppingListPage = function ShoppingListPage(_ref5) {
     className: "form-control mb-3",
     onChange: handleSearch,
     value: searchTerm
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Tabs__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Tabs__WEBPACK_IMPORTED_MODULE_3__["default"], {
     defaultActiveKey: "mercadona",
     id: "fill-tab-example",
     className: "mb-3",
     fill: true
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_4__["default"], {
     eventKey: "mercadona",
     title: "Mercadona"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_2__["default"], {
     addShoppingListProduct: addShoppingListProduct,
     closeSupermarketProducts: closeSupermarketProducts,
     displaySupermarketProducts: displaySupermarketProducts,
@@ -6621,12 +6653,25 @@ var ShoppingListPage = function ShoppingListPage(_ref5) {
     supermarketProductsSelected: supermarketProductsSelected,
     mercadonaShoppingList: mercadonaShoppingList,
     removeShoppingListProduct: removeShoppingListProduct,
-    filteredResults: filteredResults,
+    filteredResults: mercadonaFilteredResults,
     searchTerm: searchTerm
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Tab__WEBPACK_IMPORTED_MODULE_4__["default"], {
     eventKey: "consum",
     title: "Consum"
-  })));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    addShoppingListProduct: addShoppingListProduct,
+    closeSupermarketProducts: closeSupermarketProducts,
+    displaySupermarketProducts: displaySupermarketProducts,
+    isProductsDisplayed: isProductsDisplayed,
+    mercadonaProducts: consumProducts,
+    parentCategorySelected: parentCategorySelected,
+    productCategorySelected: productCategorySelected,
+    supermarketProductsSelected: supermarketProductsSelected,
+    mercadonaShoppingList: mercadonaShoppingList,
+    removeShoppingListProduct: removeShoppingListProduct,
+    filteredResults: consumFilteredResults,
+    searchTerm: searchTerm
+  }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShoppingListPage);
 
