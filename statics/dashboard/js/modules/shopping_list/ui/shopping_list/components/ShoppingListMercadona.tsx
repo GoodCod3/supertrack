@@ -62,7 +62,7 @@ const ShoppingListCategories = ({
                                     </Card.Body>
                                     <ListGroup className="list-group-flush subcategory-list" style={{ fontSize: '0.8rem', textAlign: 'center' }}>
                                         {subCategories.map((categoryName, index) => (
-                                            <ListGroup.Item>
+                                            <ListGroup.Item key={`subcategories-${index}`}>
                                                 <Card.Link
                                                     onClick={() => displaySupermarketProducts(SUPERMARKET_NAME, key, categoryName)}>
                                                     {categoryName}
@@ -78,8 +78,14 @@ const ShoppingListCategories = ({
             ))}
             <Offcanvas show={isProductsDisplayed} onHide={handleClose} backdrop="static" responsive="lg">
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                    <Offcanvas.Title>{parentCategorySelected}</Offcanvas.Title>
                 </Offcanvas.Header>
+                {productCategorySelected && (
+                <Offcanvas.Header >
+                    <Offcanvas.Title>{productCategorySelected}</Offcanvas.Title>
+                </Offcanvas.Header>
+
+                )}
                 <Offcanvas.Body>
                     I will not close if you click outside of me.
                 </Offcanvas.Body>
