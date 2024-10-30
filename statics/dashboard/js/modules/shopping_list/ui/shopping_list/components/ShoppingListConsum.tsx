@@ -83,8 +83,8 @@ const ShoppingListCategories = ({
     const defaultActiveKeys = filteredResults.map((_, index) => `search-result-list-${index}`);
     return (
         <Container>
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey='shopping-list'>
+            <Accordion defaultActiveKey="shopping-list">
+                <Accordion.Item eventKey="shopping-list">
                     <Accordion.Header>
                         Mi lista de la compra
                         {mercadonaShoppingList?.products?.length > 0 && (
@@ -93,13 +93,18 @@ const ShoppingListCategories = ({
                     </Accordion.Header>
                     <Accordion.Body>
                         {mercadonaShoppingList?.products?.length > 0 ? (
-                            <ol className='list-group list-group-numbered'>
+                            <ol className="list-group list-group-numbered">
                                 {mercadonaShoppingList.products.map((product, productIndex) => (
                                     <li
-                                        className='list-group-item d-flex justify-content-between align-items-start'
+                                        className="list-group-item d-flex justify-content-between align-items-start"
                                         key={`product-${productIndex}`}
                                     >
-                                        <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
+                                        <img
+                                            src={product.image}
+                                            className="card-img-top"
+                                            style={{ width: '4rem' }}
+                                            loading="lazy"
+                                        />
                                         <div className="ms-2 me-auto">
                                             <div className="product-name-shopping-list">{product.name}</div>
                                             <div className="fw-bold product-name-shopping-list">{product.total_price} €</div>
@@ -112,7 +117,6 @@ const ShoppingListCategories = ({
                                             Eliminar
                                         </button>
                                     </li>
-
                                 ))}
                             </ol>
                         ) : (
@@ -121,6 +125,7 @@ const ShoppingListCategories = ({
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
+
             {!!searchTerm && filteredResults.length > 0 ? (
                 filteredResults.map((filteredResult, filteredResultIndex) => (
                     <React.Fragment key={`search-result-list-${filteredResultIndex}`}>

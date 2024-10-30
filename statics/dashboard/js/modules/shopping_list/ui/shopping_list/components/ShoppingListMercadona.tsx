@@ -83,7 +83,7 @@ const ShoppingListCategories = ({
     const defaultActiveKeys = filteredResults.map((_, index) => `search-result-list-${index}`);
     return (
         <Container>
-            <Accordion defaultActiveKey="0">
+            <Accordion defaultActiveKey="shopping-list" >
                 <Accordion.Item eventKey='shopping-list'>
                     <Accordion.Header>
                         Mi lista de la compra

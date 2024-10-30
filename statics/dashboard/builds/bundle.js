@@ -6783,7 +6783,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
     return "search-result-list-".concat(index);
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    defaultActiveKey: "0"
+    defaultActiveKey: "shopping-list"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
     eventKey: "shopping-list"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Header, null, "Mi lista de la compra", (mercadonaShoppingList === null || mercadonaShoppingList === void 0 || (_mercadonaShoppingLis = mercadonaShoppingList.products) === null || _mercadonaShoppingLis === void 0 ? void 0 : _mercadonaShoppingLis.length) > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, " (Total: ", mercadonaShoppingList.total, " \u20AC)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Body, null, (mercadonaShoppingList === null || mercadonaShoppingList === void 0 || (_mercadonaShoppingLis2 = mercadonaShoppingList.products) === null || _mercadonaShoppingLis2 === void 0 ? void 0 : _mercadonaShoppingLis2.length) > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", {
@@ -6796,7 +6796,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
       src: product.image,
       className: "card-img-top",
       style: {
-        "width": "4rem"
+        width: '4rem'
       },
       loading: "lazy"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -7009,7 +7009,7 @@ var ShoppingListCategories = function ShoppingListCategories(_ref3) {
     return "search-result-list-".concat(index);
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    defaultActiveKey: "0"
+    defaultActiveKey: "shopping-list"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
     eventKey: "shopping-list"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Header, null, "Mi lista de la compra", (mercadonaShoppingList === null || mercadonaShoppingList === void 0 || (_mercadonaShoppingLis = mercadonaShoppingList.products) === null || _mercadonaShoppingLis === void 0 ? void 0 : _mercadonaShoppingLis.length) > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, " (Total: ", mercadonaShoppingList.total, " \u20AC)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Body, null, (mercadonaShoppingList === null || mercadonaShoppingList === void 0 || (_mercadonaShoppingLis2 = mercadonaShoppingList.products) === null || _mercadonaShoppingLis2 === void 0 ? void 0 : _mercadonaShoppingLis2.length) > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", {
