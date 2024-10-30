@@ -10,7 +10,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 import type {
     MercadonaCategoryProducts,
-    Product,
+    FilteredProductsResult,
 } from '@src/modules/shopping_list/interfaces';
 
 
@@ -29,10 +29,6 @@ type IShoppingListCategories = {
     ) => void,
 };
 
-type FilteredProductsResult = {
-    subcategoryName: string;
-    products: Product[];
-}[];
 
 const SUPERMARKET_NAME = 'mercadona';
 const getProductsBySelection = (

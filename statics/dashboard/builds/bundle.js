@@ -5546,32 +5546,98 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Accordion */ "./node_modules/react-bootstrap/esm/Accordion.js");
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
 /* harmony import */ var _components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/ShoppingListMercadona */ "./statics/dashboard/js/modules/shopping_list/ui/shopping_list/components/ShoppingListMercadona.tsx");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-var ShoppingListPage = function ShoppingListPage(_ref) {
+
+var filterResults = function filterResults(searchTerm, products) {
+  var lowerCasedTerm = searchTerm.toLowerCase();
+  var results = [];
+
+  // Itera por categorías
+  Object.entries(products).forEach(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+      categoryName = _ref2[0],
+      subcategories = _ref2[1];
+    var categoryMatch = categoryName.toLowerCase().includes(lowerCasedTerm);
+
+    // Itera por subcategorías dentro de la categoría
+    Object.entries(subcategories).forEach(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+        subcategoryName = _ref4[0],
+        products = _ref4[1];
+      var subcategoryMatch = subcategoryName.toLowerCase().includes(lowerCasedTerm);
+
+      // Filtra los productos que coinciden con el término de búsqueda
+      var matchingProducts = products.filter(function (product) {
+        return product.name.toLowerCase().includes(lowerCasedTerm);
+      });
+
+      // Añade resultados solo si hay coincidencia en la categoría, subcategoría o productos
+      if (categoryMatch || subcategoryMatch || matchingProducts.length > 0) {
+        results.push({
+          categoryName: categoryName,
+          subcategoryName: subcategoryName,
+          products: matchingProducts
+        });
+      }
+    });
+  });
+  return results;
+};
+var ShoppingListPage = function ShoppingListPage(_ref5) {
   var _mercadonaShoppingLis, _mercadonaShoppingLis2;
-  var addShoppingListProduct = _ref.addShoppingListProduct,
-    closeSupermarketProducts = _ref.closeSupermarketProducts,
-    displaySupermarketProducts = _ref.displaySupermarketProducts,
-    getMercadonaProducts = _ref.getMercadonaProducts,
-    getShoppingList = _ref.getShoppingList,
-    isProductsDisplayed = _ref.isProductsDisplayed,
-    mercadonaProducts = _ref.mercadonaProducts,
-    parentCategorySelected = _ref.parentCategorySelected,
-    productCategorySelected = _ref.productCategorySelected,
-    supermarketProductsSelected = _ref.supermarketProductsSelected,
-    mercadonaShoppingList = _ref.mercadonaShoppingList;
+  var addShoppingListProduct = _ref5.addShoppingListProduct,
+    closeSupermarketProducts = _ref5.closeSupermarketProducts,
+    displaySupermarketProducts = _ref5.displaySupermarketProducts,
+    getMercadonaProducts = _ref5.getMercadonaProducts,
+    getShoppingList = _ref5.getShoppingList,
+    isProductsDisplayed = _ref5.isProductsDisplayed,
+    mercadonaProducts = _ref5.mercadonaProducts,
+    parentCategorySelected = _ref5.parentCategorySelected,
+    productCategorySelected = _ref5.productCategorySelected,
+    supermarketProductsSelected = _ref5.supermarketProductsSelected,
+    mercadonaShoppingList = _ref5.mercadonaShoppingList;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    searchTerm = _useState2[0],
+    setSearchTerm = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    filteredResults = _useState4[0],
+    setFilteredResults = _useState4[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getMercadonaProducts();
     getShoppingList();
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (searchTerm === '') {
+      setFilteredResults([]);
+      return;
+    }
+    var results = filterResults(searchTerm, mercadonaProducts);
+    setFilteredResults(results);
+  }, [searchTerm, mercadonaProducts]);
+  var handleSearch = function handleSearch(event) {
+    setSearchTerm(event.target.value);
+  };
+  var defaultActiveKeys = filteredResults.map(function (_, index) {
+    return "search-result-list-".concat(index);
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
-    id: "searchInput",
-    placeholder: "Buscar productos...",
-    className: "form-control mb-3"
+    placeholder: "Buscar productos, categor\xEDas o subcategor\xEDas...",
+    className: "form-control mb-3",
+    onChange: handleSearch,
+    value: searchTerm
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"], {
     defaultActiveKey: "0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
@@ -5601,7 +5667,40 @@ var ShoppingListPage = function ShoppingListPage(_ref) {
       className: "btn btn-danger btn-sm ms-2 remove-product",
       "data-id": "{{product.id}}"
     }, "Eliminar"));
-  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "A\xFAn no has agregado ning\xFAn producto.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "A\xFAn no has agregado ning\xFAn producto.")))), !!searchTerm && filteredResults.length > 0 ? filteredResults.map(function (filteredResult, filteredResultIndex) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), {
+      key: "search-result-list-".concat(filteredResultIndex)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, filteredResult.categoryName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      defaultActiveKey: defaultActiveKeys,
+      alwaysOpen: true
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+      eventKey: "search-result-list-".concat(filteredResultIndex)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Header, null, filteredResult.subcategoryName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ol", {
+      className: "list-group list-group-numbered",
+      key: "product-list".concat(filteredResult.subcategoryName, "-").concat(filteredResultIndex)
+    }, filteredResult.products.map(function (product, productIndex) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
+        onClick: function onClick() {
+          return addShoppingListProduct(product.id);
+        },
+        key: "product-".concat(product.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        className: "list-group-item d-flex justify-content-between align-items-start",
+        key: "product-".concat(filteredResult.subcategoryName, "-").concat(filteredResultIndex, "-").concat(productIndex)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: product.image,
+        className: "card-img-top",
+        style: {
+          "width": "4rem"
+        },
+        loading: "lazy"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "ms-2 me-auto"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "fw-bold"
+      }, product.name, " (", product.price, " \u20AC)"))));
+    }))))));
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ShoppingListMercadona__WEBPACK_IMPORTED_MODULE_1__["default"], {
     addShoppingListProduct: addShoppingListProduct,
     closeSupermarketProducts: closeSupermarketProducts,
     displaySupermarketProducts: displaySupermarketProducts,

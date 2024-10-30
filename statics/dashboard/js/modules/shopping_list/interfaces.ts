@@ -34,6 +34,16 @@ export type IMercadonaCategory = {
     name: string,
 };
 
+export type FilteredProductsResult = {
+    subcategoryName: string;
+    products: Product[];
+}[];
+
+export type SearchFilteredResult = {
+    categoryName: string;
+    subcategoryName: string;
+    products: Product[];
+};
 export type IShoppingListState = {
     isProductsDisplayed: boolean,
     mercadonaProducts: MercadonaCategoryProducts,

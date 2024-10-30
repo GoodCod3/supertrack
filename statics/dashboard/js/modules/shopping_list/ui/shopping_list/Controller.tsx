@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 
 import type {
     MercadonaCategoryProducts,
     MercadonaShoppingList,
+    SearchFilteredResult,
 } from '@src/modules/shopping_list/interfaces';
 import ShoppingListMercadona from './components/ShoppingListMercadona';
 
@@ -27,6 +28,41 @@ type IShoppingListPageProps = {
     mercadonaShoppingList: MercadonaShoppingList,
 };
 
+const filterResults = (
+    searchTerm: string,
+    products: MercadonaCategoryProducts
+): SearchFilteredResult[] => {
+    const lowerCasedTerm = searchTerm.toLowerCase();
+    const results: SearchFilteredResult[] = [];
+
+    // Itera por categorías
+    Object.entries(products).forEach(([categoryName, subcategories]) => {
+        let categoryMatch = categoryName.toLowerCase().includes(lowerCasedTerm);
+
+        // Itera por subcategorías dentro de la categoría
+        Object.entries(subcategories).forEach(([subcategoryName, products]) => {
+            let subcategoryMatch = subcategoryName.toLowerCase().includes(lowerCasedTerm);
+
+            // Filtra los productos que coinciden con el término de búsqueda
+            const matchingProducts = products.filter((product) =>
+                product.name.toLowerCase().includes(lowerCasedTerm)
+            );
+
+            // Añade resultados solo si hay coincidencia en la categoría, subcategoría o productos
+            if (categoryMatch || subcategoryMatch || matchingProducts.length > 0) {
+                results.push({
+                    categoryName,
+                    subcategoryName,
+                    products: matchingProducts,
+                });
+            }
+        });
+    });
+
+    return results;
+};
+
+
 const ShoppingListPage = ({
     addShoppingListProduct,
     closeSupermarketProducts,
@@ -40,14 +76,39 @@ const ShoppingListPage = ({
     supermarketProductsSelected,
     mercadonaShoppingList,
 }: IShoppingListPageProps) => {
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [filteredResults, setFilteredResults] = useState<SearchFilteredResult[]>([]);
+
     useEffect(() => {
         getMercadonaProducts();
         getShoppingList();
     }, []);
 
+    useEffect(() => {
+        if (searchTerm === '') {
+            setFilteredResults([]);
+            return;
+        }
+
+        const results: SearchFilteredResult[] = filterResults(searchTerm, mercadonaProducts);
+        setFilteredResults(results);
+    }, [searchTerm, mercadonaProducts]);
+
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const defaultActiveKeys = filteredResults.map((_, index) => `search-result-list-${index}`);
+
     return (
         <React.Fragment>
-            <input type="text" id="searchInput" placeholder="Buscar productos..." className="form-control mb-3" />
+            <input
+                type="text"
+                placeholder="Buscar productos, categorías o subcategorías..."
+                className="form-control mb-3"
+                onChange={handleSearch}
+                value={searchTerm}
+            />
             <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey='shopping-list'>
                     <Accordion.Header>
@@ -81,16 +142,57 @@ const ShoppingListPage = ({
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
-            <ShoppingListMercadona
-                addShoppingListProduct={addShoppingListProduct}
-                closeSupermarketProducts={closeSupermarketProducts}
-                displaySupermarketProducts={displaySupermarketProducts}
-                isProductsDisplayed={isProductsDisplayed}
-                mercadonaProducts={mercadonaProducts}
-                parentCategorySelected={parentCategorySelected}
-                productCategorySelected={productCategorySelected}
-                supermarketProductsSelected={supermarketProductsSelected}
-            />
+            {!!searchTerm && filteredResults.length > 0 ? (
+                filteredResults.map((filteredResult, filteredResultIndex) => (
+                    <React.Fragment key={`search-result-list-${filteredResultIndex}`}>
+                        <h2>{filteredResult.categoryName}</h2>
+                        <Accordion defaultActiveKey={defaultActiveKeys} alwaysOpen>
+                            <Accordion.Item eventKey={`search-result-list-${filteredResultIndex}`} >
+                                <Accordion.Header>
+                                    {filteredResult.subcategoryName}
+                                </Accordion.Header>
+                                <Accordion.Body>
+                                    <ol
+                                        className="list-group list-group-numbered"
+                                        key={`product-list${filteredResult.subcategoryName}-${filteredResultIndex}`}
+                                    >
+                                        {filteredResult.products.map((product, productIndex) => (
+                                            <Card.Link
+                                                onClick={() => addShoppingListProduct(product.id)}
+                                                key={`product-${product.id}`}
+                                            >
+                                                <li
+                                                    className='list-group-item d-flex justify-content-between align-items-start'
+                                                    key={`product-${filteredResult.subcategoryName}-${filteredResultIndex}-${productIndex}`}
+                                                >
+                                                    <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
+                                                    <div className="ms-2 me-auto">
+                                                        <div className="fw-bold">{product.name} ({product.price} €)</div>
+                                                    </div>
+                                                </li>
+
+                                            </Card.Link>
+                                        ))}
+                                    </ol>
+                                </Accordion.Body>
+                            </Accordion.Item>
+                        </Accordion>
+                    </React.Fragment>
+
+                ))
+
+            ) : (
+                <ShoppingListMercadona
+                    addShoppingListProduct={addShoppingListProduct}
+                    closeSupermarketProducts={closeSupermarketProducts}
+                    displaySupermarketProducts={displaySupermarketProducts}
+                    isProductsDisplayed={isProductsDisplayed}
+                    mercadonaProducts={mercadonaProducts}
+                    parentCategorySelected={parentCategorySelected}
+                    productCategorySelected={productCategorySelected}
+                    supermarketProductsSelected={supermarketProductsSelected}
+                />
+            )}
         </React.Fragment>
     );
 }
