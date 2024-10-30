@@ -73,7 +73,6 @@ const ShoppingListCategories = ({
     let filteredProducts: MercadonaFilteredProductsResult = [];
     if (isProductsDisplayed && parentCategorySelected && supermarketProductsSelected === SUPERMARKET_NAME) {
         filteredProducts = getProductsBySelection(mercadonaProducts, parentCategorySelected, productCategorySelected);
-        console.log(filteredProducts);
     }
 
     const entries = Object.entries(mercadonaProducts);
@@ -82,7 +81,6 @@ const ShoppingListCategories = ({
         rows.push(entries.slice(i, i + 2));
     }
     const defaultActiveKeys = filteredResults.map((_, index) => `search-result-list-${index}`);
-    console.log(mercadonaProducts)
     return (
         <Container>
             <Accordion defaultActiveKey="0">
@@ -212,31 +210,36 @@ const ShoppingListCategories = ({
                         <Accordion defaultActiveKey='offcanvas-0'>
                             {filteredProducts.length > 0 && (
                                 filteredProducts.map((subCategory, index) => (
-                                    <Accordion.Item eventKey={`offcanvas-${index}`}>
-                                        <Accordion.Header>{subCategory.subcategoryName}</Accordion.Header>
-                                        <Accordion.Body>
-                                            <ol id="product-info" className="list-group list-group-numbered">
-                                                {subCategory.products.map((product, productIndex) => (
-                                                    <Card.Link onClick={() => addShoppingListProduct(product.id, SUPERMARKET_NAME)}>
-                                                        <li
-                                                            className='list-group-item d-flex justify-content-between align-items-start'
-                                                            key={`product-${productIndex}`}
+                                    <React.Fragment key={`product-info-${subCategory.subcategoryName}-${index}`}>
+                                        <Accordion.Item eventKey={`offcanvas-${index}`}>
+                                            <Accordion.Header>{subCategory.subcategoryName}</Accordion.Header>
+                                            <Accordion.Body>
+                                                <ol id="product-info" className="list-group list-group-numbered">
+                                                    {subCategory.products.map((product) => (
+                                                        <Card.Link
+                                                            key={`product-link-${product.id}`}
+                                                            onClick={() => addShoppingListProduct(product.id, SUPERMARKET_NAME)}
                                                         >
-                                                            <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
-                                                            <div className="ms-2 me-auto">
-                                                                <div className="fw-bold">{product.name} ({product.price} €)</div>
-                                                            </div>
-                                                        </li>
-
-                                                    </Card.Link>
-                                                ))}
-                                            </ol>
-                                        </Accordion.Body>
-                                    </Accordion.Item>
+                                                            <li
+                                                                className='list-group-item d-flex justify-content-between align-items-start'
+                                                                key={`product-${product.id}`}
+                                                            >
+                                                                <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
+                                                                <div className="ms-2 me-auto">
+                                                                    <div className="fw-bold">{product.name} ({product.price} €)</div>
+                                                                </div>
+                                                            </li>
+                                                        </Card.Link>
+                                                    ))}
+                                                </ol>
+                                            </Accordion.Body>
+                                        </Accordion.Item>
+                                    </React.Fragment>
                                 ))
                             )}
                         </Accordion>
                     </Offcanvas.Body>
+
                 </Offcanvas>
             )}
         </Container>

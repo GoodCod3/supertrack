@@ -44,12 +44,12 @@ export const closeSupermarketProducts = (): IAction => ({
     payload: {},
 });
 
-export const getShoppingList = (): IAction => ({
+export const getShoppingList = (supermarket: string): IAction => ({
     type: GET_SHOPPING_LIST,
-    payload: {},
+    payload: { supermarket },
 });
 
-export const addShoppingListProduct = (productId: string, supermarket:string): IAction => ({
+export const addShoppingListProduct = (productId: string, supermarket: string): IAction => ({
     type: ADD_SHOPPING_LIST_PRODUCT,
     payload: { productId, supermarket },
 });

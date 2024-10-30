@@ -10,6 +10,7 @@ import type {
     MercadonaSearchFilteredResult,
     IConsumCategoryProducts,
     IConsumSearchFilteredResult,
+    ConsumShoppingList,
 } from '@src/modules/shopping_list/interfaces';
 import { filterResults } from '@src/modules/shopping_list/helpers';
 import ShoppingListMercadona from './components/ShoppingListMercadona';
@@ -22,7 +23,7 @@ type IShoppingListPageProps = {
     getMercadonaProducts: () => void,
     getConsumProducts: () => void,
     closeSupermarketProducts: () => void,
-    getShoppingList: () => void,
+    getShoppingList: (supermarket: string) => void,
     displaySupermarketProducts: (
         supermarketSelected: string,
         parentCategorySelected: string,
@@ -35,6 +36,7 @@ type IShoppingListPageProps = {
     parentCategorySelected: string,
     productCategorySelected?: string | null,
     mercadonaShoppingList: MercadonaShoppingList,
+    consumShoppingList: ConsumShoppingList,
 };
 
 
@@ -42,6 +44,7 @@ const ShoppingListPage = ({
     addShoppingListProduct,
     closeSupermarketProducts,
     consumProducts,
+    consumShoppingList,
     displaySupermarketProducts,
     getConsumProducts,
     getMercadonaProducts,
@@ -60,8 +63,9 @@ const ShoppingListPage = ({
 
     useEffect(() => {
         getMercadonaProducts();
-        getShoppingList();
         getConsumProducts();
+        getShoppingList('mercadona');
+        getShoppingList('consum');
     }, []);
 
     useEffect(() => {
@@ -124,7 +128,7 @@ const ShoppingListPage = ({
                         parentCategorySelected={parentCategorySelected}
                         productCategorySelected={productCategorySelected}
                         supermarketProductsSelected={supermarketProductsSelected}
-                        mercadonaShoppingList={mercadonaShoppingList}
+                        mercadonaShoppingList={consumShoppingList}
                         removeShoppingListProduct={removeShoppingListProduct}
                         filteredResults={consumFilteredResults}
                         searchTerm={searchTerm}

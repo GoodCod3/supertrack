@@ -16,8 +16,8 @@ export const getMercadonaProducts = (): Promise<IMercadonaCategory> => (
     _base.get(urls.shoppingList.getMercadonaProducts)
 );
 
-export const getShoppingList = (): Promise<MercadonaShoppingList> => (
-    _base.get(urls.shoppingList.getMercadonaShoppingList)
+export const getShoppingList = (supermarket: string): Promise<MercadonaShoppingList> => (
+    _base.post(urls.shoppingList.getMercadonaShoppingList, { supermarket })
 );
 
 export const addShoppingListProduct = (productId: string, supermarket: string): Promise<IAddShoppingListProductResponse> => (

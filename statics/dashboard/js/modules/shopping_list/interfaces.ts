@@ -69,11 +69,27 @@ export type IConsumSearchFilteredResult = {
     products: ConsumProduct[];
 };
 
+export type ConsumShoppingListProduct = {
+    id: string,
+    image: string,
+    name: string,
+    price: number,
+    quantity: number,
+    total_price: number,
+};
+
+export type ConsumShoppingList = {
+    total: number,
+    products: ConsumShoppingListProduct[]
+};
+
+
 export type IShoppingListState = {
     isProductsDisplayed: boolean,
     mercadonaProducts: MercadonaCategoryProducts,
     consumProducts: IConsumCategoryProducts,
-    mercadonaShoppingList: string | null,
+    mercadonaShoppingList: MercadonaShoppingList | null,
+    consumShoppingList: ConsumShoppingList | null,
     parentCategorySelected: string | null,
     productCategorySelected: string | null,
     supermarketProductsSelected: string | null,

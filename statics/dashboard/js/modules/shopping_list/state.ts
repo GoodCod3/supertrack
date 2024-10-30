@@ -5,6 +5,7 @@ export default {
     parentCategorySelected: null,
     productCategorySelected: null,
     mercadonaShoppingList: null,
+    consumShoppingList: null,
     consumProducts: {},
 
 };

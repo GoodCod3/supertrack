@@ -37,6 +37,10 @@ interface IAddShoppingListProductSaga {
     supermarket: string,
 };
 
+interface IGetShoppingListSaga {
+    supermarket: string,
+};
+
 export function* getMercadonaProducts(): Generator<StrictEffect, void, never> {
     const mercadonaProductsResponse: MercadonaCategoryProducts = yield call(shoppingListAPI.getMercadonaProducts);
 
@@ -70,13 +74,22 @@ export function* closeSupermarketProducts(): Generator<StrictEffect, void, never
     });
 }
 
-export function* getShoppingList(): Generator<StrictEffect, void, never> {
-    const mercadonaProductsResponse: MercadonaShoppingList = yield call(shoppingListAPI.getShoppingList);
+export function* getShoppingList({ payload }: ISagaParam<IGetShoppingListSaga>): Generator<StrictEffect, void, never> {
+    const mercadonaProductsResponse: MercadonaShoppingList = yield call(
+        shoppingListAPI.getShoppingList,
+        payload.supermarket,
+    );
+    let shoppingListKeyName;
+    if (payload.supermarket == 'mercadona') {
+        shoppingListKeyName = 'mercadonaShoppingList';
+    } else {
+        shoppingListKeyName = 'consumShoppingList';
 
+    }
     yield put({
         type: GET_SHOPPING_LIST_SUCCESS,
         payload: {
-            mercadonaShoppingList: mercadonaProductsResponse,
+            [shoppingListKeyName]: mercadonaProductsResponse,
         },
     });
 }
@@ -89,7 +102,7 @@ export function* addShoppingListProduct({ payload }: ISagaParam<IAddShoppingList
             payload.supermarket,
         );
         if (mercadonaProductsResponse.status == "success") {
-            yield put({ type: GET_SHOPPING_LIST, payload: {} });
+            yield put({ type: GET_SHOPPING_LIST, payload: { supermarket: payload.supermarket } });
             toast.success('Producto añadido a la lista');
         }
     } catch (error) {

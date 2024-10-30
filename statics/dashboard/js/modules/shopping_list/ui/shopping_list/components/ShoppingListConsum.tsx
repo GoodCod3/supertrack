@@ -210,22 +210,23 @@ const ShoppingListCategories = ({
                         <Accordion defaultActiveKey="0">
                             {filteredProducts.length > 0 && (
                                 filteredProducts.map((subCategory, index) => (
-                                    <Accordion.Item eventKey={`${index}`}>
+                                    <Accordion.Item eventKey={`${index}`} key={`accordion-item-${index}`}>
                                         <Accordion.Header>{subCategory.subcategoryName}</Accordion.Header>
                                         <Accordion.Body>
-                                            <ol id="product-info" className="list-group list-group-numbered">
-                                                {subCategory.products.map((product, productIndex) => (
-                                                    <Card.Link onClick={() => addShoppingListProduct(product.id, SUPERMARKET_NAME)}>
+                                            <ol id="product-info" className="list-group list-group-numbered" key={`product-info-${index}`}>
+                                                {subCategory.products.map((product) => (
+                                                    <Card.Link
+                                                        onClick={() => addShoppingListProduct(product.id, SUPERMARKET_NAME)}
+                                                        key={`product-link-${product.id}`}>
                                                         <li
                                                             className='list-group-item d-flex justify-content-between align-items-start'
-                                                            key={`product-${productIndex}`}
+                                                            key={`product-${product.id}`}
                                                         >
                                                             <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
                                                             <div className="ms-2 me-auto">
                                                                 <div className="fw-bold">{product.name} ({product.price} €)</div>
                                                             </div>
                                                         </li>
-
                                                     </Card.Link>
                                                 ))}
                                             </ol>
@@ -235,6 +236,7 @@ const ShoppingListCategories = ({
                             )}
                         </Accordion>
                     </Offcanvas.Body>
+
                 </Offcanvas>
             )}
         </Container>
