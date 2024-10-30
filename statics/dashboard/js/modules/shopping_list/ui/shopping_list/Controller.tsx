@@ -35,20 +35,16 @@ const filterResults = (
     const lowerCasedTerm = searchTerm.toLowerCase();
     const results: SearchFilteredResult[] = [];
 
-    // Itera por categorías
     Object.entries(products).forEach(([categoryName, subcategories]) => {
         let categoryMatch = categoryName.toLowerCase().includes(lowerCasedTerm);
 
-        // Itera por subcategorías dentro de la categoría
         Object.entries(subcategories).forEach(([subcategoryName, products]) => {
             let subcategoryMatch = subcategoryName.toLowerCase().includes(lowerCasedTerm);
 
-            // Filtra los productos que coinciden con el término de búsqueda
             const matchingProducts = products.filter((product) =>
                 product.name.toLowerCase().includes(lowerCasedTerm)
             );
 
-            // Añade resultados solo si hay coincidencia en la categoría, subcategoría o productos
             if (categoryMatch || subcategoryMatch || matchingProducts.length > 0) {
                 results.push({
                     categoryName,

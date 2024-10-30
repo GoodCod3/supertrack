@@ -5561,27 +5561,19 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var filterResults = function filterResults(searchTerm, products) {
   var lowerCasedTerm = searchTerm.toLowerCase();
   var results = [];
-
-  // Itera por categorías
   Object.entries(products).forEach(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
       categoryName = _ref2[0],
       subcategories = _ref2[1];
     var categoryMatch = categoryName.toLowerCase().includes(lowerCasedTerm);
-
-    // Itera por subcategorías dentro de la categoría
     Object.entries(subcategories).forEach(function (_ref3) {
       var _ref4 = _slicedToArray(_ref3, 2),
         subcategoryName = _ref4[0],
         products = _ref4[1];
       var subcategoryMatch = subcategoryName.toLowerCase().includes(lowerCasedTerm);
-
-      // Filtra los productos que coinciden con el término de búsqueda
       var matchingProducts = products.filter(function (product) {
         return product.name.toLowerCase().includes(lowerCasedTerm);
       });
-
-      // Añade resultados solo si hay coincidencia en la categoría, subcategoría o productos
       if (categoryMatch || subcategoryMatch || matchingProducts.length > 0) {
         results.push({
           categoryName: categoryName,
