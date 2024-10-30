@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import ShoppingListCategories from './ShoppingListCategories';
+import ShoppingListCategories from './ShoppingListMercadona';
 import {getMercadonaProducts} from '../api/shoppingList';
 
 const ShoppingListPage = () => {

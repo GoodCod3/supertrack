@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import ShoppingListCategories from '@components/ShoppingListCategories';
-import {getMercadonaProducts} from '@api/shoppingList';
+import ShoppingListMercadona from '@src/components/ShoppingListMercadona';
+import type {MercadonaCategoryProducts} from '@src/modules/shopping_list/interfaces';
+
 
 type IShoppingListPageProps =  {
     getMercadonaProducts: () => void,
-    mercadonaProducts: string,
+    mercadonaProducts: MercadonaCategoryProducts,
 };
 
 const ShoppingListPage = ({getMercadonaProducts, mercadonaProducts}:IShoppingListPageProps) => {
@@ -16,7 +17,7 @@ const ShoppingListPage = ({getMercadonaProducts, mercadonaProducts}:IShoppingLis
     return (
         <React.Fragment>
             <input type="text" id="searchInput" placeholder="Buscar productos..." className="form-control mb-3" />
-            <ShoppingListCategories />
+            <ShoppingListMercadona mercadonaProducts={mercadonaProducts} />
         </React.Fragment>
     );
 }

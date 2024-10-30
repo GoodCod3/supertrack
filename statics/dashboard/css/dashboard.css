@@ -125,3 +125,22 @@
   .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important;
   }
+
+  /* Product cards */
+
+  .equal-height-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+.subcategory-list {
+  overflow-y: auto;
+  max-height: 12rem;
+  min-height: 12rem;
+}
+
+.category-title {
+  overflow-y: auto;
+  max-height: 3rem;
+  min-height: 3rem;
+}
