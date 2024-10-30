@@ -35,7 +35,7 @@ type IShoppingListCategories = {
     filteredResults: MercadonaSearchFilteredResult[],
 };
 
-const SUPERMARKET_NAME = 'mercadona';
+const SUPERMARKET_NAME = 'consum';
 const getProductsBySelection = (
     products: MercadonaCategoryProducts,
     categoryName: string,
@@ -73,7 +73,6 @@ const ShoppingListCategories = ({
     let filteredProducts: MercadonaFilteredProductsResult = [];
     if (isProductsDisplayed && parentCategorySelected && supermarketProductsSelected === SUPERMARKET_NAME) {
         filteredProducts = getProductsBySelection(mercadonaProducts, parentCategorySelected, productCategorySelected);
-        console.log(filteredProducts);
     }
 
     const entries = Object.entries(mercadonaProducts);
@@ -82,7 +81,6 @@ const ShoppingListCategories = ({
         rows.push(entries.slice(i, i + 2));
     }
     const defaultActiveKeys = filteredResults.map((_, index) => `search-result-list-${index}`);
-    console.log(mercadonaProducts)
     return (
         <Container>
             <Accordion defaultActiveKey="0">
@@ -207,12 +205,12 @@ const ShoppingListCategories = ({
                         </Offcanvas.Header>
 
                     )}
-                    <Offcanvas.Body className='offcanvas-mercadona'>
+                    <Offcanvas.Body className='offcanvas-consum'>
                         Haz click en un producto para añadirlo a la lista
-                        <Accordion defaultActiveKey='offcanvas-0'>
+                        <Accordion defaultActiveKey="0">
                             {filteredProducts.length > 0 && (
                                 filteredProducts.map((subCategory, index) => (
-                                    <Accordion.Item eventKey={`offcanvas-${index}`}>
+                                    <Accordion.Item eventKey={`${index}`}>
                                         <Accordion.Header>{subCategory.subcategoryName}</Accordion.Header>
                                         <Accordion.Body>
                                             <ol id="product-info" className="list-group list-group-numbered">

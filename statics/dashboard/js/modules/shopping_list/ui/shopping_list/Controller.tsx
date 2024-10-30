@@ -13,6 +13,7 @@ import type {
 } from '@src/modules/shopping_list/interfaces';
 import { filterResults } from '@src/modules/shopping_list/helpers';
 import ShoppingListMercadona from './components/ShoppingListMercadona';
+import ShoppingListConsum from './components/ShoppingListConsum';
 
 
 type IShoppingListPageProps = {
@@ -114,7 +115,7 @@ const ShoppingListPage = ({
                     />
                 </Tab>
                 <Tab eventKey="consum" title="Consum">
-                    <ShoppingListMercadona
+                    <ShoppingListConsum
                         addShoppingListProduct={addShoppingListProduct}
                         closeSupermarketProducts={closeSupermarketProducts}
                         displaySupermarketProducts={displaySupermarketProducts}
