@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 import type {
     MercadonaCategoryProducts,
@@ -106,95 +108,105 @@ const ShoppingListPage = ({
                 onChange={handleSearch}
                 value={searchTerm}
             />
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey='shopping-list'>
-                    <Accordion.Header>
-                        Mi lista de la compra
-                        {mercadonaShoppingList?.products?.length > 0 && (
-                            <span> (Total: {mercadonaShoppingList.total} €)</span>
-                        )}
-                    </Accordion.Header>
-                    <Accordion.Body>
-                        {mercadonaShoppingList?.products?.length > 0 ? (
-                            <ol className='list-group list-group-numbered'>
-                                {mercadonaShoppingList.products.map((product, productIndex) => (
-                                    <li
-                                        className='list-group-item d-flex justify-content-between align-items-start'
-                                        key={`product-${productIndex}`}
-                                    >
-                                        <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
-                                        <div className="ms-2 me-auto">
-                                            <div className="product-name-shopping-list">{product.name}</div>
-                                            <div className="fw-bold product-name-shopping-list">{product.total_price} €</div>
-                                        </div>
-                                        <span className="badge text-bg-primary rounded-pill">{product.quantity}</span>
-                                        <button
-                                            className="btn btn-danger btn-sm ms-2 remove-product" 
-                                            onClick={() => removeShoppingListProduct(product.id)}
-                                        >
-                                            Eliminar
-                                        </button>
-                                    </li>
-
-                                ))}
-                            </ol>
-                        ) : (
-                            <span>Aún no has agregado ningún producto.</span>
-                        )}
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
-            {!!searchTerm && filteredResults.length > 0 ? (
-                filteredResults.map((filteredResult, filteredResultIndex) => (
-                    <React.Fragment key={`search-result-list-${filteredResultIndex}`}>
-                        <h2>{filteredResult.categoryName}</h2>
-                        <Accordion defaultActiveKey={defaultActiveKeys} alwaysOpen>
-                            <Accordion.Item eventKey={`search-result-list-${filteredResultIndex}`} >
-                                <Accordion.Header>
-                                    {filteredResult.subcategoryName}
-                                </Accordion.Header>
-                                <Accordion.Body>
-                                    <ol
-                                        className="list-group list-group-numbered"
-                                        key={`product-list${filteredResult.subcategoryName}-${filteredResultIndex}`}
-                                    >
-                                        {filteredResult.products.map((product, productIndex) => (
-                                            <Card.Link
-                                                onClick={() => addShoppingListProduct(product.id)}
-                                                key={`product-${product.id}`}
+            <Tabs
+                defaultActiveKey="mercadona"
+                id="fill-tab-example"
+                className="mb-3"
+                fill
+            >
+                <Tab eventKey="mercadona" title="Mercadona">
+                    <Accordion defaultActiveKey="0">
+                        <Accordion.Item eventKey='shopping-list'>
+                            <Accordion.Header>
+                                Mi lista de la compra
+                                {mercadonaShoppingList?.products?.length > 0 && (
+                                    <span> (Total: {mercadonaShoppingList.total} €)</span>
+                                )}
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                {mercadonaShoppingList?.products?.length > 0 ? (
+                                    <ol className='list-group list-group-numbered'>
+                                        {mercadonaShoppingList.products.map((product, productIndex) => (
+                                            <li
+                                                className='list-group-item d-flex justify-content-between align-items-start'
+                                                key={`product-${productIndex}`}
                                             >
-                                                <li
-                                                    className='list-group-item d-flex justify-content-between align-items-start'
-                                                    key={`product-${filteredResult.subcategoryName}-${filteredResultIndex}-${productIndex}`}
+                                                <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
+                                                <div className="ms-2 me-auto">
+                                                    <div className="product-name-shopping-list">{product.name}</div>
+                                                    <div className="fw-bold product-name-shopping-list">{product.total_price} €</div>
+                                                </div>
+                                                <span className="badge text-bg-primary rounded-pill">{product.quantity}</span>
+                                                <button
+                                                    className="btn btn-danger btn-sm ms-2 remove-product"
+                                                    onClick={() => removeShoppingListProduct(product.id)}
                                                 >
-                                                    <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
-                                                    <div className="ms-2 me-auto">
-                                                        <div className="fw-bold">{product.name} ({product.price} €)</div>
-                                                    </div>
-                                                </li>
+                                                    Eliminar
+                                                </button>
+                                            </li>
 
-                                            </Card.Link>
                                         ))}
                                     </ol>
-                                </Accordion.Body>
-                            </Accordion.Item>
-                        </Accordion>
-                    </React.Fragment>
+                                ) : (
+                                    <span>Aún no has agregado ningún producto.</span>
+                                )}
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
+                    {!!searchTerm && filteredResults.length > 0 ? (
+                        filteredResults.map((filteredResult, filteredResultIndex) => (
+                            <React.Fragment key={`search-result-list-${filteredResultIndex}`}>
+                                <h2>{filteredResult.categoryName}</h2>
+                                <Accordion defaultActiveKey={defaultActiveKeys} alwaysOpen>
+                                    <Accordion.Item eventKey={`search-result-list-${filteredResultIndex}`} >
+                                        <Accordion.Header>
+                                            {filteredResult.subcategoryName}
+                                        </Accordion.Header>
+                                        <Accordion.Body>
+                                            <ol
+                                                className="list-group list-group-numbered"
+                                                key={`product-list${filteredResult.subcategoryName}-${filteredResultIndex}`}
+                                            >
+                                                {filteredResult.products.map((product, productIndex) => (
+                                                    <Card.Link
+                                                        onClick={() => addShoppingListProduct(product.id)}
+                                                        key={`product-${product.id}`}
+                                                    >
+                                                        <li
+                                                            className='list-group-item d-flex justify-content-between align-items-start'
+                                                            key={`product-${filteredResult.subcategoryName}-${filteredResultIndex}-${productIndex}`}
+                                                        >
+                                                            <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
+                                                            <div className="ms-2 me-auto">
+                                                                <div className="fw-bold">{product.name} ({product.price} €)</div>
+                                                            </div>
+                                                        </li>
 
-                ))
+                                                    </Card.Link>
+                                                ))}
+                                            </ol>
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                </Accordion>
+                            </React.Fragment>
 
-            ) : (
-                <ShoppingListMercadona
-                    addShoppingListProduct={addShoppingListProduct}
-                    closeSupermarketProducts={closeSupermarketProducts}
-                    displaySupermarketProducts={displaySupermarketProducts}
-                    isProductsDisplayed={isProductsDisplayed}
-                    mercadonaProducts={mercadonaProducts}
-                    parentCategorySelected={parentCategorySelected}
-                    productCategorySelected={productCategorySelected}
-                    supermarketProductsSelected={supermarketProductsSelected}
-                />
-            )}
+                        ))
+
+                    ) : (
+                        <ShoppingListMercadona
+                            addShoppingListProduct={addShoppingListProduct}
+                            closeSupermarketProducts={closeSupermarketProducts}
+                            displaySupermarketProducts={displaySupermarketProducts}
+                            isProductsDisplayed={isProductsDisplayed}
+                            mercadonaProducts={mercadonaProducts}
+                            parentCategorySelected={parentCategorySelected}
+                            productCategorySelected={productCategorySelected}
+                            supermarketProductsSelected={supermarketProductsSelected}
+                        />
+                    )}
+                </Tab>
+                <Tab eventKey="consum" title="Consum"></Tab>
+            </Tabs>
         </React.Fragment>
     );
 }

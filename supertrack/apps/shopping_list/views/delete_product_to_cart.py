@@ -27,7 +27,8 @@ def delete_product_to_cart(request):
                 shopping_list=mercadona_list,
                 product__public_id=product_id,
             )
-            product_in_list.delete()
+            product_in_list.is_deleted = True
+            product_in_list.save()
         else:
             return JsonResponse({"error": "Product ID is required"}, status=400)
     return JsonResponse({"status": "success"})

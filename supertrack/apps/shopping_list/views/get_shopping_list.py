@@ -23,7 +23,7 @@ def get_shopping_list(request):
                 "products": []
             })
         else:
-            products = shopping_list.products.select_related("product").all()
+            products = shopping_list.products.select_related("product").filter(is_deleted=False)
             total = 0
             product_data = []
             for product in products:
