@@ -10,15 +10,17 @@ import type {
 } from '@src/modules/shopping_list/interfaces';
 import {
     ADD_SHOPPING_LIST_PRODUCT,
-    CLOSE_SUPERMARKET_PRODUCTS,
     CLOSE_SUPERMARKET_PRODUCTS_SUCCESS,
-    GET_MERCADONA_PRODUCTS,
-    GET_MERCADONA_PRODUCTS_SUCCESS,
-    DISPLAY_SUPERMARKET_PRODUCTS,
+    CLOSE_SUPERMARKET_PRODUCTS,
     DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS,
-    GET_SHOPPING_LIST,
+    DISPLAY_SUPERMARKET_PRODUCTS,
+    GET_CONSUM_PRODUCTS,
+    GET_MERCADONA_PRODUCTS_SUCCESS,
+    GET_MERCADONA_PRODUCTS,
     GET_SHOPPING_LIST_SUCCESS,
+    GET_SHOPPING_LIST,
     REMOVE_SHOPPING_LIST_PRODUCT,
+    GET_CONSUM_PRODUCTS_SUCCESS,
 } from './action-types';
 import { ISagaParam } from '@src/interfaces/global';
 
@@ -90,7 +92,6 @@ export function* addShoppingListProduct({ payload }: ISagaParam<IAddShoppingList
     } catch (error) {
 
     }
-
 }
 
 export function* removeShoppingListProduct({ payload }: ISagaParam<IAddShoppingListProductSaga>): Generator<StrictEffect, void, never> {
@@ -105,7 +106,15 @@ export function* removeShoppingListProduct({ payload }: ISagaParam<IAddShoppingL
     } catch (error) {
 
     }
+}
 
+export function* getConsumProducts(): Generator<StrictEffect, void, never> {
+    const consumProductsResponse: MercadonaCategoryProducts = yield call(shoppingListAPI.getConsumProducts);
+
+    yield put({
+        type: GET_CONSUM_PRODUCTS_SUCCESS,
+        payload: { consumProducts: consumProductsResponse },
+    });
 }
 
 export default function* (): Generator {
@@ -115,5 +124,6 @@ export default function* (): Generator {
     yield takeLatest(GET_SHOPPING_LIST, getShoppingList);
     yield takeLatest(ADD_SHOPPING_LIST_PRODUCT, addShoppingListProduct);
     yield takeLatest(REMOVE_SHOPPING_LIST_PRODUCT, removeShoppingListProduct);
+    yield takeLatest(GET_CONSUM_PRODUCTS, getConsumProducts);
 }
 

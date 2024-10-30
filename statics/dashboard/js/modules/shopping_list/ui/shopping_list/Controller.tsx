@@ -16,6 +16,7 @@ type IShoppingListPageProps = {
     addShoppingListProduct: (productId: string) => void,
     removeShoppingListProduct: (productId: string) => void,
     getMercadonaProducts: () => void,
+    getConsumProducts: () => void,
     closeSupermarketProducts: () => void,
     getShoppingList: () => void,
     displaySupermarketProducts: (
@@ -65,15 +66,16 @@ const ShoppingListPage = ({
     addShoppingListProduct,
     closeSupermarketProducts,
     displaySupermarketProducts,
+    getConsumProducts,
     getMercadonaProducts,
     getShoppingList,
     isProductsDisplayed,
     mercadonaProducts,
+    mercadonaShoppingList,
     parentCategorySelected,
     productCategorySelected,
-    supermarketProductsSelected,
-    mercadonaShoppingList,
     removeShoppingListProduct,
+    supermarketProductsSelected,
 }: IShoppingListPageProps) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [filteredResults, setFilteredResults] = useState<SearchFilteredResult[]>([]);
@@ -81,6 +83,7 @@ const ShoppingListPage = ({
     useEffect(() => {
         getMercadonaProducts();
         getShoppingList();
+        getConsumProducts();
     }, []);
 
     useEffect(() => {

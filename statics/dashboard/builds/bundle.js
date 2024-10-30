@@ -5896,6 +5896,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addShoppingListProduct: () => (/* binding */ addShoppingListProduct),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   getConsumProducts: () => (/* binding */ getConsumProducts),
 /* harmony export */   getMercadonaProducts: () => (/* binding */ getMercadonaProducts),
 /* harmony export */   getShoppingList: () => (/* binding */ getShoppingList),
 /* harmony export */   removeShoppingListProduct: () => (/* binding */ removeShoppingListProduct)
@@ -5920,8 +5921,12 @@ var removeShoppingListProduct = function removeShoppingListProduct(productId) {
     productId: productId
   });
 };
+var getConsumProducts = function getConsumProducts() {
+  return _base__WEBPACK_IMPORTED_MODULE_0__["default"].get(_urls_json__WEBPACK_IMPORTED_MODULE_1__.shoppingList.getConsumProducts);
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   addShoppingListProduct: addShoppingListProduct,
+  getConsumProducts: getConsumProducts,
   getMercadonaProducts: getMercadonaProducts,
   getShoppingList: getShoppingList,
   removeShoppingListProduct: removeShoppingListProduct
@@ -6064,6 +6069,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   CLOSE_SUPERMARKET_PRODUCTS_SUCCESS: () => (/* binding */ CLOSE_SUPERMARKET_PRODUCTS_SUCCESS),
 /* harmony export */   DISPLAY_SUPERMARKET_PRODUCTS: () => (/* binding */ DISPLAY_SUPERMARKET_PRODUCTS),
 /* harmony export */   DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS: () => (/* binding */ DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS),
+/* harmony export */   GET_CONSUM_PRODUCTS: () => (/* binding */ GET_CONSUM_PRODUCTS),
+/* harmony export */   GET_CONSUM_PRODUCTS_SUCCESS: () => (/* binding */ GET_CONSUM_PRODUCTS_SUCCESS),
 /* harmony export */   GET_MERCADONA_PRODUCTS: () => (/* binding */ GET_MERCADONA_PRODUCTS),
 /* harmony export */   GET_MERCADONA_PRODUCTS_SUCCESS: () => (/* binding */ GET_MERCADONA_PRODUCTS_SUCCESS),
 /* harmony export */   GET_SHOPPING_LIST: () => (/* binding */ GET_SHOPPING_LIST),
@@ -6083,6 +6090,8 @@ var GET_SHOPPING_LIST_SUCCESS = 'shopping_list/GET_SHOPPING_LIST_SUCCESS';
 var ADD_SHOPPING_LIST_PRODUCT = 'shopping_list/ADD_SHOPPING_LIST_PRODUCT';
 var ADD_SHOPPING_LIST_PRODUCT_SUCCESS = 'shopping_list/ADD_SHOPPING_LIST_PRODUCT_SUCCESS';
 var REMOVE_SHOPPING_LIST_PRODUCT = 'shopping_list/REMOVE_SHOPPING_LIST_PRODUCT';
+var GET_CONSUM_PRODUCTS = 'shopping_list/GET_CONSUM_PRODUCTS';
+var GET_CONSUM_PRODUCTS_SUCCESS = 'shopping_list/GET_CONSUM_PRODUCTS_SUCCESS';
 
 /***/ }),
 
@@ -6098,6 +6107,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   addShoppingListProduct: () => (/* binding */ addShoppingListProduct),
 /* harmony export */   closeSupermarketProducts: () => (/* binding */ closeSupermarketProducts),
 /* harmony export */   displaySupermarketProducts: () => (/* binding */ displaySupermarketProducts),
+/* harmony export */   getConsumProducts: () => (/* binding */ getConsumProducts),
 /* harmony export */   getMercadonaProducts: () => (/* binding */ getMercadonaProducts),
 /* harmony export */   getShoppingList: () => (/* binding */ getShoppingList),
 /* harmony export */   removeShoppingListProduct: () => (/* binding */ removeShoppingListProduct)
@@ -6148,6 +6158,12 @@ var removeShoppingListProduct = function removeShoppingListProduct(productId) {
     }
   };
 };
+var getConsumProducts = function getConsumProducts() {
+  return {
+    type: _action_types__WEBPACK_IMPORTED_MODULE_0__.GET_CONSUM_PRODUCTS,
+    payload: {}
+  };
+};
 
 /***/ }),
 
@@ -6168,7 +6184,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var reducerMap = [_action_types__WEBPACK_IMPORTED_MODULE_1__.ADD_SHOPPING_LIST_PRODUCT_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.CLOSE_SUPERMARKET_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.GET_MERCADONA_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.GET_SHOPPING_LIST_SUCCESS];
+var reducerMap = [_action_types__WEBPACK_IMPORTED_MODULE_1__.ADD_SHOPPING_LIST_PRODUCT_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.CLOSE_SUPERMARKET_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.DISPLAY_SUPERMARKET_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.GET_CONSUM_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.GET_MERCADONA_PRODUCTS_SUCCESS, _action_types__WEBPACK_IMPORTED_MODULE_1__.GET_SHOPPING_LIST_SUCCESS];
 var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _state__WEBPACK_IMPORTED_MODULE_2__["default"];
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -6191,6 +6207,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   closeSupermarketProducts: () => (/* binding */ closeSupermarketProducts),
 /* harmony export */   "default": () => (/* binding */ _callee4),
 /* harmony export */   displaySupermarketProducts: () => (/* binding */ displaySupermarketProducts),
+/* harmony export */   getConsumProducts: () => (/* binding */ getConsumProducts),
 /* harmony export */   getMercadonaProducts: () => (/* binding */ getMercadonaProducts),
 /* harmony export */   getShoppingList: () => (/* binding */ getShoppingList),
 /* harmony export */   removeShoppingListProduct: () => (/* binding */ removeShoppingListProduct)
@@ -6204,7 +6221,8 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 var _marked = /*#__PURE__*/_regeneratorRuntime().mark(getMercadonaProducts),
   _marked2 = /*#__PURE__*/_regeneratorRuntime().mark(closeSupermarketProducts),
   _marked3 = /*#__PURE__*/_regeneratorRuntime().mark(getShoppingList),
-  _marked4 = /*#__PURE__*/_regeneratorRuntime().mark(_callee4);
+  _marked4 = /*#__PURE__*/_regeneratorRuntime().mark(getConsumProducts),
+  _marked5 = /*#__PURE__*/_regeneratorRuntime().mark(_callee4);
 
 
 
@@ -6368,32 +6386,57 @@ function removeShoppingListProduct(_ref3) {
     }, _callee3, null, [[0, 9]]);
   })();
 }
-function _callee4() {
-  return _regeneratorRuntime().wrap(function _callee4$(_context7) {
+function getConsumProducts() {
+  var consumProductsResponse;
+  return _regeneratorRuntime().wrap(function getConsumProducts$(_context7) {
     while (1) switch (_context7.prev = _context7.next) {
       case 0:
         _context7.next = 2;
-        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.GET_MERCADONA_PRODUCTS, getMercadonaProducts);
+        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.call)(_api_shoppingList__WEBPACK_IMPORTED_MODULE_2__["default"].getConsumProducts);
       case 2:
-        _context7.next = 4;
-        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.DISPLAY_SUPERMARKET_PRODUCTS, displaySupermarketProducts);
-      case 4:
-        _context7.next = 6;
-        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.CLOSE_SUPERMARKET_PRODUCTS, closeSupermarketProducts);
-      case 6:
-        _context7.next = 8;
-        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.GET_SHOPPING_LIST, getShoppingList);
-      case 8:
-        _context7.next = 10;
-        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.ADD_SHOPPING_LIST_PRODUCT, addShoppingListProduct);
-      case 10:
-        _context7.next = 12;
-        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.REMOVE_SHOPPING_LIST_PRODUCT, removeShoppingListProduct);
-      case 12:
+        consumProductsResponse = _context7.sent;
+        _context7.next = 5;
+        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.put)({
+          type: _action_types__WEBPACK_IMPORTED_MODULE_3__.GET_CONSUM_PRODUCTS_SUCCESS,
+          payload: {
+            consumProducts: consumProductsResponse
+          }
+        });
+      case 5:
       case "end":
         return _context7.stop();
     }
   }, _marked4);
+}
+function _callee4() {
+  return _regeneratorRuntime().wrap(function _callee4$(_context8) {
+    while (1) switch (_context8.prev = _context8.next) {
+      case 0:
+        _context8.next = 2;
+        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.GET_MERCADONA_PRODUCTS, getMercadonaProducts);
+      case 2:
+        _context8.next = 4;
+        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.DISPLAY_SUPERMARKET_PRODUCTS, displaySupermarketProducts);
+      case 4:
+        _context8.next = 6;
+        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.CLOSE_SUPERMARKET_PRODUCTS, closeSupermarketProducts);
+      case 6:
+        _context8.next = 8;
+        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.GET_SHOPPING_LIST, getShoppingList);
+      case 8:
+        _context8.next = 10;
+        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.ADD_SHOPPING_LIST_PRODUCT, addShoppingListProduct);
+      case 10:
+        _context8.next = 12;
+        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.REMOVE_SHOPPING_LIST_PRODUCT, removeShoppingListProduct);
+      case 12:
+        _context8.next = 14;
+        return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.takeLatest)(_action_types__WEBPACK_IMPORTED_MODULE_3__.GET_CONSUM_PRODUCTS, getConsumProducts);
+      case 14:
+      case "end":
+        return _context8.stop();
+    }
+  }, _marked5);
 }
 
 /***/ }),
@@ -6453,6 +6496,7 @@ var mapActionsToProps = {
   addShoppingListProduct: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.addShoppingListProduct,
   closeSupermarketProducts: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.closeSupermarketProducts,
   displaySupermarketProducts: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.displaySupermarketProducts,
+  getConsumProducts: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.getConsumProducts,
   getMercadonaProducts: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.getMercadonaProducts,
   getShoppingList: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.getShoppingList,
   removeShoppingListProduct: _src_modules_shopping_list_actions__WEBPACK_IMPORTED_MODULE_0__.removeShoppingListProduct
@@ -6523,15 +6567,16 @@ var ShoppingListPage = function ShoppingListPage(_ref5) {
   var addShoppingListProduct = _ref5.addShoppingListProduct,
     closeSupermarketProducts = _ref5.closeSupermarketProducts,
     displaySupermarketProducts = _ref5.displaySupermarketProducts,
+    getConsumProducts = _ref5.getConsumProducts,
     getMercadonaProducts = _ref5.getMercadonaProducts,
     getShoppingList = _ref5.getShoppingList,
     isProductsDisplayed = _ref5.isProductsDisplayed,
     mercadonaProducts = _ref5.mercadonaProducts,
+    mercadonaShoppingList = _ref5.mercadonaShoppingList,
     parentCategorySelected = _ref5.parentCategorySelected,
     productCategorySelected = _ref5.productCategorySelected,
-    supermarketProductsSelected = _ref5.supermarketProductsSelected,
-    mercadonaShoppingList = _ref5.mercadonaShoppingList,
-    removeShoppingListProduct = _ref5.removeShoppingListProduct;
+    removeShoppingListProduct = _ref5.removeShoppingListProduct,
+    supermarketProductsSelected = _ref5.supermarketProductsSelected;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
     searchTerm = _useState2[0],
@@ -6543,6 +6588,7 @@ var ShoppingListPage = function ShoppingListPage(_ref5) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getMercadonaProducts();
     getShoppingList();
+    getConsumProducts();
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (searchTerm === '') {
@@ -64512,7 +64558,7 @@ function invariant(condition, message) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"shoppingList":{"getMercadonaProducts":"shopping-list/mercadona/products/","getMercadonaShoppingList":"shopping-list/mercadona/","addMercadonaShoppingListProduct":"shopping-list/mercadona/add-to-cart/","removeMercadonaShoppingListProduct":"shopping-list/mercadona/delete-product-cart/"}}');
+module.exports = /*#__PURE__*/JSON.parse('{"shoppingList":{"getConsumProducts":"shopping-list/consum/products/","getMercadonaProducts":"shopping-list/mercadona/products/","getMercadonaShoppingList":"shopping-list/mercadona/","addMercadonaShoppingListProduct":"shopping-list/mercadona/add-to-cart/","removeMercadonaShoppingListProduct":"shopping-list/mercadona/delete-product-cart/"}}');
 
 /***/ })
 

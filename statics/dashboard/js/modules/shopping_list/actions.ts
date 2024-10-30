@@ -2,6 +2,7 @@ import {
     ADD_SHOPPING_LIST_PRODUCT,
     CLOSE_SUPERMARKET_PRODUCTS,
     DISPLAY_SUPERMARKET_PRODUCTS,
+    GET_CONSUM_PRODUCTS,
     GET_MERCADONA_PRODUCTS,
     GET_SHOPPING_LIST,
     REMOVE_SHOPPING_LIST_PRODUCT,
@@ -13,6 +14,7 @@ interface IAction<P = unknown> {
     | typeof ADD_SHOPPING_LIST_PRODUCT
     | typeof CLOSE_SUPERMARKET_PRODUCTS
     | typeof DISPLAY_SUPERMARKET_PRODUCTS
+    | typeof GET_CONSUM_PRODUCTS
     | typeof GET_MERCADONA_PRODUCTS
     | typeof GET_SHOPPING_LIST
     | typeof REMOVE_SHOPPING_LIST_PRODUCT
@@ -55,4 +57,9 @@ export const addShoppingListProduct = (productId: string): IAction => ({
 export const removeShoppingListProduct = (productId: string): IAction => ({
     type: REMOVE_SHOPPING_LIST_PRODUCT,
     payload: { productId },
+});
+
+export const getConsumProducts = (): IAction<string> => ({
+    type: GET_CONSUM_PRODUCTS,
+    payload: {},
 });

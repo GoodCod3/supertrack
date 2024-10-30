@@ -27,8 +27,13 @@ export const removeShoppingListProduct = (productId: string): Promise<IAddShoppi
     _base.post(urls.shoppingList.removeMercadonaShoppingListProduct, { productId })
 );
 
+export const getConsumProducts = (): Promise<IMercadonaCategory> => (
+    _base.get(urls.shoppingList.getConsumProducts)
+);
+
 export default {
     addShoppingListProduct,
+    getConsumProducts,
     getMercadonaProducts,
     getShoppingList,
     removeShoppingListProduct,
