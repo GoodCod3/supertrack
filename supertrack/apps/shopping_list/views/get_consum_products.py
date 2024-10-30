@@ -13,7 +13,7 @@ from supertrack.apps.scrappy.models import ConsumProductModel
 def get_consum_products(request):
     if request.user.is_authenticated:
         products = {}
-        consum_products = ConsumProductModel.objects.all()[:100]
+        consum_products = ConsumProductModel.objects.all()
 
         for consum_product in consum_products:
             parent_category = consum_product.category.parent_category.parent_category.name

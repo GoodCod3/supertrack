@@ -236,7 +236,6 @@ const ShoppingListCategories = ({
                             )}
                         </Accordion>
                     </Offcanvas.Body>
-
                 </Offcanvas>
             )}
         </Container>
