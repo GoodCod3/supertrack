@@ -22,6 +22,7 @@ class MercadonaParentCategoryModelAdmin(BaseModelAdmin):
     list_display = (
         "public_id",
         "name",
+        "internal_id",
     )
     search_fields = ("name",)
     # list_filter = ()
@@ -36,6 +37,7 @@ class MercadonaCategoryModelAdmin(BaseModelAdmin):
     list_display = (
         "public_id",
         "name",
+        "internal_id",
     )
     search_fields = ("name",)
     # list_filter = ()
@@ -50,7 +52,7 @@ class MercadonaProductCategoryModelAdmin(BaseModelAdmin):
     list_display = (
         "public_id",
         "name",
-        "category_image",
+        "internal_id",
     )
     search_fields = ("name", "internal_id")
 
