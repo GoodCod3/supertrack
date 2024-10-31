@@ -10,6 +10,9 @@ class MercadonaParentCategoryModel(BaseModel):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+      ordering = ['name']
 
 
 class MercadonaCategoryModel(BaseModel):
@@ -22,7 +25,9 @@ class MercadonaCategoryModel(BaseModel):
 
     def __str__(self):
         return self.name
-
+    
+    class Meta:
+      ordering = ['name']
 
 class MercadonaProductCategoryModel(BaseModel):
     parent_category = models.ForeignKey(

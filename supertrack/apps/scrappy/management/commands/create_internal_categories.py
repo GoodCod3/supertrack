@@ -78,7 +78,11 @@ class Command(BaseCommand):
     help = "Create internal categories and subcategories"
 
     def set_consum_internal_categories(self):
-        pass
+        categories_map = {
+            12: {
+                
+            }
+        }
     
     def handle(self, *args, **options):
 

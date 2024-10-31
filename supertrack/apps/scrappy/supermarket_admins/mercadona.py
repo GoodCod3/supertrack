@@ -35,12 +35,12 @@ class MercadonaCategoryModelAdmin(BaseModelAdmin):
     empty_value_display = "-empty-"
 
     list_display = (
-        "public_id",
         "name",
         "internal_id",
+        "parent_category",
     )
     search_fields = ("name",)
-    # list_filter = ()
+    list_filter = ("parent_category",)
 
 
 admin.site.register(MercadonaCategoryModel, MercadonaCategoryModelAdmin)
