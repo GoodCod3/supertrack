@@ -7,7 +7,13 @@ from supertrack.apps.base_models import BaseModel
 class MercadonaParentCategoryModel(BaseModel):
     name = models.CharField(_("Name"), max_length=200)
     internal_id = models.CharField(_("Internal ID"), max_length=100)
-
+    parent_internal_category = models.ForeignKey(
+        "scrappy.InternalCategory",
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+    )
+    
     def __str__(self):
         return self.name
     
@@ -22,7 +28,12 @@ class MercadonaCategoryModel(BaseModel):
     )
     name = models.CharField(_("Name"), max_length=200)
     internal_id = models.CharField(_("Internal ID"), max_length=100)
-
+    subcategory_internal_category = models.ForeignKey(
+        "scrappy.InternalSubCategory",
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+    )
     def __str__(self):
         return self.name
     

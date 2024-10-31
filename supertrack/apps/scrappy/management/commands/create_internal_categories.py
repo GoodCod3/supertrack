@@ -77,15 +77,7 @@ INTERNAL_CATEGORIES = {
 class Command(BaseCommand):
     help = "Create internal categories and subcategories"
 
-    def set_consum_internal_categories(self):
-        categories_map = {
-            12: {
-                
-            }
-        }
-    
     def handle(self, *args, **options):
-
         for category_name, subcategories in INTERNAL_CATEGORIES.items():
             internal_category, _ = InternalCategory.objects.get_or_create(
                 name=category_name
