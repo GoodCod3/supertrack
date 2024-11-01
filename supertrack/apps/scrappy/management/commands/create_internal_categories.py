@@ -7,20 +7,27 @@ from supertrack.apps.scrappy.models import (
 
 INTERNAL_CATEGORIES = {
     "Bebidas": [
-        "Agua y refrescos",
+        "Agua",
+        "Refrescos",
         "Zumos y néctares",
-        "Cerveza y bebidas alcohólicas",
+        "Bebidas alcohólicas",
+        "Cerveza",
         "Vinos y licores",
         "Isotónicas y energéticas",
         "Gaseosas y sodas",
     ],
     "Despensa": [
-        "Arroz, pastas y legumbres",
-        "Conservas y salsas",
+        "Arroz",
+        "Pastas",
+        "Legumbres",
+        "Conservas",
+        "Salsas",
         "Aceites y condimentos",
         "Harina y repostería",
         "Desayuno y dulces",
         "Frutos secos y aperitivos",
+        "Café",
+        "Té",
     ],
     "Lácteos y huevos": [
         "Leche y bebidas vegetales",
@@ -34,9 +41,11 @@ INTERNAL_CATEGORIES = {
         "Tartas y pasteles",
     ],
     "Frescos": [
-        "Carnes frescas y embutidos",
+        "Embutidos",
+        "Carnes frescas",
         "Pescado y marisco",
         "Verduras y frutas",
+        "Empanados y elaborados",
     ],
     "Congelados": [
         "Carne congelada",
@@ -44,6 +53,9 @@ INTERNAL_CATEGORIES = {
         "Verduras congeladas",
         "Helados y postres congelados",
         "Pizzas y bases congeladas",
+        "Arroz, pastas y legumbres",
+        "Hielo",
+        "Rebozados",
     ],
     "Higiene y cuidado personal": [
         "Cuidado del cabello",

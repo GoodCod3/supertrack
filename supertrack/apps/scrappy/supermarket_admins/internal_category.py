@@ -32,9 +32,10 @@ class InternalSubCategoryModelAdmin(BaseModelAdmin):
     list_display = (
         "public_id",
         "name",
+        "parent_category",
     )
     search_fields = ("name",)
-    # list_filter = ()
+    list_filter = ("parent_category",)
 
 
 admin.site.register(InternalSubCategory, InternalSubCategoryModelAdmin)
@@ -47,6 +48,7 @@ class InternalSubSubCategoryModelAdmin(BaseModelAdmin):
     list_display = (
         "public_id",
         "name",
+        "parent_subcategory",
     )
     search_fields = ("name",)
     # list_filter = ()

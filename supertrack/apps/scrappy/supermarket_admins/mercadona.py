@@ -55,8 +55,10 @@ class MercadonaProductCategoryModelAdmin(BaseModelAdmin):
         "public_id",
         "name",
         "internal_id",
+        "parent_category",
     )
-    search_fields = ("name", "internal_id")
+    search_fields = ("name", "internal_id", "parent_category__name")
+    list_filter = ("parent_category",)
 
     def category_image(self, obj):
         try:
@@ -80,12 +82,12 @@ class MercadonaProductModelAdmin(BaseModelAdmin):
         "public_id",
         "name",
         "unit_price",
-        "total_price",
+        "category",
         "product_image",
         "is_new",
     )
     search_fields = ("name",)
-    list_filter = ("is_new",)
+    list_filter = ("is_new", "category")
 
     def product_image(self, obj):
         try:
