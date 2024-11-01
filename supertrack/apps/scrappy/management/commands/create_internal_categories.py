@@ -34,11 +34,15 @@ INTERNAL_CATEGORIES = {
         "Yogures y postres lácteos",
         "Mantequilla y margarina",
         "Quesos",
+        "Huevos",
     ],
     "Panadería y pastelería": [
         "Pan y bollería de horno",
         "Pan de molde y tostado",
         "Tartas y pasteles",
+        "Harina y repostería",
+        "Pan tostado y rallado",
+        "Otros",
     ],
     "Frescos": [
         "Embutidos",
@@ -46,6 +50,7 @@ INTERNAL_CATEGORIES = {
         "Pescado y marisco",
         "Verduras y frutas",
         "Empanados y elaborados",
+        "Sushi",
     ],
     "Congelados": [
         "Carne congelada",
@@ -63,12 +68,22 @@ INTERNAL_CATEGORIES = {
         "Higiene bucal",
         "Desodorantes y perfumes",
         "Maquillaje",
+        "Afeitado y cuidado para hombre",
+        "Depilación",
+        "Higiene íntima",
+        "Manicura y pedicura",
     ],
     "Limpieza y hogar": [
         "Detergentes y limpieza",
         "Insecticidas y ambientadores",
         "Accesorios y utensilios de limpieza",
         "Celulosa y papel higiénico",
+        "Limpiahogar y friegasuelos",
+        "Limpieza baño",
+        "Limpieza cocina",
+        "Limpieza vajilla",
+        "Menaje y utensilios",
+        "Limpieza muebles y multiusos",
     ],
     "Mascotas": [
         "Perro",
@@ -80,9 +95,15 @@ INTERNAL_CATEGORIES = {
         "Higiene y cuidado del bebé",
     ],
     "Bazar": [
-        "Menaje y utensilios",
         "Libros y artículos de oficina",
     ],
+    "Parafarmacia": [
+        "Fitoterapia",
+        "Parafarmacia",
+    ],
+    "Platos preparados": [
+        "Platos preparados"
+    ]
 }
 
 
