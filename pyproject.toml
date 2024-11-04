@@ -24,6 +24,8 @@ whitenoise = {extras = ["brotli"], version = "^6.7.0"}
 django-allauth = "^65.0.2"
 pyjwt = "^2.9.0"
 django-widget-tweaks = "^1.5.0"
+django-redis = "^5.4.0"
+rapidfuzz = "^3.10.1"
 
 [build-system]
 requires = ["poetry-core"]

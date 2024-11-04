@@ -12,6 +12,14 @@ services:
       - POSTGRES_PORT=5432
     ports:
       - "5432:5432"
+    networks:
+      mynet:
+        ipv4_address: 173.25.0.2
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
 
   web:
     build: .
@@ -26,10 +34,11 @@ services:
       - .env
     depends_on:
       - db
+      - redis
 
 networks:
   mynet:
     driver: bridge
     ipam:
       config:
-        - subnet: 173.20.0.0/16
+        - subnet: 173.25.0.0/16

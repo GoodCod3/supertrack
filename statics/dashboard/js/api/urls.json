@@ -1,0 +1,9 @@
+{
+   "shoppingList": {
+      "getConsumProducts": "shopping-list/consum/products/",
+      "getMercadonaProducts": "shopping-list/mercadona/products/",
+      "getMercadonaShoppingList": "shopping-list/mercadona/",
+      "addMercadonaShoppingListProduct": "shopping-list/mercadona/add-to-cart/",
+      "removeMercadonaShoppingListProduct": "shopping-list/mercadona/delete-product-cart/"
+   }
+}

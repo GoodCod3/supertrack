@@ -185,6 +185,14 @@ ACCOUNT_FORMS = {
   'signup': 'supertrack.forms.CustomSignUpForm.CustomSignUpForm'
 }
 
+# Cache
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://redis:6379/1',
+    }
+}
+
 try:
     from .local_settings import *
 except ImportError:

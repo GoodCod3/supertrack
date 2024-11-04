@@ -27,3 +27,28 @@ class MercadonaShoppingListProduct(BaseModel):
 
     def __str__(self):
         return f"{self.shopping_list} - {self.product}"
+
+# Consum
+class ConsumShoppingList(BaseModel):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.PROTECT,
+    )
+
+    def __str__(self):
+        return self.user.email
+
+class ConsumShoppingListProduct(BaseModel):
+    shopping_list = models.ForeignKey(
+        ConsumShoppingList,
+        on_delete=models.PROTECT,
+        related_name="products",
+    )
+    product = models.ForeignKey(
+        "scrappy.ConsumProductModel",
+        on_delete=models.PROTECT,
+    )
+    quantity = models.IntegerField("Quantity", default=1)
+
+    def __str__(self):
+        return f"{self.shopping_list} - {self.product}"
