@@ -25,6 +25,8 @@ import {
     GET_CONSUM_PRODUCTS_SUCCESS,
     FIND_LOWEST_SHOPPING_LIST,
     FIND_LOWEST_SHOPPING_LIST_SUCCESS,
+    GET_MERCADONA_SHOPPING_LIST,
+    GET_CONSUM_SHOPPING_LIST,
 } from './action-types';
 import { ISagaParam } from '@src/interfaces/global';
 
@@ -37,10 +39,6 @@ interface IDisplaySupermarketProductsSaga {
 
 interface IAddShoppingListProductSaga {
     productId: string,
-    supermarket: string,
-};
-
-interface IGetShoppingListSaga {
     supermarket: string,
 };
 
@@ -81,22 +79,35 @@ export function* closeSupermarketProducts(): Generator<StrictEffect, void, never
     });
 }
 
-export function* getShoppingList({ payload }: ISagaParam<IGetShoppingListSaga>): Generator<StrictEffect, void, never> {
+export function* getShoppingList(): Generator<StrictEffect, void, never> {
+    yield put({type: GET_MERCADONA_SHOPPING_LIST, payload:{}});
+    yield put({type: GET_CONSUM_SHOPPING_LIST, payload:{}});
+}
+
+export function* getMercadonaShoppingList(): Generator<StrictEffect, void, never> {
     const mercadonaProductsResponse: MercadonaShoppingList = yield call(
         shoppingListAPI.getShoppingList,
-        payload.supermarket,
+        'mercadona',
     );
-    let shoppingListKeyName;
-    if (payload.supermarket == 'mercadona') {
-        shoppingListKeyName = 'mercadonaShoppingList';
-    } else {
-        shoppingListKeyName = 'consumShoppingList';
 
-    }
     yield put({
         type: GET_SHOPPING_LIST_SUCCESS,
         payload: {
-            [shoppingListKeyName]: mercadonaProductsResponse,
+            mercadonaShoppingList: mercadonaProductsResponse,
+        },
+    });
+}
+
+export function* getConsumShoppingList(): Generator<StrictEffect, void, never> {
+    const mercadonaProductsResponse: MercadonaShoppingList = yield call(
+        shoppingListAPI.getShoppingList,
+        'consum',
+    );
+
+    yield put({
+        type: GET_SHOPPING_LIST_SUCCESS,
+        payload: {
+            consumShoppingList: mercadonaProductsResponse,
         },
     });
 }
@@ -169,5 +180,7 @@ export default function* (): Generator {
     yield takeLatest(REMOVE_SHOPPING_LIST_PRODUCT, removeShoppingListProduct);
     yield takeLatest(GET_CONSUM_PRODUCTS, getConsumProducts);
     yield takeLatest(FIND_LOWEST_SHOPPING_LIST, findLowestShoppingList);
+    yield takeLatest(GET_MERCADONA_SHOPPING_LIST, getMercadonaShoppingList);
+    yield takeLatest(GET_CONSUM_SHOPPING_LIST, getConsumShoppingList);
 }
 

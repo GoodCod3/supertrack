@@ -24,7 +24,7 @@ type IShoppingListPageProps = {
     getMercadonaProducts: () => void,
     getConsumProducts: () => void,
     closeSupermarketProducts: () => void,
-    getShoppingList: (supermarket: string) => void,
+    getShoppingList: () => void,
     displaySupermarketProducts: (
         supermarketSelected: string,
         parentCategorySelected: string,
@@ -66,8 +66,7 @@ const ShoppingListPage = ({
     useEffect(() => {
         getMercadonaProducts();
         getConsumProducts();
-        getShoppingList('mercadona');
-        getShoppingList('consum');
+        getShoppingList();
     }, []);
 
     useEffect(() => {
@@ -89,7 +88,7 @@ const ShoppingListPage = ({
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
-   
+    
     return (
         <React.Fragment>
             <input
