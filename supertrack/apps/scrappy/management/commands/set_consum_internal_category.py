@@ -38,15 +38,25 @@ class Command(BaseCommand):
             second_parent_category = subcategory.parent_category.name
 
             if principal_parent_category not in allcategories_structure:
-                allcategories_structure[principal_parent_category] = {}
+                allcategories_structure[principal_parent_category] = {
+                    "categories": {},
+                    "internal_category": {},
+                }
 
             if (
                 second_parent_category
-                not in allcategories_structure[principal_parent_category]
+                not in allcategories_structure[principal_parent_category][
+                    "categories"
+                ]
             ):
-                allcategories_structure[principal_parent_category][second_parent_category] = []
+                allcategories_structure[principal_parent_category][
+                    "categories"
+                ][second_parent_category] = {
+                    "subcategories": {},
+                    "internal_category": ""
+                }
             
-            allcategories_structure[principal_parent_category][second_parent_category].append(subcategory.name)
+            allcategories_structure[principal_parent_category]["categories"][second_parent_category]["subcategories"][subcategory.name] = ""
 
         print(allcategories_structure)
 

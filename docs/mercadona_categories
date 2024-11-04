@@ -1,564 +1,1161 @@
 {
     "Zumos": {
-        "Tomate y otros sabores": ["Otros sabores"],
-        "Naranja": ["Naranja"],
-        "Melocotón y piña": ["Piña", "Melocotón"],
-        "Fruta variada": [
-            "Smoothie",
-            "Fruta variada y otros sabores",
-            "Fruta + leche",
-        ],
+        "categories": {
+            "Tomate y otros sabores": {
+                "subcategories": {"Otros sabores": ""},
+                "internal_category": "",
+            },
+            "Naranja": {
+                "subcategories": {"Naranja": ""},
+                "internal_category": "",
+            },
+            "Melocotón y piña": {
+                "subcategories": {"Piña": "", "Melocotón": ""},
+                "internal_category": "",
+            },
+            "Fruta variada": {
+                "subcategories": {
+                    "Smoothie": "",
+                    "Fruta variada y otros sabores": "",
+                    "Fruta + leche": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Postres y yogures": {
-        "Yogures y postres infantiles": ["Yogures y postres infantiles"],
-        "Yogures naturales y sabores": [
-            "Yogures de sabores",
-            "Yogures naturales",
-        ],
-        "Yogures líquidos": [
-            "Colesterol y otros",
-            "L-Casei",
-            "Yogures líquidos",
-        ],
-        "Yogures griegos": ["Yogures griegos"],
-        "Yogures desnatados": ["Yogures desnatados"],
-        "Postres de soja": ["Postres de soja"],
-        "Gelatina y otros postres": ["Otros postres", "Gelatina"],
-        "Flan y natillas": ["Natillas", "Flan"],
-        "Bífidus": ["Bífidus naturales", "Bífidus de sabores"],
+        "categories": {
+            "Yogures y postres infantiles": {
+                "subcategories": {"Yogures y postres infantiles": ""},
+                "internal_category": "",
+            },
+            "Yogures naturales y sabores": {
+                "subcategories": {
+                    "Yogures de sabores": "",
+                    "Yogures naturales": "",
+                },
+                "internal_category": "",
+            },
+            "Yogures líquidos": {
+                "subcategories": {
+                    "Colesterol y otros": "",
+                    "L-Casei": "",
+                    "Yogures líquidos": "",
+                },
+                "internal_category": "",
+            },
+            "Yogures griegos": {
+                "subcategories": {"Yogures griegos": ""},
+                "internal_category": "",
+            },
+            "Yogures desnatados": {
+                "subcategories": {"Yogures desnatados": ""},
+                "internal_category": "",
+            },
+            "Postres de soja": {
+                "subcategories": {"Postres de soja": ""},
+                "internal_category": "",
+            },
+            "Gelatina y otros postres": {
+                "subcategories": {"Otros postres": "", "Gelatina": ""},
+                "internal_category": "",
+            },
+            "Flan y natillas": {
+                "subcategories": {"Natillas": "", "Flan": ""},
+                "internal_category": "",
+            },
+            "Bífidus": {
+                "subcategories": {
+                    "Bífidus naturales": "",
+                    "Bífidus de sabores": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Pizzas y platos preparados": {
-        "Platos preparados fríos": [
-            "Sándwich",
-            "Hummus y otros",
-            "Ensaladilla",
-            "Gazpacho y salmorejo",
-        ],
-        "Platos preparados calientes": [
-            "Otros",
-            "Platos de cuchara",
-            "Fideos orientales",
-            "Tortilla",
-            "Carne",
-            "Arroz",
-            "Pasta",
-        ],
-        "Pizzas": [
-            "Roscas, quiche y baguettes",
-            "Base de pizza",
-            "Pizzas congeladas",
-            "Pizzas refrigeradas",
-        ],
-        "Listo para Comer": ["Platos fríos", "Platos calientes"],
+        "categories": {
+            "Platos preparados fríos": {
+                "subcategories": {
+                    "Sándwich": "",
+                    "Hummus y otros": "",
+                    "Ensaladilla": "",
+                    "Gazpacho y salmorejo": "",
+                },
+                "internal_category": "",
+            },
+            "Platos preparados calientes": {
+                "subcategories": {
+                    "Otros": "",
+                    "Platos de cuchara": "",
+                    "Fideos orientales": "",
+                    "Tortilla": "",
+                    "Carne": "",
+                    "Arroz": "",
+                    "Pasta": "",
+                },
+                "internal_category": "",
+            },
+            "Pizzas": {
+                "subcategories": {
+                    "Roscas, quiche y baguettes": "",
+                    "Base de pizza": "",
+                    "Pizzas congeladas": "",
+                    "Pizzas refrigeradas": "",
+                },
+                "internal_category": "",
+            },
+            "Listo para Comer": {
+                "subcategories": {"Platos fríos": "", "Platos calientes": ""},
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Panadería y pastelería": {
-        "Velas y decoración": ["Decoración", "Velas"],
-        "Tartas y pasteles": ["Tartas infantiles", "Tartas"],
-        "Picos, rosquilletas y picatostes": [
-            "Picatostes",
-            "Rosquilletas",
-            "Picos",
-        ],
-        "Pan tostado y rallado": [
-            "Crakers y tartaletas",
-            "Pan rallado",
-            "Pan tostado",
-        ],
-        "Pan de molde y otras especialidades": [
-            "Pan de hamburguesa y wrap",
-            "Otros panes",
-            "Pan de molde",
-        ],
-        "Pan de horno": ["Pan rebanado", "Pan de bocadillo", "Barra de pan"],
-        "Harina y preparado repostería": [
-            "Masas",
-            "Levadura y preparado repostería",
-            "Harina",
-        ],
-        "Bollería envasada": [
-            "Polvorones y mazapanes",
-            "Pastelitos surtidos",
-            "Bollería envasada",
-        ],
-        "Bollería de horno": ["Bollería salada", "Bollería dulce"],
+        "categories": {
+            "Velas y decoración": {
+                "subcategories": {"Decoración": "", "Velas": ""},
+                "internal_category": "",
+            },
+            "Tartas y pasteles": {
+                "subcategories": {"Tartas infantiles": "", "Tartas": ""},
+                "internal_category": "",
+            },
+            "Picos, rosquilletas y picatostes": {
+                "subcategories": {
+                    "Picatostes": "",
+                    "Rosquilletas": "",
+                    "Picos": "",
+                },
+                "internal_category": "",
+            },
+            "Pan tostado y rallado": {
+                "subcategories": {
+                    "Crakers y tartaletas": "",
+                    "Pan rallado": "",
+                    "Pan tostado": "",
+                },
+                "internal_category": "",
+            },
+            "Pan de molde y otras especialidades": {
+                "subcategories": {
+                    "Pan de hamburguesa y wrap": "",
+                    "Otros panes": "",
+                    "Pan de molde": "",
+                },
+                "internal_category": "",
+            },
+            "Pan de horno": {
+                "subcategories": {
+                    "Pan rebanado": "",
+                    "Pan de bocadillo": "",
+                    "Barra de pan": "",
+                },
+                "internal_category": "",
+            },
+            "Harina y preparado repostería": {
+                "subcategories": {
+                    "Masas": "",
+                    "Levadura y preparado repostería": "",
+                    "Harina": "",
+                },
+                "internal_category": "",
+            },
+            "Bollería envasada": {
+                "subcategories": {
+                    "Polvorones y mazapanes": "",
+                    "Pastelitos surtidos": "",
+                    "Bollería envasada": "",
+                },
+                "internal_category": "",
+            },
+            "Bollería de horno": {
+                "subcategories": {"Bollería salada": "", "Bollería dulce": ""},
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Mascotas": {
-        "Otros": ["Otros", "Pájaro"],
-        "Perro": [
-            "Snacks",
-            "Aseo y cuidado",
-            "Alimentación seca",
-            "Alimentación húmeda",
-        ],
-        "Gato": [
-            "Snacks",
-            "Aseo y cuidado",
-            "Alimentación seca",
-            "Alimentación húmeda",
-        ],
+        "categories": {
+            "Otros": {
+                "subcategories": {"Otros": "", "Pájaro": ""},
+                "internal_category": "",
+            },
+            "Perro": {
+                "subcategories": {
+                    "Snacks": "",
+                    "Aseo y cuidado": "",
+                    "Alimentación seca": "",
+                    "Alimentación húmeda": "",
+                },
+                "internal_category": "",
+            },
+            "Gato": {
+                "subcategories": {
+                    "Snacks": "",
+                    "Aseo y cuidado": "",
+                    "Alimentación seca": "",
+                    "Alimentación húmeda": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Marisco y pescado": {
-        "Sushi": ["Sushi"],
-        "Salazones y ahumados": ["Ahumados", "Salazones"],
-        "Pescado fresco": [
-            "Otros",
-            "Sardina",
-            "Rodaballo",
-            "Boquerón",
-            "Lenguado",
-            "Trucha",
-            "Sepia, pulpo y calamar",
-            "Corvina",
-            "Bacalao",
-            "Lubina",
-            "Dorada",
-            "Salmón",
-        ],
-        "Pescado congelado": [
-            "Sepia, pulpo y calamar congelado",
-            "Pescado rebozado congelado",
-            "Pescado congelado",
-        ],
-        "Marisco": ["Surimi y otros", "Marisco de concha", "Marisco"],
+        "categories": {
+            "Sushi": {"subcategories": {"Sushi": ""}, "internal_category": ""},
+            "Salazones y ahumados": {
+                "subcategories": {"Ahumados": "", "Salazones": ""},
+                "internal_category": "",
+            },
+            "Pescado fresco": {
+                "subcategories": {
+                    "Otros": "",
+                    "Sardina": "",
+                    "Rodaballo": "",
+                    "Boquerón": "",
+                    "Lenguado": "",
+                    "Trucha": "",
+                    "Sepia, pulpo y calamar": "",
+                    "Corvina": "",
+                    "Bacalao": "",
+                    "Lubina": "",
+                    "Dorada": "",
+                    "Salmón": "",
+                },
+                "internal_category": "",
+            },
+            "Pescado congelado": {
+                "subcategories": {
+                    "Sepia, pulpo y calamar congelado": "",
+                    "Pescado rebozado congelado": "",
+                    "Pescado congelado": "",
+                },
+                "internal_category": "",
+            },
+            "Marisco": {
+                "subcategories": {
+                    "Surimi y otros": "",
+                    "Marisco de concha": "",
+                    "Marisco": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Maquillaje": {
-        "Pinceles y brochas": ["Pinceles y brochas"],
-        "Ojos": [
-            "Sombra de ojos",
-            "Máscara de pestañas",
-            "Cejas",
-            "Perfilador de ojos",
-        ],
-        "Labios": [
-            "Pintalabios mate",
-            "Pintalabios cremoso y brillos",
-            "Pintalabios fijo",
-            "Perfilador labios",
-            "Cuidado",
-        ],
-        "Colorete y polvos": ["Polvos", "Colorete"],
-        "Bases de maquillaje y corrector": [
-            "Correctores y prebase",
-            "Maquillaje compacto",
-            "Maquillaje fluido",
-        ],
+        "categories": {
+            "Pinceles y brochas": {
+                "subcategories": {"Pinceles y brochas": ""},
+                "internal_category": "",
+            },
+            "Ojos": {
+                "subcategories": {
+                    "Sombra de ojos": "",
+                    "Máscara de pestañas": "",
+                    "Cejas": "",
+                    "Perfilador de ojos": "",
+                },
+                "internal_category": "",
+            },
+            "Labios": {
+                "subcategories": {
+                    "Pintalabios mate": "",
+                    "Pintalabios cremoso y brillos": "",
+                    "Pintalabios fijo": "",
+                    "Perfilador labios": "",
+                    "Cuidado": "",
+                },
+                "internal_category": "",
+            },
+            "Colorete y polvos": {
+                "subcategories": {"Polvos": "", "Colorete": ""},
+                "internal_category": "",
+            },
+            "Bases de maquillaje y corrector": {
+                "subcategories": {
+                    "Correctores y prebase": "",
+                    "Maquillaje compacto": "",
+                    "Maquillaje fluido": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Limpieza y hogar": {
-        "Utensilios de limpieza y calzado": [
-            "Limpieza de calzado",
-            "Otros utensilios de limpieza",
-            "Cubos y barreños",
-            "Fregonas, escobas y mopas",
-        ],
-        "Pilas y bolsas de basura": ["Bolsas de basura", "Pilas"],
-        "Papel higiénico y celulosa": [
-            "Toallitas",
-            "Pañuelos",
-            "Papel higiénico",
-            "Rollo cocina",
-            "Servilletas",
-        ],
-        "Menaje y conservación de alimentos": [
-            "Encendedores, velas y carbón",
-            "Cubiertos, vajilla y mantel",
-            "Papel y bolsas de conservación",
-            "Herméticos y moldes",
-        ],
-        "Limpieza vajilla": [
-            "Limpiavajilla a máquina",
-            "Limpiavajilla a mano",
-        ],
-        "Limpieza muebles y multiusos": [
-            "Multiusos y otros",
-            "Limpieza muebles",
-        ],
-        "Limpieza cocina": ["Limpieza cocina"],
-        "Limpieza baño y WC": ["Limpieza baño y WC"],
-        "Limpiahogar y friegasuelos": ["Limpiahogar", "Friegasuelos"],
-        "Limpiacristales": ["Limpiacristales"],
-        "Lejía y líquidos fuertes": [
-            "Tratamiento piscina",
-            "Amoníaco y salfumán",
-            "Lejía",
-        ],
-        "Insecticida y ambientador": [
-            "Absorbeolores y antihumedad",
-            "Ambientador decorativo y otros",
-            "Ambientador coche",
-            "Ambientador automático",
-            "Ambientador eléctrico",
-            "Ambientador spray",
-            "Insecticida eléctrico y otros",
-            "Insecticida spray",
-        ],
-        "Estropajo, bayeta y guantes": ["Guantes", "Bayeta", "Estropajo"],
-        "Detergente y suavizante ropa": [
-            "Planchado",
-            "Suavizante",
-            "Activador y antical lavadora",
-            "Quitamanchas",
-            "Detergente lavado a mano",
-            "Detergente en polvo y monodosis",
-            "Detergente líquido y gel",
-        ],
+        "categories": {
+            "Utensilios de limpieza y calzado": {
+                "subcategories": {
+                    "Limpieza de calzado": "",
+                    "Otros utensilios de limpieza": "",
+                    "Cubos y barreños": "",
+                    "Fregonas, escobas y mopas": "",
+                },
+                "internal_category": "",
+            },
+            "Pilas y bolsas de basura": {
+                "subcategories": {"Bolsas de basura": "", "Pilas": ""},
+                "internal_category": "",
+            },
+            "Papel higiénico y celulosa": {
+                "subcategories": {
+                    "Toallitas": "",
+                    "Pañuelos": "",
+                    "Papel higiénico": "",
+                    "Rollo cocina": "",
+                    "Servilletas": "",
+                },
+                "internal_category": "",
+            },
+            "Menaje y conservación de alimentos": {
+                "subcategories": {
+                    "Encendedores, velas y carbón": "",
+                    "Cubiertos, vajilla y mantel": "",
+                    "Papel y bolsas de conservación": "",
+                    "Herméticos y moldes": "",
+                },
+                "internal_category": "",
+            },
+            "Limpieza vajilla": {
+                "subcategories": {
+                    "Limpiavajilla a máquina": "",
+                    "Limpiavajilla a mano": "",
+                },
+                "internal_category": "",
+            },
+            "Limpieza muebles y multiusos": {
+                "subcategories": {
+                    "Multiusos y otros": "",
+                    "Limpieza muebles": "",
+                },
+                "internal_category": "",
+            },
+            "Limpieza cocina": {
+                "subcategories": {"Limpieza cocina": ""},
+                "internal_category": "",
+            },
+            "Limpieza baño y WC": {
+                "subcategories": {"Limpieza baño y WC": ""},
+                "internal_category": "",
+            },
+            "Limpiahogar y friegasuelos": {
+                "subcategories": {"Limpiahogar": "", "Friegasuelos": ""},
+                "internal_category": "",
+            },
+            "Limpiacristales": {
+                "subcategories": {"Limpiacristales": ""},
+                "internal_category": "",
+            },
+            "Lejía y líquidos fuertes": {
+                "subcategories": {
+                    "Tratamiento piscina": "",
+                    "Amoníaco y salfumán": "",
+                    "Lejía": "",
+                },
+                "internal_category": "",
+            },
+            "Insecticida y ambientador": {
+                "subcategories": {
+                    "Absorbeolores y antihumedad": "",
+                    "Ambientador decorativo y otros": "",
+                    "Ambientador coche": "",
+                    "Ambientador automático": "",
+                    "Ambientador eléctrico": "",
+                    "Ambientador spray": "",
+                    "Insecticida eléctrico y otros": "",
+                    "Insecticida spray": "",
+                },
+                "internal_category": "",
+            },
+            "Estropajo, bayeta y guantes": {
+                "subcategories": {
+                    "Guantes": "",
+                    "Bayeta": "",
+                    "Estropajo": "",
+                },
+                "internal_category": "",
+            },
+            "Detergente y suavizante ropa": {
+                "subcategories": {
+                    "Planchado": "",
+                    "Suavizante": "",
+                    "Activador y antical lavadora": "",
+                    "Quitamanchas": "",
+                    "Detergente lavado a mano": "",
+                    "Detergente en polvo y monodosis": "",
+                    "Detergente líquido y gel": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Huevos, leche y mantequilla": {
-        "Mantequilla y margarina": ["Nata", "Margarina", "Mantequilla"],
-        "Leche y bebidas vegetales": [
-            "Leche condensada y otros",
-            "Leche Infantil",
-            "Batidos",
-            "Bebidas vegetales",
-            "Leche entera",
-            "Leche desnatada",
-            "Leche semidesnatada",
-        ],
-        "Huevos": ["Huevos"],
+        "categories": {
+            "Mantequilla y margarina": {
+                "subcategories": {
+                    "Nata": "",
+                    "Margarina": "",
+                    "Mantequilla": "",
+                },
+                "internal_category": "",
+            },
+            "Leche y bebidas vegetales": {
+                "subcategories": {
+                    "Leche condensada y otros": "",
+                    "Leche Infantil": "",
+                    "Batidos": "",
+                    "Bebidas vegetales": "",
+                    "Leche entera": "",
+                    "Leche desnatada": "",
+                    "Leche semidesnatada": "",
+                },
+                "internal_category": "",
+            },
+            "Huevos": {
+                "subcategories": {"Huevos": ""},
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Fruta y verdura": {
-        "Verdura": [
-            "Verduras al vapor",
-            "Otras verduras y hortalizas",
-            "Hierbas aromáticas",
-            "Setas y champiñones",
-            "Repollo y col",
-            "Calabacín y pimiento",
-            "Pepino y zanahoria",
-            "Tomate",
-            "Cebolla y ajo",
-            "Patata",
-        ],
-        "Lechuga y ensalada preparada": ["Ensalada preparada", "Lechuga"],
-        "Fruta": [
-            "Otras frutas",
-            "Fruta tropical",
-            "Cítricos",
-            "Melón y sandía",
-            "Manzana y pera",
-            "Plátano y uva",
-        ],
+        "categories": {
+            "Verdura": {
+                "subcategories": {
+                    "Verduras al vapor": "",
+                    "Otras verduras y hortalizas": "",
+                    "Hierbas aromáticas": "",
+                    "Setas y champiñones": "",
+                    "Repollo y col": "",
+                    "Calabacín y pimiento": "",
+                    "Pepino y zanahoria": "",
+                    "Tomate": "",
+                    "Cebolla y ajo": "",
+                    "Patata": "",
+                },
+                "internal_category": "",
+            },
+            "Lechuga y ensalada preparada": {
+                "subcategories": {"Ensalada preparada": "", "Lechuga": ""},
+                "internal_category": "",
+            },
+            "Fruta": {
+                "subcategories": {
+                    "Otras frutas": "",
+                    "Fruta tropical": "",
+                    "Cítricos": "",
+                    "Melón y sandía": "",
+                    "Manzana y pera": "",
+                    "Plátano y uva": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Fitoterapia y parafarmacia": {
-        "Parafarmacia": ["Preservativos", "Botiquín"],
-        "Fitoterapia": ["Fitoterapia"],
+        "categories": {
+            "Parafarmacia": {
+                "subcategories": {"Preservativos": "", "Botiquín": ""},
+                "internal_category": "",
+            },
+            "Fitoterapia": {
+                "subcategories": {"Fitoterapia": ""},
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Cuidado facial y corporal": {
-        "Protector solar y aftersun": ["Protector solar y aftersun"],
-        "Perfume y colonia": [
-            "Colonia infantil",
-            "Lotes hombre",
-            "Perfume y colonia hombre",
-            "Lotes mujer",
-            "Perfume y colonia mujer",
-        ],
-        "Manicura y pedicura": [
-            "Complementos pies",
-            "Cuidado de uñas y complementos",
-            "Laca de uñas",
-        ],
-        "Higiene íntima": [
-            "Toallitas y gel",
-            "Pañales para adulto",
-            "Tampones",
-            "Protegeslips",
-            "Compresas",
-        ],
-        "Higiene bucal": [
-            "Colutorio e hilo dental",
-            "Cepillo de dientes",
-            "Pasta de dientes",
-        ],
-        "Gel y jabón de manos": ["Esponjas", "Jabón de manos", "Gel"],
-        "Desodorante": [
-            "Otros desodorantes",
-            "Desodorante Spray",
-            "Desodorante roll on y stick",
-        ],
-        "Depilación": ["Cuchilla", "Bandas, cera y crema"],
-        "Cuidado e higiene facial": [
-            "Sérum y ampollas",
-            "Contorno de ojos",
-            "Crema de cara",
-            "Limpieza de cara",
-        ],
-        "Cuidado corporal": [
-            "Toallitas",
-            "Crema pies",
-            "Crema manos",
-            "Crema y aceite para el cuerpo",
-        ],
-        "Afeitado y cuidado para hombre": [
-            "Crema y gel de cara",
-            "Recambios maquinilla de afeitar",
-            "Maquinillas de afeitar",
-            "After shave",
-            "Espuma de afeitar",
-        ],
+        "categories": {
+            "Protector solar y aftersun": {
+                "subcategories": {"Protector solar y aftersun": ""},
+                "internal_category": "",
+            },
+            "Perfume y colonia": {
+                "subcategories": {
+                    "Colonia infantil": "",
+                    "Lotes hombre": "",
+                    "Perfume y colonia hombre": "",
+                    "Lotes mujer": "",
+                    "Perfume y colonia mujer": "",
+                },
+                "internal_category": "",
+            },
+            "Manicura y pedicura": {
+                "subcategories": {
+                    "Complementos pies": "",
+                    "Cuidado de uñas y complementos": "",
+                    "Laca de uñas": "",
+                },
+                "internal_category": "",
+            },
+            "Higiene íntima": {
+                "subcategories": {
+                    "Toallitas y gel": "",
+                    "Pañales para adulto": "",
+                    "Tampones": "",
+                    "Protegeslips": "",
+                    "Compresas": "",
+                },
+                "internal_category": "",
+            },
+            "Higiene bucal": {
+                "subcategories": {
+                    "Colutorio e hilo dental": "",
+                    "Cepillo de dientes": "",
+                    "Pasta de dientes": "",
+                },
+                "internal_category": "",
+            },
+            "Gel y jabón de manos": {
+                "subcategories": {
+                    "Esponjas": "",
+                    "Jabón de manos": "",
+                    "Gel": "",
+                },
+                "internal_category": "",
+            },
+            "Desodorante": {
+                "subcategories": {
+                    "Otros desodorantes": "",
+                    "Desodorante Spray": "",
+                    "Desodorante roll on y stick": "",
+                },
+                "internal_category": "",
+            },
+            "Depilación": {
+                "subcategories": {"Cuchilla": "", "Bandas, cera y crema": ""},
+                "internal_category": "",
+            },
+            "Cuidado e higiene facial": {
+                "subcategories": {
+                    "Sérum y ampollas": "",
+                    "Contorno de ojos": "",
+                    "Crema de cara": "",
+                    "Limpieza de cara": "",
+                },
+                "internal_category": "",
+            },
+            "Cuidado corporal": {
+                "subcategories": {
+                    "Toallitas": "",
+                    "Crema pies": "",
+                    "Crema manos": "",
+                    "Crema y aceite para el cuerpo": "",
+                },
+                "internal_category": "",
+            },
+            "Afeitado y cuidado para hombre": {
+                "subcategories": {
+                    "Crema y gel de cara": "",
+                    "Recambios maquinilla de afeitar": "",
+                    "Maquinillas de afeitar": "",
+                    "After shave": "",
+                    "Espuma de afeitar": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Cuidado del cabello": {
-        "Fijación cabello": ["Gomina y cera", "Espuma y laca"],
-        "Coloración cabello": [
-            "Accesorios",
-            "Retoca raíces",
-            "Coloración hombre",
-            "Mechas y superaclarante",
-            "Coloración color rubio",
-            "Coloración color caoba",
-            "Coloración color castaño",
-            "Coloración color moreno",
-        ],
-        "Champú": ["Champú infantil", "Champú anticaspa", "Champú"],
-        "Acondicionador y mascarilla": [
-            "Sérum y otros",
-            "Mascarilla",
-            "Acondicionador",
-        ],
+        "categories": {
+            "Fijación cabello": {
+                "subcategories": {"Gomina y cera": "", "Espuma y laca": ""},
+                "internal_category": "",
+            },
+            "Coloración cabello": {
+                "subcategories": {
+                    "Accesorios": "",
+                    "Retoca raíces": "",
+                    "Coloración hombre": "",
+                    "Mechas y superaclarante": "",
+                    "Coloración color rubio": "",
+                    "Coloración color caoba": "",
+                    "Coloración color castaño": "",
+                    "Coloración color moreno": "",
+                },
+                "internal_category": "",
+            },
+            "Champú": {
+                "subcategories": {
+                    "Champú infantil": "",
+                    "Champú anticaspa": "",
+                    "Champú": "",
+                },
+                "internal_category": "",
+            },
+            "Acondicionador y mascarilla": {
+                "subcategories": {
+                    "Sérum y otros": "",
+                    "Mascarilla": "",
+                    "Acondicionador": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Conservas, caldos y cremas": {
-        "Tomate": ["Tomate"],
-        "Sopa y caldo": ["Caldo en pastillas", "Caldo líquido", "Sopa"],
-        "Gazpacho y cremas": ["Cremas y puré", "Gazpacho y salmorejo"],
-        "Conservas de verdura y frutas": [
-            "Conservas fruta",
-            "Conservas verdura",
-        ],
-        "Berberechos y mejillones": ["Mejillones", "Berberechos y almejas"],
-        "Atún y otras conservas de pescado": [
-            "Otras conservas de pescado",
-            "Sardinas",
-            "Caballa y melva",
-            "Bonito",
-            "Atún",
-        ],
+        "categories": {
+            "Tomate": {
+                "subcategories": {"Tomate": ""},
+                "internal_category": "",
+            },
+            "Sopa y caldo": {
+                "subcategories": {
+                    "Caldo en pastillas": "",
+                    "Caldo líquido": "",
+                    "Sopa": "",
+                },
+                "internal_category": "",
+            },
+            "Gazpacho y cremas": {
+                "subcategories": {
+                    "Cremas y puré": "",
+                    "Gazpacho y salmorejo": "",
+                },
+                "internal_category": "",
+            },
+            "Conservas de verdura y frutas": {
+                "subcategories": {
+                    "Conservas fruta": "",
+                    "Conservas verdura": "",
+                },
+                "internal_category": "",
+            },
+            "Berberechos y mejillones": {
+                "subcategories": {
+                    "Mejillones": "",
+                    "Berberechos y almejas": "",
+                },
+                "internal_category": "",
+            },
+            "Atún y otras conservas de pescado": {
+                "subcategories": {
+                    "Otras conservas de pescado": "",
+                    "Sardinas": "",
+                    "Caballa y melva": "",
+                    "Bonito": "",
+                    "Atún": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Congelados": {
-        "Verdura": ["Patatas", "Verdura", "Fruta"],
-        "Tartas y churros": ["Churros", "Tartas infantiles", "Tartas"],
-        "Rebozados": [
-            "Verdura rebozada y otros",
-            "Pescado rebozado",
-            "Carne rebozada",
-        ],
-        "Pizzas": ["Base de pizza", "Pizzas"],
-        "Pescado": ["Pescado"],
-        "Marisco": ["Marisco de concha y otros", "Marisco"],
-        "Hielo": ["Hielo"],
-        "Helados": [
-            "Barras de helado y barquillos",
-            "Tarrinas",
-            "Granizados y helados de hielo",
-            "Cucuruchos",
-            "Bombones",
-        ],
-        "Carne": ["Carne"],
-        "Arroz y pasta": ["Pasta", "Arroz"],
+        "categories": {
+            "Verdura": {
+                "subcategories": {"Patatas": "", "Verdura": "", "Fruta": ""},
+                "internal_category": "",
+            },
+            "Tartas y churros": {
+                "subcategories": {
+                    "Churros": "",
+                    "Tartas infantiles": "",
+                    "Tartas": "",
+                },
+                "internal_category": "",
+            },
+            "Rebozados": {
+                "subcategories": {
+                    "Verdura rebozada y otros": "",
+                    "Pescado rebozado": "",
+                    "Carne rebozada": "",
+                },
+                "internal_category": "",
+            },
+            "Pizzas": {
+                "subcategories": {"Base de pizza": "", "Pizzas": ""},
+                "internal_category": "",
+            },
+            "Pescado": {
+                "subcategories": {"Pescado": ""},
+                "internal_category": "",
+            },
+            "Marisco": {
+                "subcategories": {
+                    "Marisco de concha y otros": "",
+                    "Marisco": "",
+                },
+                "internal_category": "",
+            },
+            "Hielo": {"subcategories": {"Hielo": ""}, "internal_category": ""},
+            "Helados": {
+                "subcategories": {
+                    "Barras de helado y barquillos": "",
+                    "Tarrinas": "",
+                    "Granizados y helados de hielo": "",
+                    "Cucuruchos": "",
+                    "Bombones": "",
+                },
+                "internal_category": "",
+            },
+            "Carne": {"subcategories": {"Carne": ""}, "internal_category": ""},
+            "Arroz y pasta": {
+                "subcategories": {"Pasta": "", "Arroz": ""},
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Charcutería y quesos": {
-        "Queso untable y fresco": [
-            "Queso roquefort, camembert y cabra",
-            "Queso fresco",
-            "Queso untable",
-        ],
-        "Queso lonchas, rallado y en porciones": [
-            "Queso en porciones",
-            "Queso rallado",
-            "Queso lonchas",
-        ],
-        "Queso curado, semicurado y tierno": [
-            "Queso tierno",
-            "Queso semicurado",
-            "Queso curado",
-        ],
-        "Paté y sobrasada": ["Sobrasada", "Paté"],
-        "Jamón serrano": ["Jamón serrano"],
-        "Embutido curado": ["Lomo y otros", "Chorizo", "Salchichón"],
-        "Chopped y mortadela": ["Mortadela", "Chopped"],
-        "Bacón y salchichas": ["Salchichas", "Bacón"],
-        "Aves y jamón cocido": ["Jamón cocido", "Pavo y otros"],
+        "categories": {
+            "Queso untable y fresco": {
+                "subcategories": {
+                    "Queso roquefort, camembert y cabra": "",
+                    "Queso fresco": "",
+                    "Queso untable": "",
+                },
+                "internal_category": "",
+            },
+            "Queso lonchas, rallado y en porciones": {
+                "subcategories": {
+                    "Queso en porciones": "",
+                    "Queso rallado": "",
+                    "Queso lonchas": "",
+                },
+                "internal_category": "",
+            },
+            "Queso curado, semicurado y tierno": {
+                "subcategories": {
+                    "Queso tierno": "",
+                    "Queso semicurado": "",
+                    "Queso curado": "",
+                },
+                "internal_category": "",
+            },
+            "Paté y sobrasada": {
+                "subcategories": {"Sobrasada": "", "Paté": ""},
+                "internal_category": "",
+            },
+            "Jamón serrano": {
+                "subcategories": {"Jamón serrano": ""},
+                "internal_category": "",
+            },
+            "Embutido curado": {
+                "subcategories": {
+                    "Lomo y otros": "",
+                    "Chorizo": "",
+                    "Salchichón": "",
+                },
+                "internal_category": "",
+            },
+            "Chopped y mortadela": {
+                "subcategories": {"Mortadela": "", "Chopped": ""},
+                "internal_category": "",
+            },
+            "Bacón y salchichas": {
+                "subcategories": {"Salchichas": "", "Bacón": ""},
+                "internal_category": "",
+            },
+            "Aves y jamón cocido": {
+                "subcategories": {"Jamón cocido": "", "Pavo y otros": ""},
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Cereales y galletas": {
-        "Tortitas": ["Tortitas"],
-        "Galletas": [
-            "Galletas surtidas",
-            "Con chocolate y rellenas",
-            "Galletas integrales y digestive",
-            "Galletas desayuno",
-        ],
-        "Cereales": [
-            "Barritas de cereales",
-            "Cereales integrales y muesli",
-            "Cereales",
-        ],
+        "categories": {
+            "Tortitas": {
+                "subcategories": {"Tortitas": ""},
+                "internal_category": "",
+            },
+            "Galletas": {
+                "subcategories": {
+                    "Galletas surtidas": "",
+                    "Con chocolate y rellenas": "",
+                    "Galletas integrales y digestive": "",
+                    "Galletas desayuno": "",
+                },
+                "internal_category": "",
+            },
+            "Cereales": {
+                "subcategories": {
+                    "Barritas de cereales": "",
+                    "Cereales integrales y muesli": "",
+                    "Cereales": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Carne": {
-        "Empanados y elaborados": [
-            "Empanados y elaborados",
-            "Empanados y rebozados congelados",
-        ],
-        "Vacuno": ["Vacuno"],
-        "Hamburguesas y picadas": ["Picadas y otros", "Hamburguesas"],
-        "Embutido": ["Embutido"],
-        "Conejo y cordero": ["Cordero", "Conejo"],
-        "Cerdo": ["Cerdo"],
-        "Carne congelada": ["Carne congelada"],
-        "Aves y pollo": ["Pollo", "Pavo y otras aves"],
-        "Arreglos": ["Arreglos"],
+        "categories": {
+            "Empanados y elaborados": {
+                "subcategories": {
+                    "Empanados y elaborados": "",
+                    "Empanados y rebozados congelados": "",
+                },
+                "internal_category": "",
+            },
+            "Vacuno": {
+                "subcategories": {"Vacuno": ""},
+                "internal_category": "",
+            },
+            "Hamburguesas y picadas": {
+                "subcategories": {"Picadas y otros": "", "Hamburguesas": ""},
+                "internal_category": "",
+            },
+            "Embutido": {
+                "subcategories": {"Embutido": ""},
+                "internal_category": "",
+            },
+            "Conejo y cordero": {
+                "subcategories": {"Cordero": "", "Conejo": ""},
+                "internal_category": "",
+            },
+            "Cerdo": {"subcategories": {"Cerdo": ""}, "internal_category": ""},
+            "Carne congelada": {
+                "subcategories": {"Carne congelada": ""},
+                "internal_category": "",
+            },
+            "Aves y pollo": {
+                "subcategories": {"Pollo": "", "Pavo y otras aves": ""},
+                "internal_category": "",
+            },
+            "Arreglos": {
+                "subcategories": {"Arreglos": ""},
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Cacao, café e infusiones": {
-        "Té e infusiones": ["Infusiones", "Té"],
-        "Café soluble y otras bebidas": [
-            "Otros",
-            "Bebidas frías",
-            "Café soluble",
-        ],
-        "Café molido y en grano": ["Café en grano", "Café molido"],
-        "Café cápsula y monodosis": [
-            "Monodosis",
-            "Cápsulas compatibles Tassimo",
-            "Cápsulas compatibles Dolce gusto",
-            "Cápsulas compatibles Nespresso",
-        ],
-        "Cacao soluble y chocolate a la taza": [
-            "Chocolate a la taza",
-            "Cacao soluble",
-        ],
+        "categories": {
+            "Té e infusiones": {
+                "subcategories": {"Infusiones": "", "Té": ""},
+                "internal_category": "",
+            },
+            "Café soluble y otras bebidas": {
+                "subcategories": {
+                    "Otros": "",
+                    "Bebidas frías": "",
+                    "Café soluble": "",
+                },
+                "internal_category": "",
+            },
+            "Café molido y en grano": {
+                "subcategories": {"Café en grano": "", "Café molido": ""},
+                "internal_category": "",
+            },
+            "Café cápsula y monodosis": {
+                "subcategories": {
+                    "Monodosis": "",
+                    "Cápsulas compatibles Tassimo": "",
+                    "Cápsulas compatibles Dolce gusto": "",
+                    "Cápsulas compatibles Nespresso": "",
+                },
+                "internal_category": "",
+            },
+            "Cacao soluble y chocolate a la taza": {
+                "subcategories": {
+                    "Chocolate a la taza": "",
+                    "Cacao soluble": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Bodega": {
-        "Vino tinto": [
-            "Otros vinos tintos",
-            "Ribera del Duero",
-            "Castilla la Mancha",
-            "Rioja",
-            "Vino tinto de mesa",
-        ],
-        "Vino rosado": ["Vino rosado"],
-        "Vino lambrusco y espumoso": ["Vino lambrusco y espumoso"],
-        "Vino blanco": [
-            "Vinos dulces y mosto",
-            "Vinos semidulces",
-            "Rueda",
-            "Rioja y otras denominaciones",
-            "Vino blanco de mesa",
-        ],
-        "Tinto de verano y sangría": ["Tinto de verano y sangría"],
-        "Sidra y cava": ["Cava semi seco", "Cava brut", "Sidra"],
-        "Licores": [
-            "Licores sin alcohol",
-            "Otros licores",
-            "Anís",
-            "Vodka",
-            "Cremas",
-            "Ron",
-            "Whisky",
-            "Brandy",
-            "Ginebra",
-            "Vermouth y aperitivos",
-        ],
-        "Cerveza sin alcohol": ["Cerveza lata", "Cerveza botella y botellín"],
-        "Cerveza": [
-            "Combinado de cerveza",
-            "Cerveza botella y botellín",
-            "Cerveza lata",
-        ],
+        "categories": {
+            "Vino tinto": {
+                "subcategories": {
+                    "Otros vinos tintos": "",
+                    "Ribera del Duero": "",
+                    "Castilla la Mancha": "",
+                    "Rioja": "",
+                    "Vino tinto de mesa": "",
+                },
+                "internal_category": "",
+            },
+            "Vino rosado": {
+                "subcategories": {"Vino rosado": ""},
+                "internal_category": "",
+            },
+            "Vino lambrusco y espumoso": {
+                "subcategories": {"Vino lambrusco y espumoso": ""},
+                "internal_category": "",
+            },
+            "Vino blanco": {
+                "subcategories": {
+                    "Vinos dulces y mosto": "",
+                    "Vinos semidulces": "",
+                    "Rueda": "",
+                    "Rioja y otras denominaciones": "",
+                    "Vino blanco de mesa": "",
+                },
+                "internal_category": "",
+            },
+            "Tinto de verano y sangría": {
+                "subcategories": {"Tinto de verano y sangría": ""},
+                "internal_category": "",
+            },
+            "Sidra y cava": {
+                "subcategories": {
+                    "Cava semi seco": "",
+                    "Cava brut": "",
+                    "Sidra": "",
+                },
+                "internal_category": "",
+            },
+            "Licores": {
+                "subcategories": {
+                    "Licores sin alcohol": "",
+                    "Otros licores": "",
+                    "Anís": "",
+                    "Vodka": "",
+                    "Cremas": "",
+                    "Ron": "",
+                    "Whisky": "",
+                    "Brandy": "",
+                    "Ginebra": "",
+                    "Vermouth y aperitivos": "",
+                },
+                "internal_category": "",
+            },
+            "Cerveza sin alcohol": {
+                "subcategories": {
+                    "Cerveza lata": "",
+                    "Cerveza botella y botellín": "",
+                },
+                "internal_category": "",
+            },
+            "Cerveza": {
+                "subcategories": {
+                    "Combinado de cerveza": "",
+                    "Cerveza botella y botellín": "",
+                    "Cerveza lata": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Bebé": {
-        "Toallitas y pañales": [
-            "Bañador y braguita",
-            "Pañal talla de 4 a XL",
-            "Pañal talla de 0 a 3",
-            "Toallitas",
-        ],
-        "Higiene y cuidado": [
-            "Accesorios",
-            "Colonia",
-            "Aceite y crema",
-            "Champú y jabón",
-        ],
-        "Biberón y chupete": ["Chupete", "Biberón"],
-        "Alimentación infantil": [
-            "Papillas",
-            "Leche en polvo",
-            "Leche",
-            "Yogures y postres",
-            "Tarritos de fruta",
-            "Tarritos salados",
-        ],
+        "categories": {
+            "Toallitas y pañales": {
+                "subcategories": {
+                    "Bañador y braguita": "",
+                    "Pañal talla de 4 a XL": "",
+                    "Pañal talla de 0 a 3": "",
+                    "Toallitas": "",
+                },
+                "internal_category": "",
+            },
+            "Higiene y cuidado": {
+                "subcategories": {
+                    "Accesorios": "",
+                    "Colonia": "",
+                    "Aceite y crema": "",
+                    "Champú y jabón": "",
+                },
+                "internal_category": "",
+            },
+            "Biberón y chupete": {
+                "subcategories": {"Chupete": "", "Biberón": ""},
+                "internal_category": "",
+            },
+            "Alimentación infantil": {
+                "subcategories": {
+                    "Papillas": "",
+                    "Leche en polvo": "",
+                    "Leche": "",
+                    "Yogures y postres": "",
+                    "Tarritos de fruta": "",
+                    "Tarritos salados": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Azúcar, caramelos y chocolate": {
-        "Turrones": ["Turrones"],
-        "Mermelada y miel": ["Confitura y otros", "Miel", "Mermelada"],
-        "Golosinas": ["Golosinas"],
-        "Chocolate": [
-            "Cremas de untar",
-            "Bombones",
-            "Chocolatinas",
-            "Chocolate blanco",
-            "Chocolate con leche",
-            "Chocolate negro",
-        ],
-        "Chicles y caramelos": ["Caramelos", "Chicles"],
-        "Azúcar y edulcorante": ["Edulcorante y otros", "Azúcar"],
+        "categories": {
+            "Turrones": {
+                "subcategories": {"Turrones": ""},
+                "internal_category": "",
+            },
+            "Mermelada y miel": {
+                "subcategories": {
+                    "Confitura y otros": "",
+                    "Miel": "",
+                    "Mermelada": "",
+                },
+                "internal_category": "",
+            },
+            "Golosinas": {
+                "subcategories": {"Golosinas": ""},
+                "internal_category": "",
+            },
+            "Chocolate": {
+                "subcategories": {
+                    "Cremas de untar": "",
+                    "Bombones": "",
+                    "Chocolatinas": "",
+                    "Chocolate blanco": "",
+                    "Chocolate con leche": "",
+                    "Chocolate negro": "",
+                },
+                "internal_category": "",
+            },
+            "Chicles y caramelos": {
+                "subcategories": {"Caramelos": "", "Chicles": ""},
+                "internal_category": "",
+            },
+            "Azúcar y edulcorante": {
+                "subcategories": {"Edulcorante y otros": "", "Azúcar": ""},
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Arroz, legumbres y pasta": {
-        "Pasta y fideos": [
-            "Fideos orientales",
-            "Lasaña y canelones",
-            "Pasta rellena",
-            "Spaghetti y tallarines",
-            "Macarrones, pajaritas y hélices",
-            "Fideos",
-        ],
-        "Legumbres": ["Lentejas y otros", "Alubias", "Garbanzos"],
-        "Arroz": ["Arroz"],
+        "categories": {
+            "Pasta y fideos": {
+                "subcategories": {
+                    "Fideos orientales": "",
+                    "Lasaña y canelones": "",
+                    "Pasta rellena": "",
+                    "Spaghetti y tallarines": "",
+                    "Macarrones, pajaritas y hélices": "",
+                    "Fideos": "",
+                },
+                "internal_category": "",
+            },
+            "Legumbres": {
+                "subcategories": {
+                    "Lentejas y otros": "",
+                    "Alubias": "",
+                    "Garbanzos": "",
+                },
+                "internal_category": "",
+            },
+            "Arroz": {"subcategories": {"Arroz": ""}, "internal_category": ""},
+        },
+        "internal_category": {},
     },
     "Aperitivos": {
-        "Patatas fritas y snacks": ["Snacks", "Patatas fritas"],
-        "Frutos secos y fruta desecada": [
-            "Fruta desecada",
-            "Cocktails",
-            "Frutos secos",
-        ],
-        "Aceitunas y encurtidos": [
-            "Pepinillos y otros encurtidos",
-            "Cóctel y banderillas",
-            "Aceitunas negras",
-            "Aceitunas verdes",
-        ],
+        "categories": {
+            "Patatas fritas y snacks": {
+                "subcategories": {"Snacks": "", "Patatas fritas": ""},
+                "internal_category": "",
+            },
+            "Frutos secos y fruta desecada": {
+                "subcategories": {
+                    "Fruta desecada": "",
+                    "Cocktails": "",
+                    "Frutos secos": "",
+                },
+                "internal_category": "",
+            },
+            "Aceitunas y encurtidos": {
+                "subcategories": {
+                    "Pepinillos y otros encurtidos": "",
+                    "Cóctel y banderillas": "",
+                    "Aceitunas negras": "",
+                    "Aceitunas verdes": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Agua y refrescos": {
-        "Refresco de té y sin gas": ["Otros refrescos sin gas", "Té"],
-        "Tónica y bitter": ["Tónica y bitter"],
-        "Refresco de naranja y de limón": ["Naranja", "Lima limón", "Limón"],
-        "Refresco de cola": ["Cola sin cafeína", "Cola zero", "Cola clásica"],
-        "Isotónico y energético": ["Energético", "Isotónico"],
-        "Agua": ["Gaseosa", "Agua con gas", "Agua sin gas"],
+        "categories": {
+            "Refresco de té y sin gas": {
+                "subcategories": {"Otros refrescos sin gas": "", "Té": ""},
+                "internal_category": "",
+            },
+            "Tónica y bitter": {
+                "subcategories": {"Tónica y bitter": ""},
+                "internal_category": "",
+            },
+            "Refresco de naranja y de limón": {
+                "subcategories": {
+                    "Naranja": "",
+                    "Lima limón": "",
+                    "Limón": "",
+                },
+                "internal_category": "",
+            },
+            "Refresco de cola": {
+                "subcategories": {
+                    "Cola sin cafeína": "",
+                    "Cola zero": "",
+                    "Cola clásica": "",
+                },
+                "internal_category": "",
+            },
+            "Isotónico y energético": {
+                "subcategories": {"Energético": "", "Isotónico": ""},
+                "internal_category": "",
+            },
+            "Agua": {
+                "subcategories": {
+                    "Gaseosa": "",
+                    "Agua con gas": "",
+                    "Agua sin gas": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
     "Aceite, especias y salsas": {
-        "Otras salsas": [
-            "Otras salsas",
-            "Salsas orientales",
-            "Salsas para pasta",
-            "Salsas para carnes",
-            "Tomate frito",
-        ],
-        "Mayonesa, ketchup y mostaza": [
-            "Allioli",
-            "Mostaza",
-            "Ketchup",
-            "Mayonesa",
-        ],
-        "Especias": [
-            "Sazonadores",
-            "Otras especias",
-            "Pimienta",
-            "Colorante y pimentón",
-            "Hierbas",
-        ],
-        "Aceite, vinagre y sal": [
-            "Sal y bicarbonato",
-            "Vinagre y otros aderezos",
-            "Aceite de girasol, semillas y maíz",
-            "Aceite de oliva",
-        ],
+        "categories": {
+            "Otras salsas": {
+                "subcategories": {
+                    "Otras salsas": "",
+                    "Salsas orientales": "",
+                    "Salsas para pasta": "",
+                    "Salsas para carnes": "",
+                    "Tomate frito": "",
+                },
+                "internal_category": "",
+            },
+            "Mayonesa, ketchup y mostaza": {
+                "subcategories": {
+                    "Allioli": "",
+                    "Mostaza": "",
+                    "Ketchup": "",
+                    "Mayonesa": "",
+                },
+                "internal_category": "",
+            },
+            "Especias": {
+                "subcategories": {
+                    "Sazonadores": "",
+                    "Otras especias": "",
+                    "Pimienta": "",
+                    "Colorante y pimentón": "",
+                    "Hierbas": "",
+                },
+                "internal_category": "",
+            },
+            "Aceite, vinagre y sal": {
+                "subcategories": {
+                    "Sal y bicarbonato": "",
+                    "Vinagre y otros aderezos": "",
+                    "Aceite de girasol, semillas y maíz": "",
+                    "Aceite de oliva": "",
+                },
+                "internal_category": "",
+            },
+        },
+        "internal_category": {},
     },
 }
