@@ -6505,20 +6505,22 @@ function findLowestShoppingList(_ref5) {
     return _regeneratorRuntime().wrap(function _callee5$(_context8) {
       while (1) switch (_context8.prev = _context8.next) {
         case 0:
-          _context8.next = 2;
+          _context8.prev = 0;
+          _context8.next = 3;
           return (0,redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__.call)(_api_shoppingList__WEBPACK_IMPORTED_MODULE_2__["default"].findLowestShoppingList, payload.supermarket);
-        case 2:
+        case 3:
           lowestResponse = _context8.sent;
           console.log(lowestResponse);
-          // yield put({
-          //     type: FIND_LOWEST_SHOPPING_LIST_SUCCESS,
-          //     payload: { consumProducts: lowestResponse },
-          // });
-        case 4:
+          _context8.next = 9;
+          break;
+        case 7:
+          _context8.prev = 7;
+          _context8.t0 = _context8["catch"](0);
+        case 9:
         case "end":
           return _context8.stop();
       }
-    }, _callee5);
+    }, _callee5, null, [[0, 7]]);
   })();
 }
 function _callee6() {

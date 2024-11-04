@@ -6,6 +6,7 @@ import shoppingListAPI, {
 } from '@api/shoppingList';
 import type {
     IConsumCategoryProducts,
+    IFindLowestShoppingList,
     MercadonaCategoryProducts,
     MercadonaShoppingList,
 } from '@src/modules/shopping_list/interfaces';
@@ -141,12 +142,17 @@ export function* getConsumProducts(): Generator<StrictEffect, void, never> {
 }
 
 export function* findLowestShoppingList({ payload }: ISagaParam<IFindLowestShoppingListSaga>): Generator<StrictEffect, void, never> {
-    const lowestResponse: IConsumCategoryProducts = yield call(
-        shoppingListAPI.findLowestShoppingList,
-        payload.supermarket
-    );
+    try{
+        const lowestResponse: IFindLowestShoppingList = yield call(
+            shoppingListAPI.findLowestShoppingList,
+            payload.supermarket
+        );
+    
+        console.log(lowestResponse);
 
-    console.log(lowestResponse);
+    }catch(error) {
+
+    }
     // yield put({
     //     type: FIND_LOWEST_SHOPPING_LIST_SUCCESS,
     //     payload: { consumProducts: lowestResponse },

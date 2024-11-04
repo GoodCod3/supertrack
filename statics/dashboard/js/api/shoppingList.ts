@@ -1,5 +1,6 @@
 import {
     IConsumCategoryProducts,
+    IFindLowestShoppingList,
     IMercadonaCategory,
     MercadonaShoppingList,
 } from '@src/modules/shopping_list/interfaces';
@@ -32,7 +33,7 @@ export const getConsumProducts = (): Promise<IConsumCategoryProducts> => (
     _base.get(urls.shoppingList.getConsumProducts)
 );
 
-export const findLowestShoppingList = (supermarket: string): Promise<IConsumCategoryProducts> => (
+export const findLowestShoppingList = (supermarket: string): Promise<IFindLowestShoppingList> => (
     _base.post(urls.shoppingList.findLowestShoppingList, { supermarket })
 );
 

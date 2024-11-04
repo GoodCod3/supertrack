@@ -83,6 +83,19 @@ export type ConsumShoppingList = {
     products: ConsumShoppingListProduct[]
 };
 
+export type IFindLowestShoppingProduct = {
+    id: string,
+    image: string,
+    name: string,
+    price: number,
+    quantity: number,
+    total_price: number,
+};
+
+export type IFindLowestShoppingList = {
+    [supermarketName: string]: IFindLowestShoppingProduct,
+};
+
 
 export type IShoppingListState = {
     isProductsDisplayed: boolean,

@@ -16,6 +16,9 @@ from supertrack.apps.shopping_list.views.get_shopping_list import (
 from supertrack.apps.shopping_list.views.get_consum_products import (
     get_consum_products,
 )
+from supertrack.apps.shopping_list.views.get_lowest_shopping_list import (
+    get_lowest_shopping_list,
+)
 
 
 urlpatterns = [
@@ -43,6 +46,11 @@ urlpatterns = [
         "mercadona/",
         get_shopping_list,
         name="shopping_list__get_list",
+    ),
+    path(
+        "find-lowest-prices/",
+        get_lowest_shopping_list,
+        name="shopping_list__get_lowest",
     ),
     # Consum
     path(
