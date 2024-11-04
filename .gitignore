@@ -112,3 +112,6 @@ media/
 
 # Local DB
 db.sqlite3
+
+# Backup
+backup/

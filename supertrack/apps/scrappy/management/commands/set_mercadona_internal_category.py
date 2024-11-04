@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand, CommandError
 from supertrack.apps.scrappy.models import (
     MercadonaParentCategoryModel,
     MercadonaCategoryModel,
+    MercadonaProductCategoryModel,
     InternalCategory,
     InternalSubCategory,
 )
@@ -11,7 +12,7 @@ from supertrack.apps.scrappy.models import (
 
 class Command(BaseCommand):
     help = "Create internal categories and subcategories"
-    
+
     def add_arguments(self, parser):
         parser.add_argument(
             "--print-supermarket-categories",
@@ -24,31 +25,31 @@ class Command(BaseCommand):
             action="store_true",
             help="Remove all internal categories relationships",
         )
-    
+
     def print_initial_structure_to_mapping(self):
         # Getting initial structure for supermarket categories and
         # subcategories.
-        all_subcategories = MercadonaCategoryModel.objects.all()
+        all_subcategories = MercadonaProductCategoryModel.objects.all()
         allcategories_structure = {}
         for subcategory in all_subcategories:
-            if subcategory.parent_category.name not in allcategories_structure:
-                allcategories_structure[subcategory.parent_category.name] = {
-                    "category": "",
-                    "subcategories": {},
-                }
+            principal_parent_category = (
+                subcategory.parent_category.parent_category.name
+            )
+            second_parent_category = subcategory.parent_category.name
+
+            if principal_parent_category not in allcategories_structure:
+                allcategories_structure[principal_parent_category] = {}
 
             if (
-                subcategory.name
-                not in allcategories_structure[
-                    subcategory.parent_category.name
-                ]["subcategories"]
+                second_parent_category
+                not in allcategories_structure[principal_parent_category]
             ):
-                allcategories_structure[subcategory.parent_category.name][
-                    "subcategories"
-                ][subcategory.name] = ""
+                allcategories_structure[principal_parent_category][second_parent_category] = []
+            
+            allcategories_structure[principal_parent_category][second_parent_category].append(subcategory.name)
 
-        pprint(allcategories_structure)
-    
+        print(allcategories_structure)
+
     def clean_internal_categories_relationship(self):
         for c in MercadonaParentCategoryModel.objects.all():
             c.parent_internal_category = None
@@ -255,7 +256,7 @@ class Command(BaseCommand):
             "Fitoterapia y parafarmacia": {
                 "category": "Parafarmacia",
                 "subcategories": {
-                    "Fitoterapia": "Fitoterapia", 
+                    "Fitoterapia": "Fitoterapia",
                     "Parafarmacia": "Parafarmacia",
                 },
             },
@@ -322,8 +323,8 @@ class Command(BaseCommand):
             "Mascotas": {
                 "category": "Mascotas",
                 "subcategories": {
-                    "Gato": "Gato", 
-                    "Otros": "Otras mascotas", 
+                    "Gato": "Gato",
+                    "Otros": "Otras mascotas",
                     "Perro": "Perro",
                 },
             },
@@ -400,14 +401,20 @@ class Command(BaseCommand):
                     )
 
                     try:
-                        internal_parent_category = InternalCategory.objects.get(
-                            name=parent_category_data["category"]
+                        internal_parent_category = (
+                            InternalCategory.objects.get(
+                                name=parent_category_data["category"]
+                            )
                         )
                     except InternalCategory.DoesNotExist:
-                        import ipdb; ipdb.set_trace()
+                        import ipdb
+
+                        ipdb.set_trace()
                         print()
 
-                    parent_category.parent_internal_category = internal_parent_category
+                    parent_category.parent_internal_category = (
+                        internal_parent_category
+                    )
                     parent_category.save()
 
                     for (
@@ -415,26 +422,36 @@ class Command(BaseCommand):
                         subcategory_internal_name,
                     ) in parent_category_data["subcategories"].items():
 
-                        original_internal_parent_category = internal_parent_category
+                        original_internal_parent_category = (
+                            internal_parent_category
+                        )
 
                         if isinstance(subcategory_internal_name, dict):
                             try:
-                                original_internal_parent_category = InternalCategory.objects.get(
-                                    name=subcategory_internal_name["parent_category"][
-                                        "name"
-                                    ]
+                                original_internal_parent_category = (
+                                    InternalCategory.objects.get(
+                                        name=subcategory_internal_name[
+                                            "parent_category"
+                                        ]["name"]
+                                    )
                                 )
                             except InternalCategory.DoesNotExist:
-                                import ipdb; ipdb.set_trace()
+                                import ipdb
+
+                                ipdb.set_trace()
                                 print()
 
                             try:
                                 internal_subcategory = InternalSubCategory.objects.get(
                                     parent_category=original_internal_parent_category,
-                                    name=subcategory_internal_name["subcategory"],
+                                    name=subcategory_internal_name[
+                                        "subcategory"
+                                    ],
                                 )
                             except InternalSubCategory.DoesNotExist:
-                                import ipdb; ipdb.set_trace()
+                                import ipdb
+
+                                ipdb.set_trace()
                                 print()
 
                         else:
@@ -444,12 +461,16 @@ class Command(BaseCommand):
                                     name=subcategory_internal_name,
                                 )
                             except InternalSubCategory.DoesNotExist:
-                                import ipdb; ipdb.set_trace()
+                                import ipdb
+
+                                ipdb.set_trace()
                                 print()
 
-                        supermarket_subcategory = MercadonaCategoryModel.objects.get(
-                            parent_category=parent_category,
-                            name=supermarket_subcategory_name,
+                        supermarket_subcategory = (
+                            MercadonaCategoryModel.objects.get(
+                                parent_category=parent_category,
+                                name=supermarket_subcategory_name,
+                            )
                         )
 
                         supermarket_subcategory.subcategory_internal_category = (

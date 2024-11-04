@@ -10,7 +10,6 @@ INTERNAL_CATEGORIES = {
         "Agua",
         "Refrescos",
         "Zumos y néctares",
-        "Bebidas alcohólicas",
         "Cerveza",
         "Vinos y licores",
         "Isotónicas y energéticas",
@@ -84,6 +83,7 @@ INTERNAL_CATEGORIES = {
         "Limpieza vajilla",
         "Menaje y utensilios",
         "Limpieza muebles y multiusos",
+        "Jardin y exterior",
     ],
     "Mascotas": [
         "Perro",

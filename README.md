@@ -2,6 +2,11 @@
 
 Get categories: https://tienda.consum.es/api/rest/V1.0/shopping/category/menu
 
+# Databae dump
+
+docker exec -t supertrack-db-1 pg_dump -U supertrack -F c -b -v -f /tmp/supertrack_backup.dump supertrack
+docker cp supertrack-db-1:/tmp/supertrack_backup.dump /tmp/supertrack_backup.dump
+
 # Supermarket categories
 ## Consum
 ```python

@@ -53,9 +53,11 @@ class MercadonaProductCategoryModelAdmin(BaseModelAdmin):
 
     list_display = (
         "public_id",
-        "name",
         "internal_id",
+        "parent_category__parent_category",
         "parent_category",
+        "name",
+        "parent_category__subcategory_internal_category",
     )
     search_fields = ("name", "internal_id", "parent_category__name")
     list_filter = ("parent_category",)
@@ -84,6 +86,7 @@ class MercadonaProductModelAdmin(BaseModelAdmin):
         "unit_price",
         "category",
         "product_image",
+        "category__parent_category__subcategory_internal_category",
         "is_new",
     )
     search_fields = ("name",)
