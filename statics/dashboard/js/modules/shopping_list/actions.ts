@@ -2,6 +2,7 @@ import {
     ADD_SHOPPING_LIST_PRODUCT,
     CLOSE_SUPERMARKET_PRODUCTS,
     DISPLAY_SUPERMARKET_PRODUCTS,
+    FIND_LOWEST_SHOPPING_LIST,
     GET_CONSUM_PRODUCTS,
     GET_MERCADONA_PRODUCTS,
     GET_SHOPPING_LIST,
@@ -14,6 +15,7 @@ interface IAction<P = unknown> {
     | typeof ADD_SHOPPING_LIST_PRODUCT
     | typeof CLOSE_SUPERMARKET_PRODUCTS
     | typeof DISPLAY_SUPERMARKET_PRODUCTS
+    | typeof FIND_LOWEST_SHOPPING_LIST
     | typeof GET_CONSUM_PRODUCTS
     | typeof GET_MERCADONA_PRODUCTS
     | typeof GET_SHOPPING_LIST
@@ -62,4 +64,9 @@ export const removeShoppingListProduct = (productId: string, supermarket: string
 export const getConsumProducts = (): IAction<string> => ({
     type: GET_CONSUM_PRODUCTS,
     payload: {},
+});
+
+export const findLowestShoppingList = (supermarket: string): IAction<string> => ({
+    type: FIND_LOWEST_SHOPPING_LIST,
+    payload: { supermarket },
 });

@@ -22,6 +22,8 @@ import {
     GET_SHOPPING_LIST,
     REMOVE_SHOPPING_LIST_PRODUCT,
     GET_CONSUM_PRODUCTS_SUCCESS,
+    FIND_LOWEST_SHOPPING_LIST,
+    FIND_LOWEST_SHOPPING_LIST_SUCCESS,
 } from './action-types';
 import { ISagaParam } from '@src/interfaces/global';
 
@@ -38,6 +40,10 @@ interface IAddShoppingListProductSaga {
 };
 
 interface IGetShoppingListSaga {
+    supermarket: string,
+};
+
+interface IFindLowestShoppingListSaga {
     supermarket: string,
 };
 
@@ -134,6 +140,19 @@ export function* getConsumProducts(): Generator<StrictEffect, void, never> {
     });
 }
 
+export function* findLowestShoppingList({ payload }: ISagaParam<IFindLowestShoppingListSaga>): Generator<StrictEffect, void, never> {
+    const lowestResponse: IConsumCategoryProducts = yield call(
+        shoppingListAPI.findLowestShoppingList,
+        payload.supermarket
+    );
+
+    console.log(lowestResponse);
+    // yield put({
+    //     type: FIND_LOWEST_SHOPPING_LIST_SUCCESS,
+    //     payload: { consumProducts: lowestResponse },
+    // });
+}
+
 
 export default function* (): Generator {
     yield takeLatest(GET_MERCADONA_PRODUCTS, getMercadonaProducts);
@@ -143,5 +162,6 @@ export default function* (): Generator {
     yield takeLatest(ADD_SHOPPING_LIST_PRODUCT, addShoppingListProduct);
     yield takeLatest(REMOVE_SHOPPING_LIST_PRODUCT, removeShoppingListProduct);
     yield takeLatest(GET_CONSUM_PRODUCTS, getConsumProducts);
+    yield takeLatest(FIND_LOWEST_SHOPPING_LIST, findLowestShoppingList);
 }
 

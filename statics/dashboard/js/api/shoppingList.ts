@@ -32,8 +32,13 @@ export const getConsumProducts = (): Promise<IConsumCategoryProducts> => (
     _base.get(urls.shoppingList.getConsumProducts)
 );
 
+export const findLowestShoppingList = (supermarket: string): Promise<IConsumCategoryProducts> => (
+    _base.post(urls.shoppingList.findLowestShoppingList, { supermarket })
+);
+
 export default {
     addShoppingListProduct,
+    findLowestShoppingList,
     getConsumProducts,
     getMercadonaProducts,
     getShoppingList,

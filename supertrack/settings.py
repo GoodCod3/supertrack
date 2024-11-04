@@ -189,7 +189,7 @@ ACCOUNT_FORMS = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://redis:6379/1',
+        'LOCATION': 'redis://localhost:6379/1',
     }
 }
 

@@ -20,6 +20,7 @@ import ShoppingListConsum from './components/ShoppingListConsum';
 type IShoppingListPageProps = {
     addShoppingListProduct: (productId: string, supermarket: string) => void,
     removeShoppingListProduct: (productId: string, supermarket: string) => void,
+    findLowestShoppingList: (supermarket: string) => void,
     getMercadonaProducts: () => void,
     getConsumProducts: () => void,
     closeSupermarketProducts: () => void,
@@ -46,6 +47,7 @@ const ShoppingListPage = ({
     consumProducts,
     consumShoppingList,
     displaySupermarketProducts,
+    findLowestShoppingList,
     getConsumProducts,
     getMercadonaProducts,
     getShoppingList,
@@ -87,8 +89,7 @@ const ShoppingListPage = ({
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
-
-
+   
     return (
         <React.Fragment>
             <input
@@ -116,6 +117,7 @@ const ShoppingListPage = ({
                         supermarketProductsSelected={supermarketProductsSelected}
                         mercadonaShoppingList={mercadonaShoppingList}
                         removeShoppingListProduct={removeShoppingListProduct}
+                        findLowestShoppingList={findLowestShoppingList}
                         filteredResults={mercadonaFilteredResults}
                         searchTerm={searchTerm}
                     />
@@ -132,6 +134,7 @@ const ShoppingListPage = ({
                         supermarketProductsSelected={supermarketProductsSelected}
                         mercadonaShoppingList={consumShoppingList}
                         removeShoppingListProduct={removeShoppingListProduct}
+                        findLowestShoppingList={findLowestShoppingList}
                         filteredResults={consumFilteredResults}
                         searchTerm={searchTerm}
                     />

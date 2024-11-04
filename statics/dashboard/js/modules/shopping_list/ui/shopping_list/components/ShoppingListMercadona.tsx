@@ -18,6 +18,7 @@ import type {
 
 type IShoppingListCategories = {
     addShoppingListProduct: (productId: string, supermarket: string) => void,
+    findLowestShoppingList: (supermarket: string) => void,
     mercadonaProducts: MercadonaCategoryProducts,
     isProductsDisplayed: boolean,
     supermarketProductsSelected: string,
@@ -69,6 +70,7 @@ const ShoppingListCategories = ({
     mercadonaShoppingList,
     removeShoppingListProduct,
     filteredResults,
+    findLowestShoppingList,
 }: IShoppingListCategories) => {
     let filteredProducts: MercadonaFilteredProductsResult = [];
     if (isProductsDisplayed && parentCategorySelected && supermarketProductsSelected === SUPERMARKET_NAME) {
@@ -93,28 +95,37 @@ const ShoppingListCategories = ({
                     </Accordion.Header>
                     <Accordion.Body>
                         {mercadonaShoppingList?.products?.length > 0 ? (
-                            <ol className='list-group list-group-numbered'>
-                                {mercadonaShoppingList.products.map((product, productIndex) => (
-                                    <li
-                                        className='list-group-item d-flex justify-content-between align-items-start'
-                                        key={`product-${productIndex}`}
-                                    >
-                                        <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
-                                        <div className="ms-2 me-auto">
-                                            <div className="product-name-shopping-list">{product.name}</div>
-                                            <div className="fw-bold product-name-shopping-list">{product.total_price} €</div>
-                                        </div>
-                                        <span className="badge text-bg-primary rounded-pill">{product.quantity}</span>
-                                        <button
-                                            className="btn btn-danger btn-sm ms-2 remove-product"
-                                            onClick={() => removeShoppingListProduct(product.id, SUPERMARKET_NAME)}
-                                        >
-                                            Eliminar
-                                        </button>
-                                    </li>
+                            <>
+                                <Button
+                                    variant="success"
+                                    onClick={() => findLowestShoppingList(SUPERMARKET_NAME)}
+                                >
+                                    Buscar precio más barato
+                                </Button>
 
-                                ))}
-                            </ol>
+                                <ol className='list-group list-group-numbered'>
+                                    {mercadonaShoppingList.products.map((product, productIndex) => (
+                                        <li
+                                            className='list-group-item d-flex justify-content-between align-items-start'
+                                            key={`product-${productIndex}`}
+                                        >
+                                            <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
+                                            <div className="ms-2 me-auto">
+                                                <div className="product-name-shopping-list">{product.name}</div>
+                                                <div className="fw-bold product-name-shopping-list">{product.total_price} €</div>
+                                            </div>
+                                            <span className="badge text-bg-primary rounded-pill">{product.quantity}</span>
+                                            <button
+                                                className="btn btn-danger btn-sm ms-2 remove-product"
+                                                onClick={() => removeShoppingListProduct(product.id, SUPERMARKET_NAME)}
+                                            >
+                                                Eliminar
+                                            </button>
+                                        </li>
+
+                                    ))}
+                                </ol>
+                            </>
                         ) : (
                             <span>Aún no has agregado ningún producto.</span>
                         )}
