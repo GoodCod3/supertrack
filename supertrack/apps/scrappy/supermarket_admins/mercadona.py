@@ -82,12 +82,12 @@ class MercadonaProductModelAdmin(BaseModelAdmin):
 
     list_display = (
         "public_id",
+        "product_image",
         "name",
         "unit_price",
+        "parent_category",
+        "sub_category",
         "category",
-        "product_image",
-        "category__parent_category__subcategory_internal_category",
-        "is_new",
     )
     search_fields = ("name",)
     list_filter = ("is_new", "category")
@@ -102,6 +102,18 @@ class MercadonaProductModelAdmin(BaseModelAdmin):
 
     product_image.allow_tags = True
     product_image.short_description = "Product image"
+    
+    def parent_category(self, obj):
+        return obj.category.parent_category.parent_category
+
+    parent_category.allow_tags = True
+    parent_category.short_description = "Parent category"
+
+    def sub_category(self, obj):
+        return obj.category.parent_category.name
+
+    sub_category.allow_tags = True
+    sub_category.short_description = "Sub category"
     
 admin.site.register(MercadonaProductModel, MercadonaProductModelAdmin)
 
