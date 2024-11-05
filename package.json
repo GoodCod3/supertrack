@@ -4,7 +4,8 @@
   "description": "Get categories: https://tienda.consum.es/api/rest/V1.0/shopping/category/menu",
   "main": "index.js",
   "scripts": {
-    "start": "MODE=development webpack --watch"
+    "start": "MODE=development webpack --watch",
+    "build": "MODE=production webpack"
   },
   "repository": {
     "type": "git",
