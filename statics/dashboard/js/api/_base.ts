@@ -4,7 +4,7 @@ import axios, { AxiosError } from 'axios';
 import type { IApiError } from '../interfaces/global';
 
 
-const ENDPOINT_BASE_URL = process.env.API_ENDPOINT_URL || 'https://api.supertrack.es';
+const ENDPOINT_BASE_URL = process.env.API_ENDPOINT_URL || 'https://supertrack.onrender.com';
 const API_VERSION = process.env.REACT_APP_BUDAPP_API_VERSION || 'api/v1';
 const RESPONSE_FAIL = { success: false, errorStatus: 403 };
 
