@@ -18,7 +18,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "process.env": JSON.stringify({
-        API_ENDPOINT_URL: "http://localhost:8080",
+        API_ENDPOINT_URL: process.env.MODE === 'production' ? 'https://supertrack.onrender.com':"http://localhost:8080",
       }),
     }),
   ],
