@@ -90,7 +90,7 @@ class MercadonaProductModelAdmin(BaseModelAdmin):
         "category",
     )
     search_fields = ("name",)
-    list_filter = ("is_new", "category")
+    list_filter = ("is_new", "category__parent_category", "category__parent_category__parent_category","category")
 
     def product_image(self, obj):
         try:

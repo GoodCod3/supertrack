@@ -62,12 +62,15 @@ class ConsumProductModelAdmin(BaseModelAdmin):
 
     list_display = (
         "public_id",
+        "product_image",
         "name",
         "unit_price",
-        "product_image",
+        "parent_category",
+        "sub_category",
+        "category",
     )
     search_fields = ("name",)
-    # list_filter = ("is_new",)
+    list_filter = ("category",)
 
     def product_image(self, obj):
         try:
@@ -79,6 +82,17 @@ class ConsumProductModelAdmin(BaseModelAdmin):
 
     product_image.allow_tags = True
     product_image.short_description = "Product image"
+    def parent_category(self, obj):
+        return obj.category.parent_category.parent_category
+
+    parent_category.allow_tags = True
+    parent_category.short_description = "Parent category"
+
+    def sub_category(self, obj):
+        return obj.category.parent_category.name
+
+    sub_category.allow_tags = True
+    sub_category.short_description = "Sub category"
     
 admin.site.register(ConsumProductModel, ConsumProductModelAdmin)
 
