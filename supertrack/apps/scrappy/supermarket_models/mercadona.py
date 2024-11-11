@@ -63,6 +63,12 @@ class MercadonaProductModel(BaseModel):
         MercadonaProductCategoryModel,
         on_delete=models.PROTECT,
     )
+    internal_category = models.ForeignKey(
+        "scrappy.InternalProductCategory",
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+    )
     name = models.CharField(_("Name"), max_length=200)
     internal_id = models.CharField(_("Internal ID"), max_length=100)
     unit_price = models.FloatField(_("Price"), default=0.0)

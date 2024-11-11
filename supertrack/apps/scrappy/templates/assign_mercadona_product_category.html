@@ -1,0 +1,276 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+    {{ block.super }}
+
+    <form method="POST" style="margin-bottom: 20px;">
+        {% csrf_token %}
+
+        <div style="position: relative; width: 60vw; max-width: 600px; margin-bottom: 20px; margin-top: 20px;">
+            <div id="project_dropdown" onclick="toggleDropdown()" class="dropdown">
+                <span id="dropdown_text">Select Category</span>
+                <span id="dropdown_arrow">&#9662;</span> <!-- Down arrow icon -->
+                <span id="clear_selection" onclick="clearSelection(event)"
+                      class="clear-x">&#10006;</span> <!-- Red X icon -->
+            </div>
+            <div id="dropdown_content" class="dropdown-content">
+                <input type="text" id="project_search" placeholder="Type to search projects..."
+                       onkeyup="filterProjects()" class="dropdown-search">
+
+                <div id="project_options">
+                    {% for category in form.category.field.queryset %}
+                        <div class="dropdown-item"
+                             onclick="selectProject('{{ category.id }}', '{{ category }}')">
+                            {{ category }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="category" id="selected_project">
+        <input type="hidden" name="_selected_action" value="{% for product in products %}{{ product.id }}{% if not forloop.last %},{% endif %}{% endfor %}">
+
+        <input type="submit" name="apply" value="Reassign Project" class="button-primary">
+        <a href="{% url 'admin:scrappy_mercadonaproductmodel_changelist' %}" class="button-cancel">Cancel</a>
+    </form>
+
+    <!-- Worklog list -->
+    <p>You are about to assign the category for the following products:</p>
+    <ul>
+        {% for product in products %}
+            <li>{{ product.name }} ({{ product.category }}) </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        let focusedIndex = -1; // Keep track of the currently highlighted project
+
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById("dropdown_content");
+            const projectSearch = document.getElementById("project_search");
+
+            if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
+                dropdownContent.style.display = "block";
+                projectSearch.focus(); // Focus on search input
+            } else {
+                dropdownContent.style.display = "none";
+                projectSearch.value = ""; // Clear the search input
+                filterProjects(); // Reset the filtered list
+            }
+        }
+
+        // Filters projects in the dropdown based on search input
+        function filterProjects() {
+            const input = document.getElementById('project_search').value.toLowerCase();
+            const options = document.querySelectorAll('#project_options .dropdown-item');
+
+            options.forEach(option => {
+                const text = option.textContent || option.innerText;
+                option.style.display = text.toLowerCase().includes(input) ? '' : 'none';
+            });
+        }
+
+        // Selects a project and updates the dropdown display
+        function selectProject(id, name) {
+            document.getElementById("selected_project").value = id;
+            document.getElementById("dropdown_text").textContent = name;
+            document.getElementById("dropdown_content").style.display = "none";
+            document.getElementById("clear_selection").style.display = "inline"; // Show clear (X) icon
+        }
+
+        // Clear the selected project
+        function clearSelection(event) {
+            event.stopPropagation(); // Prevent dropdown toggle on click
+            document.getElementById("selected_project").value = "";
+            document.getElementById("dropdown_text").textContent = "Select a product category";
+            document.getElementById("clear_selection").style.display = "none"; // Hide clear (X) icon
+            focusedIndex = -1; // Reset focused index
+        }
+
+        // Arrow key navigation
+        function navigateDropdown(event) {
+            const dropdownContent = document.getElementById("dropdown_content");
+            const projectSearch = document.getElementById("project_search");
+            const visibleOptions = Array.from(document.querySelectorAll('#project_options .dropdown-item'))
+                .filter(option => option.style.display !== 'none'); // Only include visible items
+
+            if (dropdownContent.style.display === "block") {
+                if (event.key === "ArrowDown") {
+                    event.preventDefault();
+                    focusedIndex = (focusedIndex + 1) % visibleOptions.length;
+                    highlightOption(focusedIndex, visibleOptions);
+                } else if (event.key === "ArrowUp") {
+                    event.preventDefault();
+                    focusedIndex = (focusedIndex - 1 + visibleOptions.length) % visibleOptions.length;
+                    highlightOption(focusedIndex, visibleOptions);
+                } else if (event.key === "Enter" && focusedIndex >= 0) {
+                    event.preventDefault();
+                    visibleOptions[focusedIndex].click(); // Trigger click event on the highlighted option
+                    focusedIndex = -1;
+                    highlightOption(focusedIndex, visibleOptions);
+                }
+            }
+        }
+
+        function highlightOption(index, options) {
+            options.forEach((option, idx) => {
+                option.classList.toggle("highlighted", idx === index);
+            });
+
+            // Scroll into view if option is out of view
+            if (options[index]) {
+                options[index].scrollIntoView({block: "nearest"});
+            }
+        }
+
+        // Handle mouse hover to highlight items
+        document.querySelectorAll('#project_options .dropdown-item').forEach((option, index) => {
+            option.addEventListener('mouseenter', () => {
+                focusedIndex = index;
+                highlightOption(focusedIndex, document.querySelectorAll('#project_options .dropdown-item'));
+            });
+        });
+
+        // Event listeners
+        document.addEventListener("keydown", function (event) {
+            const dropdownContent = document.getElementById("dropdown_content");
+            const options = document.querySelectorAll('#project_options .dropdown-item');
+            if (event.key === "Escape" && dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none"; // Close the dropdown
+                document.getElementById("project_search").value = ""; // Clear the search input
+                filterProjects(); // Reset the filtered list
+                focusedIndex = -1;
+                highlightOption(focusedIndex, options);
+            } else {
+                navigateDropdown(event); // Handle arrow and enter key navigation
+            }
+        });
+
+        // Close dropdown if the user clicks outside
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById("project_dropdown");
+            const dropdownContent = document.getElementById("dropdown_content");
+            const options = document.querySelectorAll('#project_options .dropdown-item');
+            if (!dropdown.contains(event.target) && !dropdownContent.contains(event.target)) {
+                dropdownContent.style.display = "none";
+                document.getElementById("project_search").value = ""; // Clear search input when closing
+                focusedIndex = -1;
+                highlightOption(focusedIndex, options);
+                filterProjects(); // Reset filtered list when closing
+            }
+        });
+
+    </script>
+
+    <style>
+        /* Dropdown container (selected project display) */
+        .dropdown {
+            border: 1px solid #ccc;
+            padding: 8px;
+            cursor: pointer;
+            background-color: white;
+            color: #333;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-item.highlighted {
+            background-color: #bdbdbd;
+            color: #333333;
+        }
+
+        /* Dropdown text, arrow icon, and clear (X) icon */
+        #dropdown_text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        #dropdown_arrow {
+            font-size: 1.2rem;
+            color: #666;
+            margin-left: auto;
+        }
+
+        .clear-x {
+            color: #dc3545;
+            cursor: pointer;
+            margin-left: 10px;
+            display: none; /* Initially hidden until a project is selected */
+        }
+
+        /* Dropdown content container */
+        .dropdown-content {
+            display: none;
+            border: 1px solid #333;
+            max-height: 200px;
+            overflow-y: auto;
+            overflow-x: auto;
+            position: absolute;
+            width: 60vw;
+            max-width: 600px;
+            background-color: white;
+            z-index: 1;
+            color: #333;
+            margin-top: 8px;
+        }
+
+        /* Search input inside dropdown */
+        .dropdown-search {
+            width: 100%;
+            margin-top: 1px !important;
+            padding: 12px !important;
+            font-size: 1rem;
+            box-sizing: border-box;
+            border: 1px solid #333; /* Dark border */
+            outline: none;
+            color: #333; /* Dark text */
+            background-color: #fff; /* Light background */
+        }
+
+        /* Dropdown item styling */
+        .dropdown-item {
+            padding: 8px;
+            cursor: pointer;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        /* Submit button styling */
+        .button-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .button-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Cancel button styling */
+        .button-cancel {
+            background-color: #dc3545;
+            color: white !important;
+            border: none;
+            padding: 8px 16px;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .button-cancel:hover {
+            background-color: #c82333;
+        }
+    </style>
+
+{% endblock %}

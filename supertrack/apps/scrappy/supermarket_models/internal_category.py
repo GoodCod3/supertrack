@@ -32,3 +32,10 @@ class InternalSubSubCategory(BaseModel):
 
     def __str__(self):
         return f"{self.parent_subcategory.parent_category.name} > {self.parent_subcategory.name} > {self.name}"
+
+
+class InternalProductCategory(BaseModel):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"{self.name}"

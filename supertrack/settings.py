@@ -74,6 +74,7 @@ TEMPLATES = [
             BASE_DIR / "supertrack/apps/dashboards/templates/",
             BASE_DIR / "supertrack/apps/shopping_list/templates/",
             BASE_DIR / "supertrack/templates/",
+            BASE_DIR / "supertrack/apps/scrappy/templates/",
         ],
         "APP_DIRS": True,
         "OPTIONS": {

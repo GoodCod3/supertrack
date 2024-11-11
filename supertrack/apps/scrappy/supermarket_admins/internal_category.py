@@ -5,6 +5,7 @@ from supertrack.apps.scrappy.models import (
     InternalCategory,
     InternalSubCategory,
     InternalSubSubCategory,
+    InternalProductCategory,
 )
 from supertrack.helpers.admin import BaseModelAdmin
 
@@ -55,3 +56,17 @@ class InternalSubSubCategoryModelAdmin(BaseModelAdmin):
 
 
 admin.site.register(InternalSubSubCategory, InternalSubSubCategoryModelAdmin)
+
+# ======================= Product category =======================
+class InternalProductCategoryModelAdmin(BaseModelAdmin):
+    model = InternalProductCategory
+    empty_value_display = "-empty-"
+
+    list_display = (
+        "public_id",
+        "name",
+    )
+    search_fields = ("name",)
+
+
+admin.site.register(InternalProductCategory, InternalProductCategoryModelAdmin)
