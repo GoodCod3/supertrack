@@ -1,3 +1,4 @@
+import calendar
 import base64
 from datetime import timedelta, datetime
 from django.views.generic import TemplateView
@@ -63,7 +64,15 @@ class HomeView(LoginRequiredMixin, TemplateView):
         }
 
     def _get_date_range(self):
-        today = timezone.now()
+        def get_first_day(date):
+            return datetime(date.year, date.month, 1)
+
+
+        def get_last_day(date):
+            return datetime(
+                date.year, date.month, calendar.monthrange(date.year, date.month)[1]
+            )
+        today = timezone.now().date()
 
         start_date = self.request.GET.get("start_date")
         end_date = self.request.GET.get("end_date")
@@ -75,15 +84,11 @@ class HomeView(LoginRequiredMixin, TemplateView):
                 ).date()
                 end_of_range = datetime.strptime(end_date, "%Y-%m-%d").date()
             except ValueError:
-                start_of_range = today.replace(day=1).date()
-                end_of_range = (today.replace(
-                    month=today.month + 1, day=1
-                ) - timedelta(days=1)).date()
+                start_of_range = get_first_day(today)
+                end_of_range = get_last_day(today)
         else:
-            start_of_range = today.replace(day=1).date()
-            end_of_range = (today.replace(
-                month=today.month + 1, day=1
-            ) - timedelta(days=1)).date()
+            start_of_range = get_first_day(today)
+            end_of_range = get_last_day(today)
 
         return start_of_range, end_of_range
 

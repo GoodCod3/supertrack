@@ -85,6 +85,47 @@ const ShoppingListCategories = ({
     const defaultActiveKeys = filteredResults.map((_, index) => `search-result-list-${index}`);
     return (
         <Container>
+            {supermarketProductsSelected === SUPERMARKET_NAME && (
+                <Offcanvas show={isProductsDisplayed} onHide={closeSupermarketProducts}>
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>{parentCategorySelected}</Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body className='offcanvas-mercadona'>
+                        Haz click en un producto para añadirlo a la lista
+                        <Accordion defaultActiveKey='offcanvas-0'>
+                            {filteredProducts.length > 0 && (
+                                filteredProducts.map((subCategory, index) => (
+                                    <React.Fragment key={`product-info-${subCategory.subcategoryName}-${index}`}>
+                                        <Accordion.Item eventKey={`offcanvas-${index}`}>
+                                            <Accordion.Header>{subCategory.subcategoryName}</Accordion.Header>
+                                            <Accordion.Body>
+                                                <ol id="product-info" className="list-group list-group-numbered">
+                                                    {subCategory.products.map((product) => (
+                                                        <Card.Link
+                                                            key={`product-link-${product.id}`}
+                                                            onClick={() => addShoppingListProduct(product.id, SUPERMARKET_NAME)}
+                                                        >
+                                                            <li
+                                                                className='list-group-item d-flex justify-content-between align-items-start'
+                                                                key={`product-${product.id}`}
+                                                            >
+                                                                <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
+                                                                <div className="ms-2 me-auto">
+                                                                    <div className="fw-bold">{product.name} ({product.price} €)</div>
+                                                                </div>
+                                                            </li>
+                                                        </Card.Link>
+                                                    ))}
+                                                </ol>
+                                            </Accordion.Body>
+                                        </Accordion.Item>
+                                    </React.Fragment>
+                                ))
+                            )}
+                        </Accordion>
+                    </Offcanvas.Body>
+                </Offcanvas>
+            )}
             <Accordion defaultActiveKey="shopping-list" >
                 <Accordion.Item eventKey='shopping-list'>
                     <Accordion.Header>
@@ -205,55 +246,8 @@ const ShoppingListCategories = ({
                     </Row>
                 ))
             )}
-            {supermarketProductsSelected === SUPERMARKET_NAME && (
-                <Offcanvas show={isProductsDisplayed} onHide={closeSupermarketProducts} backdrop="static" responsive="lg">
-                    <Offcanvas.Header closeButton>
-                        <Offcanvas.Title>{parentCategorySelected}</Offcanvas.Title>
-                    </Offcanvas.Header>
-                    {productCategorySelected && (
-                        <Offcanvas.Header >
-                            <Offcanvas.Title>{productCategorySelected}</Offcanvas.Title>
-                        </Offcanvas.Header>
-
-                    )}
-                    <Offcanvas.Body className='offcanvas-mercadona'>
-                        Haz click en un producto para añadirlo a la lista
-                        <Accordion defaultActiveKey='offcanvas-0'>
-                            {filteredProducts.length > 0 && (
-                                filteredProducts.map((subCategory, index) => (
-                                    <React.Fragment key={`product-info-${subCategory.subcategoryName}-${index}`}>
-                                        <Accordion.Item eventKey={`offcanvas-${index}`}>
-                                            <Accordion.Header>{subCategory.subcategoryName}</Accordion.Header>
-                                            <Accordion.Body>
-                                                <ol id="product-info" className="list-group list-group-numbered">
-                                                    {subCategory.products.map((product) => (
-                                                        <Card.Link
-                                                            key={`product-link-${product.id}`}
-                                                            onClick={() => addShoppingListProduct(product.id, SUPERMARKET_NAME)}
-                                                        >
-                                                            <li
-                                                                className='list-group-item d-flex justify-content-between align-items-start'
-                                                                key={`product-${product.id}`}
-                                                            >
-                                                                <img src={product.image} className="card-img-top" style={{ "width": "4rem" }} loading="lazy" />
-                                                                <div className="ms-2 me-auto">
-                                                                    <div className="fw-bold">{product.name} ({product.price} €)</div>
-                                                                </div>
-                                                            </li>
-                                                        </Card.Link>
-                                                    ))}
-                                                </ol>
-                                            </Accordion.Body>
-                                        </Accordion.Item>
-                                    </React.Fragment>
-                                ))
-                            )}
-                        </Accordion>
-                    </Offcanvas.Body>
-
-                </Offcanvas>
-            )}
         </Container>
+
     );
 }
 

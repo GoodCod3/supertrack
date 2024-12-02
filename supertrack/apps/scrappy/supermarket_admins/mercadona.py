@@ -83,15 +83,15 @@ class MercadonaProductCategoryModelAdmin(BaseModelAdmin):
 admin.site.register(MercadonaProductCategoryModel, MercadonaProductCategoryModelAdmin)
 
 
-@admin.action(description='Reassign to a different project')
+@admin.action(description='Assign product internal category')
 def assign_category(modeladmin, request, queryset):
+    parent_category = request.GET["category__parent_category__id__exact"]
     selected_ids = request.POST.getlist(ACTION_CHECKBOX_NAME)
-    url = reverse('admin:cat_app_worklog_reassign_project') + f"?ids={','.join(selected_ids)}"
+    url = reverse('admin:supertrack_assign_product_category') + f"?ids={','.join(selected_ids)}&category__parent_category__id__exact={parent_category}"
     return HttpResponseRedirect(url)
 
 def assign_product_category_view(request):
     if request.method == "POST":
-        print(request.POST)
         form = CategoryAssignmentForm(request.POST)
         if form.is_valid():
             selected_ids = [i for i in
@@ -101,8 +101,13 @@ def assign_product_category_view(request):
             MercadonaProductModel.objects.filter(id__in=selected_ids).update(internal_category=new_internal_category)
 
             messages.success(request, 'The products category has been assigned successfully.')
+            parent_category = request.GET["category__parent_category__id__exact"]
+            
+            url = request.session.pop(
+                'referrer_url', 
+                reverse('admin:scrappy_mercadonaproductmodel_changelist') + f"?category__parent_category__id__exact={parent_category}")
 
-            return HttpResponseRedirect(reverse('admin:scrappy_mercadonaproductmodel_changelist'))
+            return HttpResponseRedirect(url)
         else:
             for field in form:
                 for error in field.errors:
@@ -128,22 +133,21 @@ class MercadonaProductModelAdmin(BaseModelAdmin):
         "product_image",
         "name",
         "unit_price",
-        "parent_category",
-        "sub_category",
         "category",
         "internal_category",
     )
     search_fields = ("name",)
-    list_filter = ("is_new", "category")
+    list_filter = ("is_new", "category", "category__parent_category", "category__parent_category__parent_category")
     actions = [assign_category]
 
     def get_urls(self):
         urls = super().get_urls()
         custom_urls = [
-            path('reassign_project/', self.admin_site.admin_view(assign_product_category_view),
+            path('assign_product_category/', self.admin_site.admin_view(assign_product_category_view),
                  name="supertrack_assign_product_category"),
         ]
         return custom_urls + urls
+
     def product_image(self, obj):
         try:
             return mark_safe(

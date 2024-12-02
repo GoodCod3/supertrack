@@ -5,6 +5,7 @@ from supertrack.apps.scrappy.models import (
     MercadonaParentCategoryModel,
     MercadonaCategoryModel,
     MercadonaProductCategoryModel,
+    MercadonaProductModel,
     InternalCategory,
     InternalSubCategory,
 )
@@ -29,36 +30,14 @@ class Command(BaseCommand):
     def print_initial_structure_to_mapping(self):
         # Getting initial structure for supermarket categories and
         # subcategories.
-        all_subcategories = MercadonaProductCategoryModel.objects.all()
-        allcategories_structure = {}
-        for subcategory in all_subcategories:
-            principal_parent_category = (
-                subcategory.parent_category.parent_category.name
-            )
-            second_parent_category = subcategory.parent_category.name
-
-            if principal_parent_category not in allcategories_structure:
-                allcategories_structure[principal_parent_category] = {
-                    "categories": {},
-                    "internal_category": {},
-                }
-
-            if (
-                second_parent_category
-                not in allcategories_structure[principal_parent_category][
-                    "categories"
-                ]
-            ):
-                allcategories_structure[principal_parent_category][
-                    "categories"
-                ][second_parent_category] = {
-                    "subcategories": {},
-                    "internal_category": ""
-                }
+        all_products = MercadonaProductModel.objects.all()
+        allproducts_structure = {}
+        for product in all_products:
+            allproducts_structure[product.name] = product.internal_category.name if product.internal_category else ""
             
-            allcategories_structure[principal_parent_category]["categories"][second_parent_category]["subcategories"][subcategory.name] = ""
+            
 
-        print(allcategories_structure)
+        pprint(allproducts_structure)
 
     def clean_internal_categories_relationship(self):
         for c in MercadonaParentCategoryModel.objects.all():
